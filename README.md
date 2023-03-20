@@ -8,7 +8,7 @@ Group project for SCC0219 Introduction to Web Development course.
 ## Membros:
 
 - Pedro Kenzo Muramatsu Carmo (11796451)
-- 
+- Ana Cristina Silva de Oliveira (11965630)
 -
 
 ## Requisitos
