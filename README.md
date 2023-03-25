@@ -1,6 +1,6 @@
-<p align="center">
+<div align="center">
   <img src="assets/pintastic-logo.png" />
-</p>
+</div>
 
 # SCC0219 Pintastic: developing a fully-functional Online Store to sell button pins
 
