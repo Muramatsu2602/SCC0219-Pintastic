@@ -2,7 +2,7 @@
   <img src="assets/pintastic-logo.png" />
 </p>
 
-# SCC0219 Group Project: developing a fully-functional Online Store
+# SCC0219 Pintastic: developing a fully-functional Online Store to sell button pins
 
 Group project for SCC0219 Introduction to Web Development course.
 
