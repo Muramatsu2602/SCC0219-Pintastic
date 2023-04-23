@@ -6,8 +6,6 @@
 
 Group project for SCC0219 Introduction to Web Development course.
 
-![Logo](./src/assets/img/logo.png)
-
 ## Membros:
 
 - Pedro Kenzo Muramatsu Carmo (11796451)
@@ -24,7 +22,7 @@ Group project for SCC0219 Introduction to Web Development course.
 
 ## Descrição do projeto
 
-![Diagrama de navegação](./src/assets/img/PokeCard%20Diagrama.png)
+![Diagrama de navegação](./assets/nav-diagram.png)
 
 ### Informações armazenadas no servidor
 
