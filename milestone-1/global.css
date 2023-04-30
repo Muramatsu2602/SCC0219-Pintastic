@@ -218,6 +218,19 @@ table {
 	} */
 }
 
+/* end css reset */
+
+
+/* partial css */
+@import "components/footer.style.css"; 
+@import "components/header.style.css"; 
+
+/* end partial css */
+
+
+/* background colors  */
+
+
 :root {
 	--black: #000000;
 	--black2: #151515;
@@ -231,8 +244,6 @@ table {
 	--red: #c5330b;
 	--green: #2dbc44;
 }
-
-/* background colors  */
 
 .background-yellow {
 	background-color: var(--yellow);
@@ -257,8 +268,7 @@ table {
 /* end background colors */
 
 
-/*  */
-
+/* end partial css */
 body {
 	background-color: var(--white);
 	margin: 0;
