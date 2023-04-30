@@ -1,51 +1,81 @@
 .text-cart h2 {
-	position: absolute;
-	width: 117px;
-	height: 39px;
-	left: 500px;
-	top: 300px;
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 26px;
-	line-height: 39px;
-	color: #151515;
+    position: absolute;
+    width: 117px;
+    height: 39px;
+    left: 500px;
+    top: 300px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color: #151515;
 }
 
 .pin-img-cart {
-	/* width: 100px; */
-	height: 100px;
-	/* background: url(pin-cafezinho.png); */
-	flex: none;
-	order: 0;
+    height: 120px;
+    flex: none;
+    order: 0;
     margin-top: 380px;
     margin-left: 520px;
-	flex-grow: 0;
+    flex-grow: 0;
 }
 
-.pin-characteristics h3{
+#pin-title {
+    position: absolute;
     width: 251px;
     height: 23px;
-    
-    /* S5/Default */
-    
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
     line-height: 22px;
-    /* identical to box height */
-    
-    
-    /* C1/A */
-    
+    top: 402px;
+    left: 650px;
     color: #151515;
-    
-    
-    /* Inside auto layout */
-    
     flex: none;
     order: 0;
     flex-grow: 0;
+}
 
+#pin-category {
+    position: absolute;
+    height: 16px;
+    left: 650px;
+    top: 425px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #A9A9A9;
+}
+
+.ic-cart {
+    width: 18px;
+    height: 18px;
+    margin-left: 500px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.pin-characteristics {
+    display: flex;
+}
+
+.pin-characteristics p {
+    height: 16px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #A9A9A9;
+    flex-grow: 0;
+}
+
+span {
+    color: black;
+    background-color: white;
 }
