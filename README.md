@@ -20,6 +20,8 @@ Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.
 
 ### Funcionalidade extra: Pin do Dia
 
+* Todos os dias, os clientes podem acessar uma tela chamada  **Pin do dia** , na qual um dos pins que o cliente gostou da loja (ou seja, algum dos itens do seu 'wishlist') será sorteada e terá um desconto especial naquele dia.
+
 ## Descrição do projeto
 
 ![Diagrama de navegação](./assets/nav-diagram.png)

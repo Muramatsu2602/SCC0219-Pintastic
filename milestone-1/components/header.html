@@ -22,25 +22,39 @@
 	</head>
 	<body>
 		<header>
-			<div class="logo">
-				<img
-					src="../img/pintastic-logo.png"
-					id="img-logotipo"
-					class="logotipo"
-					alt="Logo"
-				/>
-			</div>
-			<div class="search-bar">
-				<select name="filter">
-					<option value="all">All</option>
-					<option value="pins">Pins</option>
-					<option value="stickers">Stickers</option>
-				</select>
-				<input type="text" placeholder="Search..." />
-			</div>
-			<div class="user-icons">
-				<a href="#"><i class="fa fa-shopping-cart"></i></a>
-				<a href="#"><i class="fa fa-user"></i></a>
+			<div class="container">
+				<div class="logo">
+					<img
+						src="../img/pintastic-logo.png"
+						id="img-logotipo"
+						class="logotipo"
+						alt="Logo"
+					/>
+				</div>
+				<div class="search-bar">
+					<div class="search">
+						<select name="filter">
+							<option value="all">All</option>
+							<option value="pins">Pins</option>
+							<option value="stickers">Stickers</option>
+						</select>
+						<input type="text" placeholder="Search..." />
+						<button><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+				<div class="user-icons">
+					<div>
+						<a href="#"
+							><i title="View cart" class="fa fa-user"></i
+						></a>
+						<a href="#"
+							><i
+								title="View profile"
+								class="fa fa-shopping-cart"
+							></i
+						></a>
+					</div>
+				</div>
 			</div>
 		</header>
 	</body>
