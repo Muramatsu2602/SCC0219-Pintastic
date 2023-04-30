@@ -2,6 +2,7 @@
 @import 'components/footer.style.css';
 @import 'components/header.style.css';
 @import 'components/menu.style.css';
+@import 'components/button.style.css';
 
 /* end components' styling */
 
@@ -31,6 +32,12 @@
 
 	--red: #c5330b;
 	--green: #2dbc44;
+
+	--font-xs: 12px;
+	--font-sm: 14px;
+	--font-md: 16px;
+	--font-lg: 18px;
+	--font-xl: 20px;
 }
 
 .background-yellow {
