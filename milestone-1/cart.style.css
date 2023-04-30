@@ -1,0 +1,15 @@
+.text-cart h2 {
+    position: absolute;
+    width: 117px;
+    height: 39px;
+    left: 500px;
+    top: 300px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color: #151515;
+}
+
+
