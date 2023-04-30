@@ -2,9 +2,9 @@
   <img src="assets/pintastic-logo.png" />
 </div>
 
-# SCC0219 Pintastic: developing a fully-functional Online Store to sell button pins
+# SCC0219 Pintastic: a fully-functional Online Store to sell button pins.
 
-Group project for SCC0219 Introduction to Web Development course.
+Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.
 
 ## Membros:
 
@@ -18,7 +18,7 @@ Group project for SCC0219 Introduction to Web Development course.
   ....
 - O sistema deve conter requisitos de accessibilidade e prover boa usabilidade para o cliente.
 
-### Funcionalidade extra:
+### Funcionalidade extra: Pin do Dia
 
 ## Descrição do projeto
 

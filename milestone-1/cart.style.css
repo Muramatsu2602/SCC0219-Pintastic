@@ -12,7 +12,7 @@
 	color: #151515;
 }
 
-.pin-cart {
+.pin-img-cart {
 	/* width: 100px; */
 	height: 100px;
 	/* background: url(pin-cafezinho.png); */
@@ -23,6 +23,29 @@
 	flex-grow: 0;
 }
 
-.pin-characteristics {
+.pin-characteristics h3{
+    width: 251px;
+    height: 23px;
     
+    /* S5/Default */
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    /* identical to box height */
+    
+    
+    /* C1/A */
+    
+    color: #151515;
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
 }
