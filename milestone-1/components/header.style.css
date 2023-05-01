@@ -1,7 +1,7 @@
-.container {
+.header-main {
 	display: flex;
 	justify-content: space-between;
-	padding-top: 3rem;
+	padding-top: 2.5rem;
 	padding-bottom: 1rem;
 	padding-right: 2rem;
 	padding-left: 1rem;
@@ -39,8 +39,9 @@ header {
 .search {
 	border: 2px solid var(--light-gray);
 	border-radius: 10px;
-    padding-right: 1rem;
-    padding-left: 1rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	background-color: var(--lightest-gray);
 }
 
 .search-bar input[type='text'] {
@@ -49,6 +50,11 @@ header {
 	margin-right: 10px;
 	font-size: 16px;
 	width: 300px;
+	background-color: var(--lightest-gray);
+}
+
+.filter {
+	font-weight: bold;
 }
 
 .search-bar select {
