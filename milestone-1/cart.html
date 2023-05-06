@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Shopping Cart</title>
-        <link href="global.css" rel="stylesheet" />
-		<link href="cart.style.css" rel="stylesheet" />
 
-	</head>
-	<body>
-		<div class="pin-cart">
-			<div class="text-cart">
-				<h2>Shopping Cart</h2>
-			</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Shopping Cart</title>
+	<link href="global.css" rel="stylesheet" />
+	<link href="cart.style.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/bace2651a9.js" crossorigin="anonymous"></script>
+</head>
 
-			<img
-				src="../mockups/figma/img-pins/pin-cafezinho.webp"
-				alt="pin-cafezinho"
-				class="pin-img-cart"
-			/>
-
-			<div class="pin-characteristics">
-				<h3 id="pin-title">Cafézinho</h3>
-				<p id="pin-category">Categoria: <span>Brasil</span></p>
-				<img 
-					src="img/ic-heart-wishlist.png"
-					alt="wishlist"
-					class="ic-cart"
-				/> <p>Wishlist</p>
-				<br>
-				<img
-					src="img/ic-close.png"
-					alt="remove-pin-cart"
-					class="ic-cart"
-				/> <p>Remove</p>
-			</div>
+<body>
+	<div class="pin-cart">
+		<div class="text-cart">
+			<h2>Shopping Cart</h2>
 		</div>
 
-	</body>
+		<img src="../mockups/figma/img-pins/pin-cafezinho.webp" alt="pin-cafezinho" class="pin-img-cart" />
+
+		<div class="pin-characteristics">
+			<div>
+				<h3 id="pin-title">Cafézinho</h3>
+				<p id="pin-category">Categoria: <span>Brasil</span></p>
+			</div>
+			<div class="cart-wishlist-section">
+				<span>Wishlist</span>
+				<i class="fa-regular fa-heart" alt="wishlist" class="ic-cart"></i>	
+			</div>
+
+			<div class="cart-remove-section">
+				<span>Remove</span>
+				<i class="fa-solid fa-xmark" alt="remove-pin-cart" class="ic-cart"></i>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
 </html>
