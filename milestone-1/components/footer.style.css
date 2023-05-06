@@ -1,5 +1,4 @@
 footer {
-	padding: 25px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -20,6 +19,8 @@ footer a:hover {
 }
 
 .footer-main {
+	padding: 25px;
+
 	display: flex;
 	align-items: center;
 }
@@ -53,16 +54,15 @@ footer a:hover {
 
 .payment-icons img {
 	height: 30px;
-	margin-left: 10px;
 }
 
 .footer-logo img {
 	height: 100px;
 }
 
-
 .footer-under {
 	margin-top: 2rem;
+	padding: 25px;
 }
 
 footer span {
