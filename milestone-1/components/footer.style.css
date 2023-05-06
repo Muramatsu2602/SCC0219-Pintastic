@@ -1,9 +1,26 @@
 footer {
-	background-color: #333;
-	color: #fff;
-	padding: 20px;
+	padding: 25px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+}
+
+footer h4 {
+	color: var(--black);
+}
+
+footer a {
+	color: var(--yellow);
+	font-size: var(--font-sm);
+	margin-bottom: 3rem;
+}
+
+footer a:hover {
+	color: var(--gray);
+}
+
+.footer-main {
+	display: flex;
 	align-items: center;
 }
 
@@ -31,7 +48,6 @@ footer {
 }
 
 .footer-column a {
-	color: #fff;
 	text-decoration: none;
 }
 
@@ -41,5 +57,15 @@ footer {
 }
 
 .footer-logo img {
-	height: 50px;
+	height: 100px;
+}
+
+
+.footer-under {
+	margin-top: 2rem;
+}
+
+footer span {
+	color: var(--black);
+	font-size: var(--font-sm);
 }
