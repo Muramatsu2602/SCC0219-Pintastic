@@ -13,7 +13,7 @@
 			content="Pintastic - Make a statement. Pin by pin"
 		/>
 		<meta name="keywords" content="pin buttons, cool, Pintastic" />
-		<title>Button Template</title>
+		<title>Item Card Template</title>
 		<link href="../global.css" rel="stylesheet" />
 		<script
 			src="https://kit.fontawesome.com/bace2651a9.js"
@@ -21,12 +21,24 @@
 		></script>
 	</head>
 	<body>
-		<!-- use this as the template for the button  -->
-		<button class="pintastic-button" type="submit">
-			<span> Click me! </span>
-			<i class="fa-solid fa-chevron-right"></i>
-		</button>
-
-		<!-- End of template -->
+		<!-- use this as the template for the Item Card  -->
+		<div class="item-card-container">
+			<div class="item-card-img"></div>
+			<div class="item-card-details">
+				<div>
+					<h4 id="item-title">Product Title</h4>
+					<span id="item-description"
+						>Space for a small product description</span
+					>
+				</div>
+				<div>
+					<span id="item-price">R$ 13.48 </span>
+					<button class="pintastic-button" type="submit">
+						<span> Buy Now ! </span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- end of template  -->
 	</body>
 </html>
