@@ -2,8 +2,7 @@
     position: absolute;
     width: 117px;
     height: 39px;
-    left: 500px;
-    top: 300px;
+ 
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
@@ -16,8 +15,7 @@
     height: 120px;
     flex: none;
     order: 0;
-    margin-top: 380px;
-    margin-left: 520px;
+ 
     flex-grow: 0;
 }
 
@@ -30,8 +28,7 @@
     font-weight: 500;
     font-size: 15px;
     line-height: 22px;
-    top: 402px;
-    left: 650px;
+
     color: #151515;
     flex: none;
     order: 0;
@@ -41,14 +38,16 @@
 #pin-category {
     position: absolute;
     height: 16px;
-    left: 650px;
-    top: 425px;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
     color: #A9A9A9;
+}
+
+.pin-cart {
+    background-color: red;
 }
 
 .ic-cart {
@@ -62,6 +61,7 @@
 
 .pin-characteristics {
     display: flex;
+    background-color: red;
 }
 
 .pin-characteristics p {
@@ -72,10 +72,9 @@
     font-size: 12px;
     line-height: 16px;
     color: #A9A9A9;
-    flex-grow: 0;
+    flex-grow: 0;    
 }
 
-span {
+.cart-remove-section span {
     color: black;
-    background-color: white;
 }
