@@ -72,12 +72,3 @@ A seguir estão listados os testes que iremos realizar:
 9) Testar inclusão de cartas e usuários por parte do administrador
 10) Testar alteração de perfil por parte do usuário
 11) Testar finalização de compra após itens serem adicionados ao carrinho.
-
-
-## Resultados dos testes
-
-## Procedimentos de build
-
-### Tutorial de Build
-
-## Comentários e agradecimentos
