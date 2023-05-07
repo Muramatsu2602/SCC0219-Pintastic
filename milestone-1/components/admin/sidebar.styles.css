@@ -1,0 +1,30 @@
+/* Sidebar CSS */
+.wrapper .sidebar {
+  min-width: 250px;
+  height: calc(100vh - 80px);
+  background-color: var(--lightest-gray);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.wrapper .sidebar .navigation-buttons {
+  width: 100%;
+}
+
+.wrapper .sidebar .navigation-buttons li {
+  font-size: var(--font-sm);
+  
+  padding: 15px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.wrapper .sidebar .navigation-buttons li:hover {
+  background-color: var(--lighter-gray);
+}
+/* End of Sidebar CSS */
