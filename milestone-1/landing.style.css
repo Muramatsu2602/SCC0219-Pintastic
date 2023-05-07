@@ -12,6 +12,11 @@
 	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+.section-title {
+	padding: 20px;
+	font-size: var(--font-lg);
+}
+
 .hero-text {
 	text-align: center;
 	color: white;
@@ -25,11 +30,34 @@
 .hero-text p {
 	font-size: 25px;
 }
+
+/* #landing-highlighted {
+
+} */
+
+#highlighted-content {
+	display: flex;
+	flex-direction: row;
+}
+
+#highlighted-items {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 #landing-testimonials {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 
 	margin-top: 60px;
+}
+
+#testimonials-content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .testimonial {
@@ -39,8 +67,8 @@
 	width: 30%;
 	padding: 30px;
 	border-radius: 10px;
-    border: 2px solid #d1d1d1;
-    margin: 1rem;
+	border: 2px solid #d1d1d1;
+	margin: 1rem;
 }
 
 .testimonial-content {

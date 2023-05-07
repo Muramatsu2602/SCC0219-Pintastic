@@ -19,10 +19,11 @@ footer a:hover {
 }
 
 .footer-main {
-	padding: 25px;
+	padding: 25px 25px 25px 25px;
 
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .footer-left {
