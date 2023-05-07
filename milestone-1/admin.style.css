@@ -1,0 +1,245 @@
+/* PintasticAdmin - Product Management Styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+hr {
+  border: 1px solid var(--lightest-gray);
+}
+
+.header {
+  width: 100vw;
+  height: 80px;
+  background-color: var(--yellow);
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 70px;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: var(--font-lg);
+  cursor: pointer;
+}
+
+.header .logo img {
+  width: 36px;
+  height: auto;
+}
+
+.header .logo p {
+  color: var(--white);
+}
+
+.header .logo p span {
+  color: var(--black);
+}
+
+.wrapper {
+  display: flex;
+}
+
+.wrapper .sidebar {
+  min-width: 250px;
+  height: calc(100vh - 80px);
+  background-color: var(--lightest-gray);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.wrapper .sidebar .navigation-buttons {
+  width: 100%;
+}
+
+.wrapper .sidebar .navigation-buttons li {
+  font-size: var(--font-sm);
+  
+  padding: 15px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.wrapper .sidebar .navigation-buttons li:hover {
+  background-color: var(--lighter-gray);
+}
+
+.wrapper main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 30px 0;
+}
+
+.wrapper main .content {
+  width: 1070px;
+}
+
+.content .content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content .content-header h1 {
+  font-size: var(--font-xl);
+}
+
+.content .content-header button {
+  background-color: var(--yellow);
+  border: none;
+  padding: 10px 20px;
+  color: var(--white);
+  font-family: 'Poppins';
+  border-radius: 5px;
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.content .content-header button:hover {
+  filter: brightness(90%);
+}
+
+.datatable {
+  width: 100%;
+}
+
+.datatable table {
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.datatable table td,th {
+  vertical-align: middle;
+}
+
+.datatable table tr:not(:first-child) {
+  background-color: var(--lightest-gray);
+  border: none;
+  height: 100px;
+}
+
+.datatable table img {
+  height: 80px;
+  max-width: 100px;
+}
+
+.datatable .datatable-options > i {
+  position: relative;
+}
+
+.datatable .datatable-options > i {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100%;
+  transition: background-color .2s;
+}
+
+/* .datatable .datatable-options > i:hover {
+  background-color: var(--lighter-gray);
+} */
+
+.datatable .datatable-options > i:hover ul {
+  display: block;
+}
+
+.datatable .datatable-options ul {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  display: none;
+}
+
+.datatable .datatable-options ul {
+  background-color: var(--white);
+  padding: 10px;
+  width: 120px;
+
+  text-align: left;
+  font-family: 'Poppins';
+  font-size: var(--font-sm);
+  z-index: 99;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  cursor: default;
+}
+
+.datatable .datatable-options ul li {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.datatable .datatable-options ul li:hover {
+  background-color: var(--lighter-gray);
+}
+
+.datatable .pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.datatable .pagination ul li {  
+  background-color: var(--lightest-gray);
+  margin-right: 10px;
+  width: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.datatable .pagination ul li:not(.active-page):hover {
+  filter: brightness(90%);
+}
+
+.datatable .pagination .active-page {
+  background-color: var(--yellow);
+  color: var(--white);
+}
+
+.status {
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 50px;
+}
+
+.status.active {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.status.active:before {
+  content: "Ativo";
+}
+
+.status.inactive {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+.status.inactive:before {
+  content: "Inativo";
+}

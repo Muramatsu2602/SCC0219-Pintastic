@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>PintasticAdmin</title>
+		<link href="global.css" rel="stylesheet" />
+		<link href="admin.style.css" rel="stylesheet" />
+		<script
+			src="https://kit.fontawesome.com/bace2651a9.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<div class="header">
+			<a href="">
+				<div class="logo">
+					<img src="./img/pintastic-logo-small.png" alt="Pintastic logo">
+					<p>Pintastic<span>Admin</span></p>
+				</div>
+			</a>
+		</div>
+
+		<div class="wrapper">
+			<div class="sidebar">
+				<ul class="navigation-buttons">
+					<a href=""><li><i class="fa fa-home"></i> Inicio</li></a>
+					<a href=""><li><i class="fa fa-list"></i> Produtos</li></a>
+					<a href=""><li><i class="fa fa-group"></i> Clientes</li></a>
+					<a href=""><li><i class="fa fa-lock"></i> Administradores</li></a>
+					<a href=""><li><i class="fa fa-sign-out"></i> Sair</li></a>
+				</ul>
+			</div>
+
+			<main>
+				<div class="content">
+					<div class="content-header">
+						<h1>Produtos</h1>
+						<button onclick="openNewProductModal()"><i class="fa fa-plus"></i> Criar novo</button>
+					</div>
+					<hr>
+					<div class="datatable">
+						<table>
+							<tr>
+								<th>Imagem</th>
+								<th>Nome</th>
+								<th>Estoque</th>
+								<th>Preço</th>
+								<th>Desconto</th>
+								<th>Status</th>
+								<th>Opções</th>
+							</tr>
+							<tr>
+								<td><img src="./img/items/caramelo.png" alt="Imagem do pin"></td>
+								<td>Product title</td>
+								<td>10</td>
+								<td>R$ 49,99</td>
+								<td>10%</td>
+								<td><div class="status active"></div></td>
+								<td class="datatable-options">
+									<i class="fa fa-ellipsis-h">
+										<ul>
+											<li onclick="openProductEditModal('id')"><i class="fa fa-edit"></i> Editar</li>
+											<li onclick="openProductStatusToggleModal('id')"><i class="fa fa-edit"></i> Desativar</li>
+											<li onclick="openProductDeleteModal('id')"><i class="fa fa-trash"></i> Excluir</li>
+										</ul> 
+									</i>
+								</td>
+							</tr>
+							<tr>
+								<td><img src="./img/items/caramelo.png" alt="Imagem do pin"></td>
+								<td>Product title</td>
+								<td>0</td>
+								<td>R$ 49,99</td>
+								<td>10%</td>
+								<td><div class="status inactive"></div></td>
+								<td class="datatable-options">
+									<i class="fa fa-ellipsis-h">
+										<ul>
+											<li onclick="openProductEditModal('id')"><i class="fa fa-edit"></i> Editar</li>
+											<li onclick="openProductStatusToggleModal('id')"><i class="fa fa-edit"></i> Desativar</li>
+											<li onclick="openProductDeleteModal('id')"><i class="fa fa-trash"></i> Excluir</li>
+										</ul> 
+									</i>
+								</td>
+							</tr>
+						</table>
+						<div class="pagination">
+							<ul>
+								<li class="active-page">1</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</body>
+
+	<script>
+		function openNewProductModal() { alert("TBD");}
+		function openProductEditModal() { alert("TBD");}
+		function openProductStatusToggleModal() { alert("TBD");}
+		function openProductDeleteModal() { alert("TBD");}
+	</script>
+</html>
