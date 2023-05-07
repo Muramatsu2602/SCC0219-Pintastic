@@ -10,14 +10,14 @@ Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.
 
 - Pedro Kenzo Muramatsu Carmo (11796451)
 - Ana Cristina Silva de Oliveira (11965630)
-- André Santana Fernandes (112081537)
+- André Santana Fernandes (11208537)
 
 ## Requisitos
 
 - O sistema possui 2 tipos de usuários: Clientes e Administradores.
   - Os administradores gerenciam o sistema, os usuários e os produtos oferecidos (pins e adesivos).
-  - O registro de um administrador ocorre após seu cadastro no  sistema fornecendo dados pessoais obrigatórios como: nome completo, email e senha. <br>
-    Os demais campos, como endereço, serão opcionais. Logo após, enviamos em seu email os dados para login no sistema: email@pintastic.com e senha única.
+  - Um administrador pode apenas ser cadastrado por outros administradores, fornecendo: nome completo e email. <br>
+    Após o cadastro de um administrador, enviamos em seu email os dados para login no sistema: email e senha única, sendo a última gerada pelo sistema.
   - Os usuário são clientes que acessam a aplicação para a compra de pins e adesivos.
 - O registro de cada cliente inclui: nome completo, email, senha, endereço de entrega e telefone para contato.
 - Os registros dos pins e adesivos incluem: ID, nome do produto, categoria, preço de venda e quantidade em estoque.

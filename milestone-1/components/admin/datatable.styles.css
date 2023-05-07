@@ -1,0 +1,110 @@
+/* Datatable CSS */
+.datatable {
+  width: 100%;
+}
+
+.datatable table {
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.datatable table td,th {
+  vertical-align: middle;
+}
+
+.datatable table tr:not(:first-child) {
+  background-color: var(--lightest-gray);
+  border: none;
+  height: 100px;
+}
+
+.datatable table img {
+  height: 80px;
+  max-width: 100px;
+}
+
+.datatable .datatable-options > i {
+  position: relative;
+}
+
+.datatable .datatable-options > i {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 100%;
+  transition: background-color .2s;
+}
+
+/* .datatable .datatable-options > i:hover {
+  background-color: var(--lighter-gray);
+} */
+
+.datatable .datatable-options > i:hover ul {
+  display: block;
+}
+
+.datatable .datatable-options ul {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  display: none;
+}
+
+.datatable .datatable-options ul {
+  background-color: var(--white);
+  padding: 10px;
+  width: 120px;
+
+  text-align: left;
+  font-family: 'Poppins';
+  font-size: var(--font-sm);
+  z-index: 99;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  cursor: default;
+}
+
+.datatable .datatable-options ul li {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.datatable .datatable-options ul li:hover {
+  background-color: var(--lighter-gray);
+}
+
+.datatable .pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.datatable .pagination ul li {  
+  background-color: var(--lightest-gray);
+  margin-right: 10px;
+  width: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: filter .2s;
+}
+
+.datatable .pagination ul li:not(.active-page):hover {
+  filter: brightness(90%);
+}
+
+.datatable .pagination .active-page {
+  background-color: var(--yellow);
+  color: var(--white);
+}
+/* End of Datatable CSS */
