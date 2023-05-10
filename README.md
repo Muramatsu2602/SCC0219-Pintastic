@@ -5,6 +5,7 @@
 # SCC0219 Pintastic: a fully-functional Online Store to sell button pins.
 
 Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.
+(Imagens da aplicação podem ser encontradas no diretório mockups/)
 
 ## Membros:
 
