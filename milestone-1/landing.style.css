@@ -65,10 +65,6 @@
 	background-color: #ddd;
 }
 
-#highlighted-items {
-	
-}
-
 #highlighted-content {
 	display: flex;
 	flex-direction: row;
