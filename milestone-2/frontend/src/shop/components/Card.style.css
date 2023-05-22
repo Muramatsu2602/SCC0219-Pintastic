@@ -1,0 +1,73 @@
+.item-card-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 32px 24px;
+	width: 237px;
+	max-width: 800px;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+}
+
+#item-card-bottom {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+}
+
+#item-description {
+	color: var(--gray);
+}
+
+.discount-pill {
+	position: absolute;
+	padding: 4px 8px;
+	background-color: #ffc107;
+	border-radius: 20px;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.item-card-img img {
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 180px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.item-card-details {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.item-card-details > div {
+	margin-bottom: 16px;
+}
+
+.item-card-details h4 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.item-card-details span {
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+.item-card-details span#item-price {
+	font-size: 24px;
+	font-weight: bold;
+}
