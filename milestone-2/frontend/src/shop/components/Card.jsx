@@ -13,8 +13,8 @@ const Card = ({
   return (
     <div className='item-card-container'>
       <div className='item-card-img'>
-        <img src={productImage} alt="card_image" />
-        <div className='discount-pill'>{productDiscountPercentage}</div>
+        <div className='discount-pill'>{productDiscountPercentage}% OFF</div>
+        <img src={require(`${productImage}`)} alt="card_image" />
       </div>
       <div className='item-card-details'>
         <div>

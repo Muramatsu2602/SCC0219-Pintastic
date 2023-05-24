@@ -12,7 +12,8 @@ const Header = () => {
       <div className="header-main">
         <div className="logo">
           <img
-            src="../img/pintastic-logo.png"
+            src={require("./assets/img/pintastic-logo.png")}
+            
             id="img-logotipo"
             className="logotipo"
             alt="Logo"
