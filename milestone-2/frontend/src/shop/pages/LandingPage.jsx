@@ -6,21 +6,22 @@ import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
 import Nav from '../components/Nav.jsx'
 import Card from '../components/Card.jsx'
+import Testimonial from '../components/Testimonial.jsx'
 
 export default function LandingPage () {
   return (
     <>
       <Header />
       <Nav />
-      <div class='landing-hero'>
-        <div class='hero-text'>
+      <div className='landing-hero'>
+        <div className='hero-text'>
           <h1>Welcome to Pintastic</h1>
           <p>Discover the best collection of pins and stickers!</p>
         </div>
       </div>
       <main>
         <section id='landing-highlighted'>
-          <div class='section-title'>
+          <div className='section-title'>
             <span>Best selling products</span>
           </div>
           <div id='highlighted-content'>
@@ -72,46 +73,25 @@ export default function LandingPage () {
 
         <hr />
         <section id='landing-testimonials'>
-          <div class='section-title'>
+          <div className='section-title'>
             <span>Relato de nossos clientes</span>
           </div>
           <div id='testimonials-content'>
-            <div class='testimonial'>
-              <div class='testimonial-content'>
-                <p class='testimonial-text'>
-                  "Pintastic has made it so easy for me to find unique and
-                  high-quality pins for my collection. I'm always impressed with
-                  the selection and the customer service."
-                </p>
-              </div>
-              <div class='testimonial-image'>
-                <img
-                  src='img/testimonials/testimonial-1.jpeg'
-                  alt='Testimonial 1'
-                  class='testimonial-avatar'
-                />
-              </div>
-              <p class='testimonial-author'>Kenzo Johnson</p>
-            </div>
+            <Testimonial
+              testimonialText={
+                "Pintastic has made it so easy for me to find unique and high-quality pins for my collection. I'm always impressed with  the selection and the customer service."
+              }
+              testimonialImgSrc={'./assets/img/testimonials/testimonial-1.jpeg'}
+              testimonialAuthor={'Pedro Hering'}
+            />
 
-            <div class='testimonial'>
-              <div class='testimonial-content'>
-                <p class='testimonial-text'>
-                  "Pintastic is my go-to for all things pins and stickers. The
-                  website is user-friendly and the checkout process is a breeze.
-                  I can always count on Pintastic to deliver high-quality
-                  products!"
-                </p>
-              </div>
-              <div class='testimonial-image'>
-                <img
-                  src='img/testimonials/testimonial-3.jpeg'
-                  alt='Testimonial 3'
-                  class='testimonial-avatar'
-                />
-              </div>
-              <p class='testimonial-author'>Emily Chen</p>
-            </div>
+            {/* <Testimonial
+              testimonialText={
+                'Pintastic is my go-to for all things pins and stickers. The website is user-friendly and the checkout process is a breeze. I can always count on Pintastic to deliver high-quality products!'
+              }
+              testimonialImgSrc={'./assets/img/testimonials/testimonial-3.jpeg'}
+              testimonialAuthor={'Maria Schoffen'}
+            /> */}
           </div>
         </section>
       </main>
