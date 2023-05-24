@@ -1,6 +1,6 @@
 import './LandingPage.style.css'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../components/Button.jsx'
 import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
@@ -9,6 +9,59 @@ import Card from '../components/Card.jsx'
 import Testimonial from '../components/Testimonial.jsx'
 
 export default function LandingPage () {
+  const [currentPage, setCurrentPage] = useState(1)
+  const cardsPerPage = 5
+
+  // Sample card data for demonstration purposes
+  const cardData = [
+    {
+      productTitle: 'Product Title 1',
+      productDescription: 'Space for a small product description',
+      productPrice: '5.99',
+      productDiscountPercentage: '4.3',
+      productImage: './assets/img/items/caramelo.png'
+    },
+    {
+      productTitle: 'Product Title 2',
+      productDescription: 'Space for a small product description',
+      productPrice: '5.99',
+      productDiscountPercentage: '4.3',
+      productImage: './assets/img/items/caramelo.png'
+    },
+    {
+      productTitle: 'Product Title 2',
+      productDescription: 'Space for a small product description',
+      productPrice: '5.99',
+      productDiscountPercentage: '4.3',
+      productImage: './assets/img/items/caramelo.png'
+    },
+    {
+      productTitle: 'Product Title 2',
+      productDescription: 'Space for a small product description',
+      productPrice: '5.99',
+      productDiscountPercentage: '4.3',
+      productImage: './assets/img/items/caramelo.png'
+    },
+    {
+      productTitle: 'Product Title 2',
+      productDescription: 'Space for a small product description',
+      productPrice: '5.99',
+      productDiscountPercentage: '4.3',
+      productImage: './assets/img/items/caramelo.png'
+    }
+    // Add more card data as needed
+  ]
+
+  // Calculate index range for the current page
+  const indexOfLastCard = currentPage * cardsPerPage
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage
+  const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard)
+
+  // Function to handle pagination
+  const handlePageChange = pageNumber => {
+    setCurrentPage(pageNumber)
+  }
+
   return (
     <>
       <Header />
@@ -44,29 +97,39 @@ export default function LandingPage () {
               <Button buttonText={'More Products'} />
             </div>
             <div id='highlighted-items'>
-              <Card
-                productTitle={'Product Title'}
-                productDescription={'Space for a small product description'}
-                productPrice={'5.99'}
-                productDiscountPercentage={'4.3'}
-                productImage={'./assets/img/items/caramelo.png'}
-              />
-
-              <Card
-                productTitle={'Product Title'}
-                productDescription={'Space for a small product description'}
-                productPrice={'5.99'}
-                productDiscountPercentage={'4.3'}
-                productImage={'./assets/img/items/caramelo.png'}
-              />
-
-              <Card
-                productTitle={'Product Title'}
-                productDescription={'Space for a small product description'}
-                productPrice={'5.99'}
-                productDiscountPercentage={'4.3'}
-                productImage={'./assets/img/items/caramelo.png'}
-              />
+              <section id='landing-cards-pagination'>
+                <div className='section-title'>
+                  <span>More Cards</span>
+                </div>
+                <div id='cards-content' className='horizontal-scroll'>
+                  {currentCards.map((card, index) => (
+                    <Card
+                      key={index}
+                      productTitle={card.productTitle}
+                      productDescription={card.productDescription}
+                      productPrice={card.productPrice}
+                      productDiscountPercentage={card.productDiscountPercentage}
+                      productImage={card.productImage}
+                    />
+                  ))}
+                </div>
+                {cardData.length > cardsPerPage && (
+                  <div className='pagination'>
+                    {Array.from(
+                      Array(Math.ceil(cardData.length / cardsPerPage)),
+                      (e, i) => (
+                        <button
+                          key={i}
+                          onClick={() => handlePageChange(i + 1)}
+                          className={currentPage === i + 1 ? 'active' : ''}
+                        >
+                          {i + 1}
+                        </button>
+                      )
+                    )}
+                  </div>
+                )}
+              </section>
             </div>
           </div>
         </section>
@@ -89,7 +152,9 @@ export default function LandingPage () {
               testimonialText={
                 'Pintastic is my go-to for all things pins and stickers. The website is user-friendly and the checkout process is a breeze. I can always count on Pintastic to deliver high-quality products!'
               }
-              testimonialImgSrc={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
+              testimonialImgSrc={
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+              }
               testimonialAuthor={'Maria Schoffen'}
             />
           </div>
