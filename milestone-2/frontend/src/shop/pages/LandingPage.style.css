@@ -75,3 +75,17 @@
 	align-items: center;
 	justify-content: center;
 }
+
+#landing-testimonials {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	margin-top: 60px;
+}
+
+#testimonials-content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}

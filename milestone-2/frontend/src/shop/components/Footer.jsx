@@ -14,25 +14,25 @@ const Footer = () => {
           <div className="footer-column">
             <h4>Social Media</h4>
             <ul>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">YouTube</a></li>
-              <li><a href="#">LinkedIn</a></li>
+              <li><a href="*">Facebook</a></li>
+              <li><a href="*">Twitter</a></li>
+              <li><a href="*">Instagram</a></li>
+              <li><a href="*">YouTube</a></li>
+              <li><a href="*">LinkedIn</a></li>
             </ul>
           </div>
           <div className="footer-column">
             <h4>Contact</h4>
             <ul>
-              <li><a href="#">Talk to Us</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="*">Talk to Us</a></li>
+              <li><a href="*">FAQ</a></li>
             </ul>
           </div>
           <div className="footer-column">
             <h4>Pintastic</h4>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Address</a></li>
+              <li><a href="*">About Us</a></li>
+              <li><a href="*">Address</a></li>
             </ul>
           </div>
         </div>

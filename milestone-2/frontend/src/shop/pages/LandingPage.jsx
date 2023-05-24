@@ -81,17 +81,17 @@ export default function LandingPage () {
               testimonialText={
                 "Pintastic has made it so easy for me to find unique and high-quality pins for my collection. I'm always impressed with  the selection and the customer service."
               }
-              testimonialImgSrc={'./assets/img/testimonials/testimonial-1.jpeg'}
+              testimonialImgSrc={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}
               testimonialAuthor={'Pedro Hering'}
             />
 
-            {/* <Testimonial
+            <Testimonial
               testimonialText={
                 'Pintastic is my go-to for all things pins and stickers. The website is user-friendly and the checkout process is a breeze. I can always count on Pintastic to deliver high-quality products!'
               }
-              testimonialImgSrc={'./assets/img/testimonials/testimonial-3.jpeg'}
+              testimonialImgSrc={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
               testimonialAuthor={'Maria Schoffen'}
-            /> */}
+            />
           </div>
         </section>
       </main>
