@@ -1,6 +1,6 @@
 import './LandingPage.style.css'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../components/Button.jsx'
 import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
@@ -10,7 +10,8 @@ import Testimonial from '../components/Testimonial.jsx'
 
 export default function LandingPage () {
   const [currentPage, setCurrentPage] = useState(1)
-  const cardsPerPage = 5
+  const [cardsPerPage, setCardsPerPage] = useState(3)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   // Sample card data for demonstration purposes
   const cardData = [
@@ -52,6 +53,24 @@ export default function LandingPage () {
     // Add more card data as needed
   ]
 
+  useEffect(() => {
+    // Update the number of cards per page based on the window width
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+      if (window.innerWidth >= 768) {
+        setCardsPerPage(3)
+      } else {
+        setCardsPerPage(1)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   // Calculate index range for the current page
   const indexOfLastCard = currentPage * cardsPerPage
   const indexOfFirstCard = indexOfLastCard - cardsPerPage
@@ -72,7 +91,7 @@ export default function LandingPage () {
           <p>Discover the best collection of pins and stickers!</p>
         </div>
       </div>
-      <main>
+      <main id='landing-main'>
         <section id='landing-highlighted'>
           <div className='section-title'>
             <span>Best selling products</span>
@@ -101,19 +120,25 @@ export default function LandingPage () {
                 <div className='section-title'>
                   <span>More Cards</span>
                 </div>
-                <div id='cards-content' className='horizontal-scroll'>
-                  {currentCards.map((card, index) => (
-                    <Card
-                      key={index}
-                      productTitle={card.productTitle}
-                      productDescription={card.productDescription}
-                      productPrice={card.productPrice}
-                      productDiscountPercentage={card.productDiscountPercentage}
-                      productImage={card.productImage}
-                    />
-                  ))}
+
+                <div className='cards-container'>
+                  <div id='cards-content' className='horizontal-scroll'>
+                    {currentCards.map((card, index) => (
+                      <Card
+                        key={index}
+                        productTitle={card.productTitle}
+                        productDescription={card.productDescription}
+                        productPrice={card.productPrice}
+                        productDiscountPercentage={
+                          card.productDiscountPercentage
+                        }
+                        productImage={card.productImage}
+                      />
+                    ))}
+                  </div>
                 </div>
-                {cardData.length > cardsPerPage && (
+
+                {windowWidth >= 768 && (
                   <div className='pagination'>
                     {Array.from(
                       Array(Math.ceil(cardData.length / cardsPerPage)),
@@ -133,7 +158,6 @@ export default function LandingPage () {
             </div>
           </div>
         </section>
-
         <hr />
         <section id='landing-testimonials'>
           <div className='section-title'>
