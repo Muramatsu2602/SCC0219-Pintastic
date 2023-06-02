@@ -1,20 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import ShopRouter from './shop/ShopRouter';
 import AdminRouter from './admin/AdminRouter';
 
-function Router() {
+function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<ShopRouter />} />
-        <Route path="/admin" element={<AdminRouter />} />
-
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/admin/*" element={<AdminRouter />} />
+        <Route path="/*" element={<ShopRouter />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
-export default Router;
+export default App;

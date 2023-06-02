@@ -10,7 +10,7 @@ import Testimonial from '../components/Testimonial.jsx'
 
 export default function LandingPage () {
   const [currentPage, setCurrentPage] = useState(1)
-  const [cardsPerPage, setCardsPerPage] = useState(3)
+  const [cardsPerPage, setCardsPerPage] = useState(4)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   // Sample card data for demonstration purposes
@@ -58,7 +58,7 @@ export default function LandingPage () {
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
       if (window.innerWidth >= 768) {
-        setCardsPerPage(3)
+        setCardsPerPage(4)
       } else {
         setCardsPerPage(1)
       }
