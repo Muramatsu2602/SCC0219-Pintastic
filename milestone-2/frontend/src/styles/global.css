@@ -13,6 +13,11 @@
 	flex-grow: 0;
 }
 
+a:-webkit-any-link {
+	text-decoration: none;
+	color: inherit;
+}
+
 nav ul {
 	display: flex;
 	list-style: none;
