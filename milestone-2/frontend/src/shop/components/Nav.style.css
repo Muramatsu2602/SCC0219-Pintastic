@@ -64,3 +64,7 @@ nav ul li a {
 nav ul li a:hover {
 	color: var(--white);
 }
+
+nav ul li ul li a:hover {
+	color: var(--light-gray);
+}

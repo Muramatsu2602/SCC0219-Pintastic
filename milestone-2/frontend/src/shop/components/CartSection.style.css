@@ -95,3 +95,15 @@ main {
 	cursor: pointer;
 	transition: all 0.3s ease;
 }
+
+.cart-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 3rem;
+}
+
+.cart-empty h1 {
+	margin-bottom: 1rem;
+}
