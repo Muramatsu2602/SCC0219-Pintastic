@@ -47,12 +47,14 @@ export function AuthProvider({ children }) {
   }, []);
 
   function loadStorageData() {
-    const storagedUser = localStorage.getItem('@App:user');
-  
-    if (storagedUser) {
+    try {
+      const storagedUser = localStorage.getItem('@App:user');
+    
       const parsedUser = JSON.parse(storagedUser);
-
+      
       setUser(parsedUser);
+    } catch (error) {
+      console.log('Error while trying to load storage data');
     }
   }
 
