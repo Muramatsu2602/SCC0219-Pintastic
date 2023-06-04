@@ -5,9 +5,10 @@ import LandingPage from './pages/LandingPage'; // do not forget to include the e
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
 import PinOfTheDay from './pages/PinOfTheDay';
+import ProductDetails from './pages/ProductDetails';
 
 function ShopRouter(props) {
-  const mockData = {
+  const mockDataPinOfTheDay = {
     productPrice: 49.99,
     productTitle: 'Product Title 3',
     productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -16,26 +17,27 @@ function ShopRouter(props) {
     productImage: 'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg',
     productRating: 3.5,
   };
+  const mockDataProductDetails = {
+    productPrice: 39.99,
+    productTitle: 'Sample Product',
+    productDescription: 'This is a sample product description.',
+    productDiscountPercentage: 20,
+    productImage: './assets/img/items/caramelo.png',
+    productRating: 4.5,
+  };
 
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
+      <Route
+        path='/product'
+        element={<ProductDetails {...mockDataProductDetails} />}
+      />
       <Route path='/cart' element={<Cart />} />
       <Route path='/wishlist' element={<Wishlist />} />
       <Route
         path='/day'
-        element={
-          <PinOfTheDay
-            productPrice={mockData.productPrice}
-            productTitle={mockData.productTitle}
-            productDescription={mockData.productDescription}
-            productDiscountPercentage={
-              mockData.productDiscountPercentage
-            }
-            productImage={mockData.productImage}
-            productRating={mockData.productRating}
-          />
-        }
+        element={<PinOfTheDay {...mockDataPinOfTheDay} />}
       />
     </Routes>
   );
