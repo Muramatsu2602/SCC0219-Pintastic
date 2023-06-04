@@ -3,6 +3,9 @@ import './Wishlist.style.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Button from '../components/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import StarRating from '../components/StarRating'
 
 const Wishlist = () => {
   // Mock data for wishlist items
@@ -10,18 +13,39 @@ const Wishlist = () => {
     {
       id: 1,
       productTitle: 'Product Title 1',
-      stars: 4,
+      stars: 4.5,
       price: 39.99,
-      discountPrice: 29.99
+      discountPrice: 29.99,
+      picture:
+        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg'
     },
     {
       id: 2,
       productTitle: 'Product Title 2',
-      stars: 3,
+      stars: 2.5,
       price: 24.99,
-      discountPrice: 19.99
+      discountPrice: 19.99,
+      picture:
+        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg'
+    },
+    {
+      id: 3,
+      productTitle: 'Product Title 3',
+      stars: 3.5,
+      price: 49.99,
+      discountPrice: 39.99,
+      picture:
+        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg'
+    },
+    {
+      id: 4,
+      productTitle: 'Product Title 4',
+      stars: 4.0,
+      price: 19.99,
+      discountPrice: 14.99,
+      picture:
+        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg'
     }
-    // Add more wishlist items as needed
   ])
 
   // Mock data for cart items
@@ -43,7 +67,7 @@ const Wishlist = () => {
     <>
       <Header quantity={wishlistItems.length} />
 
-      <main>
+      <main id='wishlist-main'>
         <div id='wishlist-container'>
           <h2 className='wishlist-title'>Wishlist</h2>
 
@@ -54,17 +78,22 @@ const Wishlist = () => {
               {wishlistItems.map(item => (
                 <li key={item.id} className='wishlist-item'>
                   <div className='wishlist-details'>
+                    <img
+                      className='wishlist-product-image'
+                      src={item.picture}
+                      alt='Product'
+                    />
                     <h3 className='wishlist-product-title'>
                       {item.productTitle}
                     </h3>
                     <div className='wishlist-rating'>
-                      <span className='wishlist-stars'>{item.stars} stars</span>
                       <button
                         className='wishlist-remove-button'
                         onClick={() => handleRemoveItem(item.id)}
                       >
-                        <i className='fas fa-heart'></i>
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </button>
+                      <StarRating rating={item.stars} />
                     </div>
                     <div className='wishlist-prices'>
                       <span className='wishlist-price'>${item.price}</span>
@@ -76,7 +105,7 @@ const Wishlist = () => {
                   <Button
                     className='wishlist-add-to-cart-button'
                     onClick={() => handleAddToCart(item.id)}
-                    buttonText={"+ Add to Cart"}
+                    buttonText='+ Add to Cart'
                   />
                 </li>
               ))}
@@ -84,7 +113,11 @@ const Wishlist = () => {
           )}
 
           <p className='wishlist-item-count'>
-            Number of items in wishlist: {wishlistItems.length}
+            Number of items in wishlist:{' '}
+            <span id='wishlist-item-count'>
+              {wishlistItems.length}{' '}
+              {wishlistItems.length === 1 ? 'Item' : 'Items'}
+            </span>
           </p>
         </div>
       </main>

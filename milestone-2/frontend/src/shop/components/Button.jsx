@@ -1,13 +1,12 @@
-import React from 'react';
-import './Button.style.css';
+import React from 'react'
+import './Button.style.css'
 
-
-const Button = ({ buttonText }) => {
+const Button = ({ buttonText, onClick }) => {
   return (
-    <button className="pintastic-button" type="submit">
+    <button onClick={onClick} className='pintastic-button' type='submit'>
       <span>{buttonText}</span>
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

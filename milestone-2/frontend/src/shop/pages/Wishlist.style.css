@@ -1,5 +1,9 @@
+#wishlist-main {
+	margin-bottom: 8rem;
+}
+
 #wishlist-container {
-	max-width: 80%;
+	width: 70%;
 	margin: 0 auto;
 	margin-top: 3rem;
 	padding: 1rem;
@@ -45,6 +49,13 @@
 	margin-right: 0.5rem;
 }
 
+.wishlist-item-image {
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	margin-right: 20px;
+}
+
 .wishlist-remove-button {
 	background-color: transparent;
 	border: none;
@@ -73,4 +84,10 @@
 
 .wishlist-item-count {
 	margin-top: 1rem;
+}
+
+#wishlist-item-count {
+	color: var(--yellow);
+	font-weight: bold;
+	font-size: var(--font-lg);
 }

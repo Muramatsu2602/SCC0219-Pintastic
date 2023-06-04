@@ -6,8 +6,8 @@ main {
 }
 
 .cart-section {
-
 	max-width: 1000px;
+	width: 60%;
 	margin: 0 auto;
 
 	justify-self: center;
@@ -49,6 +49,7 @@ main {
 
 .cart-actions {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	margin-top: 20px;
 }
@@ -67,6 +68,10 @@ main {
 
 .cart-remove button:hover {
 	background-color: #f00;
+}
+
+.cart-price {
+	text-align: right;
 }
 
 .cart-price h3 {

@@ -46,7 +46,7 @@ const Cart = () => {
     <>
       <Header key={cartQuantity} quantity={cartQuantity} />
 
-      <main>
+      <main id='cart-main'>
         <CartSection
           items={cartItems}
           updateCartQuantity={updateCartQuantity}

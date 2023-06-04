@@ -35,14 +35,15 @@ const CartItem = ({ item, handleQuantityChange, removeItem }) => {
             />
           </div>
           <div className='cart-remove'>
+            <div className='cart-price'>
+              <h3>${(item.productPrice * quantity).toFixed(2)}</h3>
+            </div>
+
             <button type='button' onClick={() => removeItem(item.id)}>
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
           </div>
         </div>
-      </div>
-      <div className='cart-price'>
-        <h3>${(item.productPrice * quantity).toFixed(2)}</h3>
       </div>
     </div>
   )
