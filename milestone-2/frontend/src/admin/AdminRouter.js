@@ -1,15 +1,15 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 
-import { useAuth } from '../contexts/Auth';
+import {useAuth} from '../contexts/Auth';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
 
 function AdminRouter(props) {
-  const { signed } = useAuth();
+  const {signed} = useAuth();
 
-  return signed ? <SignedRoutes /> : <UnsignedRoutes />; 
+  return signed ? <SignedRoutes /> : <UnsignedRoutes />;
 }
 
 function UnsignedRoutes() {
