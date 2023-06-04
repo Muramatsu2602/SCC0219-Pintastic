@@ -7,7 +7,7 @@ import React, {
 
 const AuthContext = createContext({});
 
-export function AuthProvider({ children }) {
+export function AuthProvider({children}) {
   const [user, setUser] = useState(null);
 
   async function login(email, password) {
@@ -18,7 +18,9 @@ export function AuthProvider({ children }) {
       // });
 
       const response = {
-        email: 'admin@pintastic.com',
+        data: {
+          email,
+        },
       };
 
       setUser(response.data);
@@ -49,9 +51,9 @@ export function AuthProvider({ children }) {
   function loadStorageData() {
     try {
       const storagedUser = localStorage.getItem('@App:user');
-    
+
       const parsedUser = JSON.parse(storagedUser);
-      
+
       setUser(parsedUser);
     } catch (error) {
       console.log('Error while trying to load storage data');

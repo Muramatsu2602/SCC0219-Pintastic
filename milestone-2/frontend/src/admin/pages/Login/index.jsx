@@ -1,14 +1,14 @@
-import { React, useState } from 'react';
+import {React, useState} from 'react';
 import './styles.css';
 
-import { useAuth } from '../../../contexts/Auth';
+import {useAuth} from '../../../contexts/Auth';
 import PintasticException from '../../../models/PinstaticException';
 
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export default function Login() {
-  const { login } = useAuth();
+  const auth = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ export default function Login() {
     try {
       e.preventDefault();
 
-      await login(email, password);
+      await auth.login(email, password);
     } catch (error) {
       if (error instanceof PintasticException) {
         alert(error.getBusinessMessage());
@@ -29,14 +29,14 @@ export default function Login() {
   }
 
   return (
-    <div id='login-page'>
+    <div id="admin-login-page">
       <div className="login-wrapper">
         <div className="title">
           <p>Pintastic<span>Admin</span></p>
         </div>
         <div className="card">
           <form onSubmit={handleLogin}>
-            <Input 
+            <Input
               type='email'
               id='email'
               icon={faEnvelope}
@@ -45,7 +45,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Input 
+            <Input
               type='password'
               id='password'
               icon={faLock}
