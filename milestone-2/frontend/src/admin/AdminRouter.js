@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 
 import {useAuth} from '../contexts/Auth';
 
+import AdminLayout from './components/AdminLayout';
 import Login from './pages/Login';
 import Home from './pages/Home';
 
@@ -23,7 +24,9 @@ function UnsignedRoutes() {
 function SignedRoutes() {
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route element={<AdminLayout />}>
+        <Route index element={<Home />} />
+      </Route>
     </Routes>
   );
 }

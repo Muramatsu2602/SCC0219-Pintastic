@@ -8,7 +8,7 @@ import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export default function Login() {
-  const {login} = useAuth();
+  const auth = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ export default function Login() {
     try {
       e.preventDefault();
 
-      await login(email, password);
+      await auth.login(email, password);
     } catch (error) {
       if (error instanceof PintasticException) {
         alert(error.getBusinessMessage());
@@ -29,7 +29,7 @@ export default function Login() {
   }
 
   return (
-    <div id='login-page'>
+    <div id="admin-login-page">
       <div className="login-wrapper">
         <div className="title">
           <p>Pintastic<span>Admin</span></p>

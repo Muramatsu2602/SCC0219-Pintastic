@@ -18,7 +18,9 @@ export function AuthProvider({children}) {
       // });
 
       const response = {
-        email: 'admin@pintastic.com',
+        data: {
+          email,
+        },
       };
 
       setUser(response.data);
