@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 import './CartSection.style.css'
 
-const CartSection = ({ items }) => {
+const CartSection = ({ items, updateCartQuantity }) => {
   const [cartItems, setCartItems] = useState(items)
 
   // Calculate the total price of items in the cart
@@ -28,6 +28,7 @@ const CartSection = ({ items }) => {
         item.id === itemId ? { ...item, quantity: newQuantity } : item
       )
     )
+    setTotalPrice(calculateTotalPrice())
   }
 
   // Function to remove an item from the cart
@@ -36,8 +37,10 @@ const CartSection = ({ items }) => {
   }
 
   useEffect(() => {
-    setTotalPrice(calculateTotalPrice())
-  }, [calculateTotalPrice, cartItems])
+    let totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+
+    updateCartQuantity(totalQuantity)
+  }, [cartItems, cartItems.length, updateCartQuantity])
 
   return (
     <section className='cart-section'>
@@ -53,7 +56,6 @@ const CartSection = ({ items }) => {
       {cartItems.length === 0 ? (
         <div className='cart-empty'>
           <h1>Cart is Empty</h1>
-          <p>Start shopping now!</p>
           <Link to='/'>
             <button className='pintastic-button' type='button'>
               Go to Store
