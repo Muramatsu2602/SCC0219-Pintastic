@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import './Header.style.css'
 import { Link } from 'react-router-dom'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faShoppingCart,
+  faUser,
+  faHeart
+} from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({quantity}) => {
-  const [cartItemCount, setCartItemCount] = useState(quantity);
-
+const Header = ({ quantity }) => {
+  const [cartItemCount, setCartItemCount] = useState(quantity)
 
   return (
     <header>
@@ -46,6 +48,12 @@ const Header = ({quantity}) => {
               {cartItemCount > 0 && (
                 <div className='cart-item-count'>{cartItemCount}</div>
               )}
+            </div>
+          </Link>
+
+          <Link to='/wishlist'>
+            <div className='wishlist-icon'>
+              <FontAwesomeIcon icon={faHeart} />
             </div>
           </Link>
         </div>

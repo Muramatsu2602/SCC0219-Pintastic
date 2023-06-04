@@ -17,7 +17,7 @@ const Wishlist = () => {
       price: 39.99,
       discountPrice: 29.99,
       picture:
-        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg'
+        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_machado_de_assis_191_4_20201210231655.jpg'
     },
     {
       id: 2,
@@ -78,30 +78,35 @@ const Wishlist = () => {
               {wishlistItems.map(item => (
                 <li key={item.id} className='wishlist-item'>
                   <div className='wishlist-details'>
-                    <img
-                      className='wishlist-product-image'
-                      src={item.picture}
-                      alt='Product'
-                    />
-                    <h3 className='wishlist-product-title'>
-                      {item.productTitle}
-                    </h3>
-                    <div className='wishlist-rating'>
-                      <button
-                        className='wishlist-remove-button'
-                        onClick={() => handleRemoveItem(item.id)}
-                      >
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
-                      <StarRating rating={item.stars} />
+                    <div className='wishlist-image-remove'>
+                      <img
+                        id='wishlist-item-image'
+                        src={item.picture}
+                        alt='Product'
+                      />
                     </div>
-                    <div className='wishlist-prices'>
-                      <span className='wishlist-price'>${item.price}</span>
-                      <span className='wishlist-discount-price'>
-                        ${item.discountPrice}
-                      </span>
+                    <div className='wishlist-info'>
+                      <h3 className='wishlist-product-title'>
+                        {item.productTitle}
+                      </h3>
+                      <div className='wishlist-rating'>
+                        <StarRating rating={item.stars} />
+                      </div>
+                      <div className='wishlist-prices'>
+                        <span className='wishlist-price'>${item.price}</span>
+                        <span className='wishlist-discount-price'>
+                          ${item.discountPrice}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <button
+                    className='wishlist-remove-button'
+                    onClick={() => handleRemoveItem(item.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} /> 
+                    <span className='wishlist-remove-text'> Remover</span>
+                  </button>
                   <Button
                     className='wishlist-add-to-cart-button'
                     onClick={() => handleAddToCart(item.id)}
