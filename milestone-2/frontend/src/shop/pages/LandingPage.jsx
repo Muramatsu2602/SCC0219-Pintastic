@@ -20,35 +20,45 @@ export default function LandingPage () {
       productDescription: 'Space for a small product description',
       productPrice: '5.99',
       productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png'
+      productImage: './assets/img/items/caramelo.png',
+      productRating: '4.3',
+      productIsOnWishlist: false
     },
     {
       productTitle: 'Product Title 2',
       productDescription: 'Space for a small product description',
       productPrice: '5.99',
       productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png'
+      productImage: './assets/img/items/caramelo.png',
+      productRating: '4.3',
+      productIsOnWishlist: false
     },
     {
       productTitle: 'Product Title 2',
       productDescription: 'Space for a small product description',
       productPrice: '5.99',
       productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png'
+      productImage: './assets/img/items/caramelo.png',
+      productRating: '4.3',
+      productIsOnWishlist: false
     },
     {
       productTitle: 'Product Title 2',
       productDescription: 'Space for a small product description',
       productPrice: '5.99',
       productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png'
+      productImage: './assets/img/items/caramelo.png',
+      productRating: '4.3',
+      productIsOnWishlist: false
     },
     {
       productTitle: 'Product Title 2',
       productDescription: 'Space for a small product description',
       productPrice: '5.99',
       productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png'
+      productImage: './assets/img/items/caramelo.png',
+      productRating: '4.3',
+      productIsOnWishlist: false
     }
     // Add more card data as needed
   ]
@@ -83,7 +93,7 @@ export default function LandingPage () {
 
   return (
     <>
-      <Header quantity={3}/>
+      <Header quantity={3} />
       <Nav />
       <div className='landing-hero'>
         <div className='hero-text'>
@@ -133,6 +143,8 @@ export default function LandingPage () {
                           card.productDiscountPercentage
                         }
                         productImage={card.productImage}
+                        productRating={card.productRating}
+                        productIsOnWishlist={card.productIsOnWishlist}
                       />
                     ))}
                   </div>

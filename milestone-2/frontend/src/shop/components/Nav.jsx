@@ -2,6 +2,7 @@ import React from 'react'
 import './Nav.style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 
 const Menu = () => {
   return (
@@ -40,7 +41,7 @@ const Menu = () => {
           </ul>
         </li>
         <li>
-          <a href='#'>😎 Pin do Dia</a>
+          <Link to={'/day'}>😎 Pin do Dia</Link>{' '}
         </li>
       </ul>
     </nav>
