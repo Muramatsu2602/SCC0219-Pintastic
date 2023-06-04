@@ -83,7 +83,7 @@ export default function LandingPage () {
 
   return (
     <>
-      <Header />
+      <Header quantity={3}/>
       <Nav />
       <div className='landing-hero'>
         <div className='hero-text'>

@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './Header.style.css'
 import { Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 
-const Header = () => {
+const Header = ({quantity}) => {
+  const [cartItemCount, setCartItemCount] = useState(quantity);
+
+
   return (
     <header>
       <div className='header-main'>
         <div className='logo'>
           <Link to='/'>
-          <img
-            src={require('./assets/img/pintastic-logo.png')}
-            id='img-logotipo'
-            className='logotipo'
-            alt='Logo'
-          />
+            <img
+              src={require('./assets/img/pintastic-logo.png')}
+              id='img-logotipo'
+              className='logotipo'
+              alt='Logo'
+            />
           </Link>
-       
         </div>
         <div className='search-bar'>
           <div className='search'>
@@ -34,17 +36,18 @@ const Header = () => {
           </div>
         </div>
         <div className='user-icons'>
-          <div>
-            <a href='#'>
-              <FontAwesomeIcon icon={faUser} />
-            </a>
+          <Link to='/profile'>
+            <FontAwesomeIcon icon={faUser} />
+          </Link>
 
-            <Link to='/cart'>
-              <a href='#'>
-                <FontAwesomeIcon icon={faShoppingCart} />
-              </a>
-            </Link>
-          </div>
+          <Link to='/cart'>
+            <div className='cart-item-icon'>
+              <FontAwesomeIcon icon={faShoppingCart} />
+              {cartItemCount > 0 && (
+                <div className='cart-item-count'>{cartItemCount}</div>
+              )}
+            </div>
+          </Link>
         </div>
       </div>
     </header>

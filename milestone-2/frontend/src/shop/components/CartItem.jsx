@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const CartItem = ({ item, removeItem }) => {
-  const [quantity, setQuantity] = useState(item.quantity);
+const CartItem = ({ item, handleQuantityChange, removeItem }) => {
+  const [quantity, setQuantity] = useState(item.quantity)
 
-  const handleQuantityChange = (event) => {
-    const newQuantity = parseInt(event.target.value);
-    setQuantity(newQuantity);
-  };
+  const handleChange = event => {
+    const newQuantity = parseInt(event.target.value)
+    setQuantity(newQuantity)
+    handleQuantityChange(item.id, newQuantity) // Call the callback function with the updated values
+  }
 
   return (
     <div className='cart-item'>
@@ -30,7 +31,7 @@ const CartItem = ({ item, removeItem }) => {
               min='1'
               max='10'
               value={quantity}
-              onChange={handleQuantityChange}
+              onChange={handleChange}
             />
           </div>
           <div className='cart-remove'>
@@ -44,7 +45,7 @@ const CartItem = ({ item, removeItem }) => {
         <h3>${(item.productPrice * quantity).toFixed(2)}</h3>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CartItem;
+export default CartItem
