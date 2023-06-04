@@ -1,17 +1,18 @@
-import './LandingPage.style.css'
+/* eslint-disable max-len */
+import './LandingPage.style.css';
 
-import React, { useState, useEffect } from 'react'
-import Button from '../components/Button.jsx'
-import Footer from '../components/Footer.jsx'
-import Header from '../components/Header.jsx'
-import Nav from '../components/Nav.jsx'
-import Card from '../components/Card.jsx'
-import Testimonial from '../components/Testimonial.jsx'
+import React, {useState, useEffect} from 'react';
+import Button from '../components/Button.jsx';
+import Footer from '../components/Footer.jsx';
+import Header from '../components/Header.jsx';
+import Nav from '../components/Nav.jsx';
+import Card from '../components/Card.jsx';
+import Testimonial from '../components/Testimonial.jsx';
 
-export default function LandingPage () {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [cardsPerPage, setCardsPerPage] = useState(4)
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+export default function LandingPage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage, setCardsPerPage] = useState(4);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Sample card data for demonstration purposes
   const cardData = [
@@ -22,7 +23,7 @@ export default function LandingPage () {
       productDiscountPercentage: '4.3',
       productImage: './assets/img/items/caramelo.png',
       productRating: '4.3',
-      productIsOnWishlist: false
+      productIsOnWishlist: false,
     },
     {
       productTitle: 'Product Title 2',
@@ -31,7 +32,7 @@ export default function LandingPage () {
       productDiscountPercentage: '4.3',
       productImage: './assets/img/items/caramelo.png',
       productRating: '4.3',
-      productIsOnWishlist: false
+      productIsOnWishlist: false,
     },
     {
       productTitle: 'Product Title 2',
@@ -40,7 +41,7 @@ export default function LandingPage () {
       productDiscountPercentage: '4.3',
       productImage: './assets/img/items/caramelo.png',
       productRating: '4.3',
-      productIsOnWishlist: false
+      productIsOnWishlist: false,
     },
     {
       productTitle: 'Product Title 2',
@@ -49,7 +50,7 @@ export default function LandingPage () {
       productDiscountPercentage: '4.3',
       productImage: './assets/img/items/caramelo.png',
       productRating: '4.3',
-      productIsOnWishlist: false
+      productIsOnWishlist: false,
     },
     {
       productTitle: 'Product Title 2',
@@ -58,38 +59,38 @@ export default function LandingPage () {
       productDiscountPercentage: '4.3',
       productImage: './assets/img/items/caramelo.png',
       productRating: '4.3',
-      productIsOnWishlist: false
-    }
+      productIsOnWishlist: false,
+    },
     // Add more card data as needed
-  ]
+  ];
 
   useEffect(() => {
     // Update the number of cards per page based on the window width
     const handleResize = () => {
-      setWindowWidth(window.innerWidth)
+      setWindowWidth(window.innerWidth);
       if (window.innerWidth >= 768) {
-        setCardsPerPage(4)
+        setCardsPerPage(4);
       } else {
-        setCardsPerPage(1)
+        setCardsPerPage(1);
       }
-    }
+    };
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // Calculate index range for the current page
-  const indexOfLastCard = currentPage * cardsPerPage
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage
-  const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard)
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
 
   // Function to handle pagination
-  const handlePageChange = pageNumber => {
-    setCurrentPage(pageNumber)
-  }
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -153,16 +154,16 @@ export default function LandingPage () {
                 {windowWidth >= 768 && (
                   <div className='pagination'>
                     {Array.from(
-                      Array(Math.ceil(cardData.length / cardsPerPage)),
-                      (e, i) => (
-                        <button
-                          key={i}
-                          onClick={() => handlePageChange(i + 1)}
-                          className={currentPage === i + 1 ? 'active' : ''}
-                        >
-                          {i + 1}
-                        </button>
-                      )
+                        Array(Math.ceil(cardData.length / cardsPerPage)),
+                        (e, i) => (
+                          <button
+                            key={i}
+                            onClick={() => handlePageChange(i + 1)}
+                            className={currentPage === i + 1 ? 'active' : ''}
+                          >
+                            {i + 1}
+                          </button>
+                        ),
                     )}
                   </div>
                 )}
@@ -178,7 +179,7 @@ export default function LandingPage () {
           <div id='testimonials-content'>
             <Testimonial
               testimonialText={
-                "Pintastic has made it so easy for me to find unique and high-quality pins for my collection. I'm always impressed with  the selection and the customer service."
+                'Pintastic has made it so easy for me to find unique and high-quality pins for my collection. I\'m always impressed with  the selection and the customer service.'
               }
               testimonialImgSrc={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}
               testimonialAuthor={'Pedro Hering'}
@@ -198,5 +199,5 @@ export default function LandingPage () {
       </main>
       <Footer />
     </>
-  )
+  );
 }

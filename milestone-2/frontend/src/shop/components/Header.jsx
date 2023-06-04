@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import './Header.style.css'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, {useState} from 'react';
+import './Header.style.css';
+import {Link} from 'react-router-dom';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   faShoppingCart,
   faUser,
-  faHeart
-} from '@fortawesome/free-solid-svg-icons'
+  faHeart,
+} from '@fortawesome/free-solid-svg-icons';
 
-const Header = ({ quantity }) => {
-  const [cartItemCount, setCartItemCount] = useState(quantity)
+const Header = ({quantity}) => {
+  const [cartItemCount] = useState(quantity);
 
   return (
     <header>
@@ -59,7 +59,7 @@ const Header = ({ quantity }) => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -6,6 +6,8 @@ import Button from '../components/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import StarRating from '../components/StarRating';
+import Menu from '../components/Nav';
+
 
 const Wishlist = () => {
   // Mock data for wishlist items
@@ -66,7 +68,7 @@ const Wishlist = () => {
   return (
     <>
       <Header quantity={wishlistItems.length} />
-
+      <Menu />
       <main id='wishlist-main'>
         <div id='wishlist-container'>
           <h2 className='wishlist-title'>Wishlist</h2>

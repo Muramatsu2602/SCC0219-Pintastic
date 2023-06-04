@@ -25,6 +25,10 @@
 	color: var(--gray);
 }
 
+#item-title {
+	cursor: pointer;
+}
+
 .discount-pill {
 	position: absolute;
 	padding: 4px 8px;
@@ -43,6 +47,7 @@
 	height: 180px;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
+	cursor: pointer;
 }
 
 .item-card-details {

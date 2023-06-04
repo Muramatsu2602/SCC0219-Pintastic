@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import Button from '../components/Button';
 import StarRating from '../components/StarRating';
 import Confetti from 'react-confetti';
+import Menu from '../components/Nav';
+import {Link} from 'react-router-dom';
 
 const PinOfTheDay = ({
   productPrice,
@@ -17,7 +19,7 @@ const PinOfTheDay = ({
   return (
     <>
       <Header quantity={7} />
-
+      <Menu />
       <main id='pinoftheday-main'>
         <div className='pinoftheday-container'>
           <Confetti width={1000} height={1000} />
@@ -43,8 +45,11 @@ const PinOfTheDay = ({
                 <span className='pinoftheday-sale-price'>
                   ${productDiscountPercentage}
                 </span>
+
+                <Link to='/cart'>
+                  <Button buttonText='Go To Cart !' />
+                </Link>
               </div>
-              <Button buttonText='Go To Cart !' />
             </div>
           </div>
         </div>

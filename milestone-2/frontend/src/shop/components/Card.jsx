@@ -3,11 +3,8 @@ import './Card.style.css';
 import Button from './Button';
 import StarRating from './StarRating';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faHeart as faHeartSolid,
-} from '@fortawesome/free-solid-svg-icons';
+import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
-
 const Card = ({
   productPrice,
   productTitle,
@@ -51,7 +48,7 @@ const Card = ({
         </div>
         <div id='item-card-bottom'>
           <span id='item-price'>R$ {productPrice}</span>
-          <Button buttonText={' Buy Now !'} />
+          <Button buttonText={'Add to Cart'} />
         </div>
       </div>
     </div>
