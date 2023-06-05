@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import caramelo from './caramelo.png';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 
 export default styled(RawDatatable)`
   width: 100%;
@@ -28,22 +29,22 @@ export default styled(RawDatatable)`
       max-width: 100px;
   }
 
-  .datatable-options > i {
+  .datatable-options > .datatable-options-icon {
       position: relative;
   }
 
-  .datatable-options > i {
+  .datatable-options > .datatable-options-icon {
       cursor: pointer;
       padding: 5px;
       border-radius: 100%;
       transition: background-color .2s;
   }
 
-  /* .datatable-options > i:hover {
+  /* .datatable-options > .datatable-options-icon:hover {
       background-color: var(--lighter-gray);
   } */
 
-  .datatable-options > i:hover ul {
+  .datatable-options > .datatable-options-icon:hover ul {
       display: block;
   }
 
@@ -116,49 +117,31 @@ function RawDatatable(props) {
   return (
     <div className={props.className}>
       <table>
-        <tr>
-          <th>Imagem</th>
-          <th>Nome</th>
-          <th>Estoque</th>
-          <th>Preço</th>
-          <th>Desconto</th>
-          <th>Status</th>
-          <th>Opções</th>
-        </tr>
-        <tr>
-          <td><img src={caramelo} alt="Imagem do pin" /></td>
-          <td>Product title</td>
-          <td>10</td>
-          <td>R$ 49,99</td>
-          <td>10%</td>
-          <td><div className="status active"></div></td>
-          <td className="datatable-options">
-            <i className="fa fa-ellipsis-h">
-              <ul>
-                <li onClick="openProductEditModal('id')"><i className="fa fa-edit"></i> Editar</li>
-                <li onClick="openProductStatusToggleModal('id')"><i className="fa fa-edit"></i> Desativar</li>
-                <li onClick="openProductDeleteModal('id')"><i className="fa fa-trash"></i> Excluir</li>
-              </ul>
-            </i>
-          </td>
-        </tr>
-        <tr>
-          <td><img src={caramelo} alt="Imagem do pin" /></td>
-          <td>Product title</td>
-          <td>0</td>
-          <td>R$ 49,99</td>
-          <td>10%</td>
-          <td><div className="status inactive"></div></td>
-          <td className="datatable-options">
-            <i className="fa fa-ellipsis-h">
-              <ul>
-                <li onClick="openProductEditModal('id')"><i className="fa fa-edit"></i> Editar</li>
-                <li onClick="openProductStatusToggleModal('id')"><i className="fa fa-edit"></i> Desativar</li>
-                <li onClick="openProductDeleteModal('id')"><i className="fa fa-trash"></i> Excluir</li>
-              </ul>
-            </i>
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            {
+              props.columns.map((column, index) => (
+                <th key={index}>{column}</th>
+              ))
+            }
+            {
+            props.options ? <th>Opções</th> : <></>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            props.data.map((row, rowIndex) => {
+              return (
+                <tr key={rowIndex}>
+                  {
+                    row.map(buildColumnElement)
+                  }
+                </tr>
+              );
+            })
+          }
+        </tbody>
       </table>
       <div className="pagination">
         <ul>
@@ -167,4 +150,44 @@ function RawDatatable(props) {
       </div>
     </div>
   );
+}
+
+function buildColumnElement(column, index) {
+  const mappedTypes = {
+    'text': (column, index) => (
+      <td key={index}>{column.value}</td>
+    ),
+    'image': (column, index) => (
+      <td key={index}><img src={column.value.image} alt={column.value.alt} /></td>
+    ),
+    'status': (column, index) => (
+      <td key={index}><div className={`status ${column.value}`}></div></td>
+    ),
+    'options': (column, index) => (
+      <td key={index} className="datatable-options">
+        <i className="datatable-options-icon">
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+          <ul>
+            {
+              column.value.map((option, optionIndex) => (
+                <li key={optionIndex} onClick={option.action}>
+                  <FontAwesomeIcon icon={option.icon} /> {option.title}
+                </li>
+              ))
+            }
+          </ul>
+        </i>
+      </td>
+    ),
+  };
+
+  if (!(column.type in mappedTypes)) {
+    console.error('Column type is not mapped: ' + column.type);
+
+    return (
+      <td key={index}></td>
+    );
+  }
+
+  return mappedTypes[column.type](column, index);
 }
