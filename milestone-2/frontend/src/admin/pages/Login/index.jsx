@@ -1,11 +1,12 @@
 import {React, useState} from 'react';
 import './styles.css';
 
-import {useAuth} from '../../../contexts/Auth';
-import PintasticException from '../../../models/PinstaticException';
-
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import Swal from 'sweetalert2';
+
+import {useAuth} from '../../../contexts/Auth';
+import PintasticException from '../../../models/PinstaticException';
 
 export default function Login() {
   const auth = useAuth();
@@ -20,11 +21,11 @@ export default function Login() {
       await auth.login(email, password);
     } catch (error) {
       if (error instanceof PintasticException) {
-        alert(error.getBusinessMessage());
+        Swal.fire('Ocorreu um erro', error.getBusinessMessage(), 'error');
         return;
       }
 
-      alert('Não foi possível realizar o login, tente novamente mais tarde');
+      Swal.fire('Ocorreu um erro', 'Não foi possível realizar o login, tente novamente mais tarde', 'error');
     }
   }
 

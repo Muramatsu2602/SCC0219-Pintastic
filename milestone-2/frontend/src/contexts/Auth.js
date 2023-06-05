@@ -4,6 +4,7 @@ import React, {
   useContext,
   createContext,
 } from 'react';
+import PintasticException from '../models/PinstaticException';
 
 const AuthContext = createContext({});
 
@@ -12,6 +13,9 @@ export function AuthProvider({children}) {
 
   async function login(email, password) {
     try {
+      if (email != 'admin@pintastic.com' || password != '123') {
+        throw new PintasticException('Incorrect email or password', 'Email ou senha incorretos');
+      }
       // const response = await api.post('/login', {
       //   email,
       //   senha: password,
