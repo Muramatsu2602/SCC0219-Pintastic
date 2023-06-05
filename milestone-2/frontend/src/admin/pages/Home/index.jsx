@@ -66,6 +66,496 @@ export default function Home() {
         ],
       },
     ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
+    [
+      {
+        'type': 'image',
+        'value': {
+          'image': 'https://raw.githubusercontent.com/Muramatsu2602/SCC0219-Pintastic/main/milestone-1/img/items/caramelo.png',
+          'alt': 'Pin de cachorro caramelo',
+        },
+      },
+      {
+        'type': 'text',
+        'value': 'Caramelo',
+      },
+      {
+        'type': 'text',
+        'value': '10',
+      },
+      {
+        'type': 'text',
+        'value': 'R$ 49.99',
+      },
+      {
+        'type': 'text',
+        'value': '10%',
+      },
+      {
+        'type': 'status',
+        'value': 'active',
+      },
+      {
+        'type': 'options',
+        'value': [
+          {
+            'title': 'Editar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Desativar',
+            'icon': faPencil,
+            'action': () => {},
+          },
+          {
+            'title': 'Excluir',
+            'icon': faTrash,
+            'action': () => {},
+          },
+        ],
+      },
+    ],
   ];
 
   return (

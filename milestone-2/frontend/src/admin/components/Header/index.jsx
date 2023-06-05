@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logo from './pintastic-logo-small.png';
 
 export default styled(RawHeader)`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: var(--yellow);
 

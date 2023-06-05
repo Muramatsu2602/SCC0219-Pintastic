@@ -5,7 +5,8 @@ import {useAuth} from '../../../contexts/Auth';
 
 export default styled(RawSidebar)`
   min-width: 250px;
-  height: calc(100vh - 80px);
+  height: auto;
+  min-height: calc(100vh - 80px);
   background-color: var(--lightest-gray);
 
   display: flex;

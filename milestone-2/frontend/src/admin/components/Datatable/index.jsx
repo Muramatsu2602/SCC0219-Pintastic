@@ -1,11 +1,111 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
 
+function RawDatatable(props) {
+  const itemsPerPage = 5;
+
+  const [currentPage, setCurrentPage] = useState(0);
+
+  return (
+    <div className={props.className}>
+      <table>
+        <thead>
+          <tr>
+            {
+              props.columns.map((column, index) => (
+                <th key={index}>{column}</th>
+              ))
+            }
+            {
+            props.options ? <th>Opções</th> : <></>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            props.data.slice(itemsPerPage * currentPage, itemsPerPage * currentPage + itemsPerPage).map((row, rowIndex) => {
+              return (
+                <tr key={rowIndex}>
+                  {
+                    row.map(buildColumnElement)
+                  }
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+      <div className="pagination">
+        <ul>
+          {
+            Array(Math.ceil(props.data.length / itemsPerPage))
+            // Array(50)
+                .fill(0)
+                .map((_, page) => (
+                  <li
+                    key={page}
+                    className={currentPage == page ? 'active-page' : ''}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    { page + 1}
+                  </li>
+                ))
+          }
+
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function buildColumnElement(column, index) {
+  const mappedTypes = {
+    'text': (column, index) => (
+      <td key={index}>{column.value}</td>
+    ),
+    'image': (column, index) => (
+      <td key={index}><img src={column.value.image} alt={column.value.alt} /></td>
+    ),
+    'status': (column, index) => (
+      <td key={index}><div className={`status ${column.value}`}></div></td>
+    ),
+    'options': (column, index) => (
+      <td key={index} className="datatable-options">
+        <i className="datatable-options-icon">
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+          <ul>
+            {
+              column.value.map((option, optionIndex) => (
+                <li key={optionIndex} onClick={option.action}>
+                  <FontAwesomeIcon icon={option.icon} /> {option.title}
+                </li>
+              ))
+            }
+          </ul>
+        </i>
+      </td>
+    ),
+  };
+
+  if (!(column.type in mappedTypes)) {
+    console.error('Column type is not mapped: ' + column.type);
+
+    return (
+      <td key={index}></td>
+    );
+  }
+
+  return mappedTypes[column.type](column, index);
+}
+
 export default styled(RawDatatable)`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   table {
       width: 100%;
@@ -18,7 +118,7 @@ export default styled(RawDatatable)`
       vertical-align: middle;
   }
 
-  table tr:not(:first-child) {
+  table tbody tr {
       background-color: var(--lightest-gray);
       border: none;
       height: 100px;
@@ -82,7 +182,7 @@ export default styled(RawDatatable)`
   }
 
   .pagination {
-      width: 100%;
+      width: 80%;
       display: flex;
       justify-content: center;
   }
@@ -93,6 +193,7 @@ export default styled(RawDatatable)`
       width: 30px;
       aspect-ratio: 1/1;
       border-radius: 100%;
+      margin-bottom: 10px;
 
       float: left;
       display: flex;
@@ -112,82 +213,3 @@ export default styled(RawDatatable)`
       color: var(--white);
   }
 `;
-
-function RawDatatable(props) {
-  return (
-    <div className={props.className}>
-      <table>
-        <thead>
-          <tr>
-            {
-              props.columns.map((column, index) => (
-                <th key={index}>{column}</th>
-              ))
-            }
-            {
-            props.options ? <th>Opções</th> : <></>
-            }
-          </tr>
-        </thead>
-        <tbody>
-          {
-            props.data.map((row, rowIndex) => {
-              return (
-                <tr key={rowIndex}>
-                  {
-                    row.map(buildColumnElement)
-                  }
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
-      <div className="pagination">
-        <ul>
-          <li className="active-page">1</li>
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function buildColumnElement(column, index) {
-  const mappedTypes = {
-    'text': (column, index) => (
-      <td key={index}>{column.value}</td>
-    ),
-    'image': (column, index) => (
-      <td key={index}><img src={column.value.image} alt={column.value.alt} /></td>
-    ),
-    'status': (column, index) => (
-      <td key={index}><div className={`status ${column.value}`}></div></td>
-    ),
-    'options': (column, index) => (
-      <td key={index} className="datatable-options">
-        <i className="datatable-options-icon">
-          <FontAwesomeIcon icon={faEllipsisVertical} />
-          <ul>
-            {
-              column.value.map((option, optionIndex) => (
-                <li key={optionIndex} onClick={option.action}>
-                  <FontAwesomeIcon icon={option.icon} /> {option.title}
-                </li>
-              ))
-            }
-          </ul>
-        </i>
-      </td>
-    ),
-  };
-
-  if (!(column.type in mappedTypes)) {
-    console.error('Column type is not mapped: ' + column.type);
-
-    return (
-      <td key={index}></td>
-    );
-  }
-
-  return mappedTypes[column.type](column, index);
-}

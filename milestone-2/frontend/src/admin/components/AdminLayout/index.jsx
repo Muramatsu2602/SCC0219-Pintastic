@@ -19,7 +19,8 @@ export default styled(RawAdminLayout)`
 }
 
 .content-wrapper main .outlet {
-  width: 1070px;
+  min-width: 1070px;
+  max-width: 1070px;
   height: 100%;
 }
 `;
