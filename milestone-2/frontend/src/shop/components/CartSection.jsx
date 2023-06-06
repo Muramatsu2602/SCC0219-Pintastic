@@ -1,51 +1,51 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-import CartItem from './CartItem'
-import './CartSection.style.css'
+import React, {useState, useEffect, useCallback} from 'react';
+import {Link} from 'react-router-dom';
+import CartItem from './CartItem';
+import './CartSection.style.css';
 
-const CartSection = ({ items, updateCartQuantity }) => {
-  const [cartItems, setCartItems] = useState(items)
+const CartSection = ({items, updateCartQuantity}) => {
+  const [cartItems, setCartItems] = useState(items);
 
   // Calculate the total price of items in the cart
   const calculateTotalPrice = useCallback(() => {
     return cartItems.reduce(
-      (acc, item) => acc + item.productPrice * item.quantity,
-      0
-    )
-  }, [cartItems])
+        (acc, item) => acc + item.productPrice * item.quantity,
+        0,
+    );
+  }, [cartItems]);
 
-  const [totalPrice, setTotalPrice] = useState(calculateTotalPrice())
+  const [totalPrice, setTotalPrice] = useState(calculateTotalPrice());
 
   // Update the total price whenever cartItems changes
   useEffect(() => {
-    setTotalPrice(calculateTotalPrice())
-  }, [calculateTotalPrice, cartItems])
+    setTotalPrice(calculateTotalPrice());
+  }, [calculateTotalPrice, cartItems]);
 
   // Function to handle quantity changes for an item
   const handleQuantityChange = (itemId, newQuantity) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
-      )
-    )
-    setTotalPrice(calculateTotalPrice())
-  }
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? {...item, quantity: newQuantity} : item,
+      ),
+    );
+    setTotalPrice(calculateTotalPrice());
+  };
 
   // Function to remove an item from the cart
-  const removeItem = itemId => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== itemId))
-  }
+  const removeItem = (itemId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
 
   useEffect(() => {
-    let totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-    updateCartQuantity(totalQuantity)
-  }, [cartItems, cartItems.length, updateCartQuantity])
+    updateCartQuantity(totalQuantity);
+  }, [cartItems, cartItems.length, updateCartQuantity]);
 
   return (
     <section className='cart-section'>
       <h2>Shopping Cart</h2>
-      {cartItems.map(item => (
+      {cartItems.map((item) => (
         <CartItem
           key={item.id}
           item={item}
@@ -81,7 +81,7 @@ const CartSection = ({ items, updateCartQuantity }) => {
         </div>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default CartSection
+export default CartSection;

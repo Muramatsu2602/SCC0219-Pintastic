@@ -1,8 +1,8 @@
-import React from 'react'
-import './Nav.style.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import './Nav.style.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'react-router-dom';
 
 const Menu = () => {
   return (
@@ -45,7 +45,7 @@ const Menu = () => {
         </li>
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

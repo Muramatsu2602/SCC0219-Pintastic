@@ -1,10 +1,10 @@
-import React from 'react'
-import './Testimonial.style.css'
+import React from 'react';
+import './Testimonial.style.css';
 
 const Testimonial = ({
   testimonialText,
   testimonialImageSrc,
-  testimonialAuthor
+  testimonialAuthor,
 }) => {
   return (
     <div className='testimonial'>
@@ -22,7 +22,7 @@ const Testimonial = ({
       </div>
       <p className='testimonial-author'>{testimonialAuthor}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Testimonial
+export default Testimonial;

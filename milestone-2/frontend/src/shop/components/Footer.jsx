@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-import './Footer.style.css'
-import VisaImg from './assets/img/logos/visa.png'
-import MastercardImg from './assets/img/logos/mastercard.png'
-import PixImg from './assets/img/logos/pix.png'
-import BoletoImg from './assets/img/logos/boleto.png'
-import LogoImg from './assets/img/pintastic-logo.png'
+import './Footer.style.css';
+import VisaImg from './assets/img/logos/visa.png';
+import MastercardImg from './assets/img/logos/mastercard.png';
+import PixImg from './assets/img/logos/pix.png';
+import BoletoImg from './assets/img/logos/boleto.png';
+import LogoImg from './assets/img/pintastic-logo.png';
 
 const Footer = () => {
   return (
@@ -76,7 +76,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

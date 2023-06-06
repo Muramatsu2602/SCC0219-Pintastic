@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, {useState} from 'react';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-const CartItem = ({ item, handleQuantityChange, removeItem }) => {
-  const [quantity, setQuantity] = useState(item.quantity)
+const CartItem = ({item, handleQuantityChange, removeItem}) => {
+  const [quantity, setQuantity] = useState(item.quantity);
 
-  const handleChange = event => {
-    const newQuantity = parseInt(event.target.value)
-    setQuantity(newQuantity)
-    handleQuantityChange(item.id, newQuantity) // Call the callback function with the updated values
-  }
+  const handleChange = (event) => {
+    const newQuantity = parseInt(event.target.value);
+    setQuantity(newQuantity);
+    handleQuantityChange(item.id, newQuantity); // Call the callback function with the updated values
+  };
 
   return (
     <div className='cart-item'>
@@ -46,7 +46,7 @@ const CartItem = ({ item, handleQuantityChange, removeItem }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CartItem
+export default CartItem;

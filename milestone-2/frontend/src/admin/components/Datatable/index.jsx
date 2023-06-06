@@ -42,7 +42,6 @@ function RawDatatable(props) {
         <ul>
           {
             Array(Math.ceil(props.data.length / itemsPerPage))
-            // Array(50)
                 .fill(0)
                 .map((_, page) => (
                   <li
