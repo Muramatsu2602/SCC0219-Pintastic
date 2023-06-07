@@ -111,3 +111,11 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+
+.related-products-upper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 4rem;
+}

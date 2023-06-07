@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import StarRating from '../components/StarRating';
 import Menu from '../components/Nav';
 import Card from '../components/Card';
+import {useNavigate} from 'react-router-dom';
 
 const ProductDetails = ({
   productPrice,
@@ -19,6 +20,8 @@ const ProductDetails = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const {productId} = useParams();
+
+  const navigate = useNavigate();
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
@@ -44,7 +47,8 @@ const ProductDetails = ({
       <Header quantity={quantity} />
       <Menu />
       <main id='product-details-main'>
-        <div className='product-details-container'>
+        <section className='product-details-container'>
+          {' '}
           <div className='product-details-image'>
             <img src={productImageUrl} alt='Product Image' />
           </div>
@@ -63,7 +67,6 @@ const ProductDetails = ({
               </div> */}
             </div>
             <div className='product-details-price'>
-
               <div className='product-details-prices-container'>
                 <span className='product-details-original-price'>{`$${productPrice}`}</span>
                 {productDiscountPercentage && (
@@ -75,8 +78,10 @@ const ProductDetails = ({
                   </div>
                 )}
               </div>
-              <div className="">
-                <span className='product-details-quantity-label'>Quantity:</span>
+              <div className=''>
+                <span className='product-details-quantity-label'>
+                  Quantity:
+                </span>
                 <input
                   className='product-details-input'
                   type='number'
@@ -85,8 +90,6 @@ const ProductDetails = ({
                   onChange={handleQuantityChange}
                 />
               </div>
-
-
             </div>
 
             <div className='product-details-button-container'>
@@ -98,10 +101,20 @@ const ProductDetails = ({
               />
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className='related-products-container'>
-          <h3 className='related-products-title'>Related Products</h3>
+        <section className='related-products-container'>
+          <div className='related-products-upper'>
+            <h3 className='related-products-title'>Related Products</h3>
+            <Button
+              className='product-details-other-products-butto abs'
+              onClick={() => {
+                navigate('/catalog/pins');
+              }}
+              buttonText='Other Products'
+            />{' '}
+          </div>
+
           <div className='related-products-carousel'>
             <Card
               productPrice={24.99}
@@ -121,7 +134,7 @@ const ProductDetails = ({
             />
             {/* Add more Card components as needed */}
           </div>
-        </div>
+        </section>
       </main>
 
       <Footer />

@@ -7,10 +7,10 @@ const Menu = () => {
     <nav className='main-nav'>
       <ul>
         <li>
-          <Link to={'/products/button'}>Button Pins</Link>{' '}
+          <Link to={'/catalog/button'}>Button Pins</Link>{' '}
         </li>
         <li>
-          <Link to={'/products/metal'}>Metal Pins</Link>{' '}
+          <Link to={'/catalog/metal'}>Metal Pins</Link>{' '}
         </li>
         <li>
           <Link to={'/day'}>😎 Pin do Dia</Link>{' '}

@@ -6,6 +6,7 @@ import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
 import PinOfTheDay from './pages/PinOfTheDay';
 import ProductDetails from './pages/ProductDetails';
+import Catalog from './pages/Catalog';
 
 function ShopRouter(props) {
   const mockDataPinOfTheDay = {
@@ -39,6 +40,13 @@ function ShopRouter(props) {
         path='/day'
         element={<PinOfTheDay {...mockDataPinOfTheDay} />}
       />
+
+      <Route
+        path='/catalog/button'
+        element={<Catalog type={'button'} />}
+      />
+
+      <Route path='/catalog/metal' element={<Catalog type={'metal'} />} />
     </Routes>
   );
 }
