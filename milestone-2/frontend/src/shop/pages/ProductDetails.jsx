@@ -20,14 +20,24 @@ const ProductDetails = ({
   const [quantity, setQuantity] = useState(1);
   const {productId} = useParams();
 
-
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
 
+  function calculateDiscountedPrice(originalPrice, discountPercentage) {
+    const discountAmount = (originalPrice * discountPercentage) / 100;
+    const discountedPrice = originalPrice - discountAmount;
+    return discountedPrice.toFixed(2);
+  }
+
   const handleAddToCart = () => {
     // Logic to add the product to the cart
   };
+
+  // Use placeholder image if the product image is not available
+  const placeholderImage =
+    'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
+  const productImageUrl = placeholderImage;
 
   return (
     <>
@@ -36,7 +46,7 @@ const ProductDetails = ({
       <main id='product-details-main'>
         <div className='product-details-container'>
           <div className='product-details-image'>
-            <img src={productImage} alt='Product Image' />
+            <img src={productImageUrl} alt='Product Image' />
           </div>
           <div className='product-details-info'>
             <h2 className='product-details-title'>{productTitle}</h2>
@@ -45,28 +55,48 @@ const ProductDetails = ({
             </div>
             <p className='product-details-description'>{productDescription}</p>
             <div className='product-details-specs'>
-              <div>
+              {/* <div>
                 <strong>Height:</strong> 10cm
               </div>
               <div>
                 <strong>Width:</strong> 20cm
-              </div>
+              </div> */}
             </div>
             <div className='product-details-price'>
-              <span className='product-details-quantity-label'>Quantity:</span>
-              <input
-                type='number'
-                min='1'
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <span className='product-details-price-label'>{`$${productPrice}`}</span>
+
+              <div className='product-details-prices-container'>
+                <span className='product-details-original-price'>{`$${productPrice}`}</span>
+                {productDiscountPercentage && (
+                  <div className='product-details-discount'>
+                    <span className='product-details-discounted-price'>{`$${calculateDiscountedPrice(
+                        productPrice,
+                        productDiscountPercentage,
+                    )}`}</span>
+                  </div>
+                )}
+              </div>
+              <div className="">
+                <span className='product-details-quantity-label'>Quantity:</span>
+                <input
+                  className='product-details-input'
+                  type='number'
+                  min='1'
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                />
+              </div>
+
+
             </div>
-            <Button
-              className='product-details-add-to-cart-button'
-              onClick={handleAddToCart}
-              buttonText='Add to Cart'
-            />
+
+            <div className='product-details-button-container'>
+              {' '}
+              <Button
+                className='product-details-add-to-cart-button'
+                onClick={handleAddToCart}
+                buttonText='Add to Cart'
+              />
+            </div>
           </div>
         </div>
 

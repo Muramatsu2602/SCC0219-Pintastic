@@ -38,7 +38,7 @@ const PinOfTheDay = ({
                 {productDescription}
               </div>
               <div className='pinoftheday-price'>
-                <span className='pinoftheday-discount'>Special Discount!</span>
+                <span className='pinoftheday-discount'>Special Discount! </span>
                 <span className='pinoftheday-original-price'>
                   ${productPrice}
                 </span>
