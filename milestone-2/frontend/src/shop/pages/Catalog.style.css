@@ -32,6 +32,12 @@ aside {
 	cursor: pointer;
 }
 
+.rating-filter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .pagination button.active {
 	font-weight: bold;
 }
@@ -44,6 +50,11 @@ aside {
 	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 0.5rem;
+}
+
+.rating-filter label {
+	display: block;
+	margin-bottom: 5px;
 }
 
 .rating-filter {
@@ -72,6 +83,10 @@ aside {
 	justify-content: space-between;
 	margin-top: 0.5rem;
 	font-size: 14px;
+}
+
+.exact-price-input {
+	margin-top: 10px;
 }
 
 .filter-buttons {
