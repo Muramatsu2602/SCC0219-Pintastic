@@ -1,0 +1,80 @@
+/* Checkout.style.css */
+
+/* Main styles for the checkout page */
+#checkout-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Styles for the payee information section */
+  #checkout-payee-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the billing information section */
+  #checkout-billing-info {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the delivery method section */
+  #checkout-delivery-method {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the payment method section */
+  #checkout-payment-method {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the additional information section */
+  #checkout-additional-info {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the confirmation section */
+  #checkout-confirmation {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  /* Styles for the purchase summary section */
+  #checkout-purchase-summary {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  /* Styles for the input groups */
+  .checkout-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Styles for the credit card details */
+  .credit-card-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  
+  /* Styles for each summary item in the purchase summary section */
+  .checkout-summary-item {
+    margin-bottom: 10px;
+  }
+  
