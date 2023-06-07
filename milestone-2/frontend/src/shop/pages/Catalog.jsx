@@ -23,7 +23,8 @@ export default function Catalog({type}) {
       if (
         ratingFilter.length > 0 &&
         !ratingFilter.some(
-            (rating) => item.productRating >= rating && item.productRating < rating + 1,
+            (rating) =>
+              item.productRating >= rating && item.productRating < rating + 1,
         )
       ) {
         return false;
@@ -151,19 +152,25 @@ export default function Catalog({type}) {
         </aside>
 
         <section>
-          <div className='card-grid'>
-            {currentCards.map((item, index) => (
-              <Card
-                key={index}
-                productTitle={item.productTitle}
-                productDescription={item.productDescription}
-                productPrice={item.productPrice}
-                productDiscountPercentage={item.productDiscountPercentage}
-                productImage={item.productImage}
-                productRating={item.productRating}
-              />
-            ))}
-          </div>
+          {currentCards.length > 0 ? (
+            <div className='card-grid'>
+              {currentCards.map((item, index) => (
+                <Card
+                  key={index}
+                  productTitle={item.productTitle}
+                  productDescription={item.productDescription}
+                  productPrice={item.productPrice}
+                  productDiscountPercentage={item.productDiscountPercentage}
+                  productImage={item.productImage}
+                  productRating={item.productRating}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className='no-items-message'>
+              No items could be found with the specified filter.
+            </div>
+          )}
 
           {filteredData.length > cardsPerPage && (
             <div className='pagination'>

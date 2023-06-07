@@ -94,3 +94,11 @@ aside {
 	justify-content: space-between;
 	margin-top: 1rem;
 }
+
+.no-items-message {
+	text-align: center;
+	padding: 20px;
+	font-size: 16px;
+	color: #555555;
+  }
+  
