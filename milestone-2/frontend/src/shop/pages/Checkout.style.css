@@ -2,79 +2,152 @@
 
 /* Main styles for the checkout page */
 #checkout-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /* Styles for the payee information section */
-  #checkout-payee-information {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Styles for the billing information section */
-  #checkout-billing-info {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-  }
-  
-  /* Styles for the delivery method section */
-  #checkout-delivery-method {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-  }
-  
-  /* Styles for the payment method section */
-  #checkout-payment-method {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-  }
-  
-  /* Styles for the additional information section */
-  #checkout-additional-info {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-  }
-  
-  /* Styles for the confirmation section */
-  #checkout-confirmation {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-  }
-  
-  /* Styles for the purchase summary section */
-  #checkout-purchase-summary {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-    width: 300px;
-  }
-  
-  /* Styles for the input groups */
-  .checkout-input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  /* Styles for the credit card details */
-  .credit-card-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-  }
-  
-  /* Styles for each summary item in the purchase summary section */
-  .checkout-summary-item {
-    margin-bottom: 10px;
-  }
-  
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Styles for the payee information section */
+#checkout-payee-information {
+	flex: 1;
+	margin-right: 20px;
+}
+
+#checkout-purchase-summary {
+	flex: 0 0 300px; /* Adjust the width as needed */
+}
+
+/* Styles for the billing information section */
+#checkout-billing-info {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+/* Styles for the delivery method section */
+#checkout-delivery-method {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	padding: 20px;
+	border-radius: 8px;
+}
+
+/* Styles for the payment method section */
+#checkout-payment-method {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+/* Styles for the additional information section */
+#checkout-additional-info {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+/* Styles for the confirmation section */
+#checkout-confirmation {
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+	background-color: #ffffff;
+	color: #333333;
+	border: 2px solid #d1d1d1;
+	border-radius: 12px;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+/* Styles for the purchase summary section */
+#checkout-purchase-summary {
+	padding: 20px;
+	border-radius: 4px;
+	width: 300px;
+}
+
+/* Styles for the input groups */
+.checkout-input-group {
+	margin-bottom: 10px;
+}
+
+/* Styles for the credit card details */
+.credit-card-details {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 10px;
+}
+
+/* Styles for each summary item in the purchase summary section */
+.checkout-summary-item {
+	margin-bottom: 10px;
+}
+
+.checkout-input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.checkout-input-group input[type='text'],
+.checkout-input-group input[type='email'],
+.checkout-input-group textarea {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+/* Credit card details */
+.credit-card-details {
+	margin-left: 20px;
+}
+
+.credit-card-details input[type='text'] {
+	margin-bottom: 5px;
+}
+
+/* Checkout summary items */
+.checkout-summary-item {
+	margin-bottom: 20px;
+}
+
+.checkout-summary-item h3 {
+	margin-bottom: 10px;
+}
+
+.checkout-summary-item div {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+.checkout-summary-item span {
+	flex: 1;
+}
+
+/* Complete purchase button */
+#checkout-confirmation .checkout-input-group {
+	margin-top: 20px;
+}
