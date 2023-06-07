@@ -16,69 +16,19 @@
 	flex: 0 0 300px; /* Adjust the width as needed */
 }
 
-/* Styles for the billing information section */
-#checkout-billing-info {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
-	color: #333333;
-	border: 2px solid #d1d1d1;
-	border-radius: 12px;
-	margin-right: 1rem;
-	margin-left: 1rem;
-	padding: 20px;
-	border-radius: 4px;
-}
-
 /* Styles for the delivery method section */
-#checkout-delivery-method {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
+.checkout-payee-info-section-card {
+	/* box-shadow: 0 0 16px rgba(0, 0, 0, 0.1); */
+	width: 60%;
+    background-color: #ffffff;
 	color: #333333;
 	border: 2px solid #d1d1d1;
 	border-radius: 12px;
-	margin-right: 1rem;
-	margin-left: 1rem;
+	margin: 1rem;
 	padding: 20px;
 	border-radius: 8px;
-}
 
-/* Styles for the payment method section */
-#checkout-payment-method {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
-	color: #333333;
-	border: 2px solid #d1d1d1;
-	border-radius: 12px;
-	margin-right: 1rem;
-	margin-left: 1rem;
-	padding: 20px;
-	border-radius: 4px;
-}
-
-/* Styles for the additional information section */
-#checkout-additional-info {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
-	color: #333333;
-	border: 2px solid #d1d1d1;
-	border-radius: 12px;
-	margin-right: 1rem;
-	margin-left: 1rem;
-	padding: 20px;
-	border-radius: 4px;
-}
-
-/* Styles for the confirmation section */
-#checkout-confirmation {
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
-	background-color: #ffffff;
-	color: #333333;
-	border: 2px solid #d1d1d1;
-	border-radius: 12px;
-	margin-right: 1rem;
-	margin-left: 1rem;
-	padding: 20px;
-	border-radius: 4px;
+	margin-bottom: 0.5rem;
 }
 
 /* Styles for the purchase summary section */
@@ -150,4 +100,16 @@
 /* Complete purchase button */
 #checkout-confirmation .checkout-input-group {
 	margin-top: 20px;
+}
+
+#checkout-payee-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#checkout-payee-information h2 {
+	font-size: 24px;
+	margin-bottom: 2rem;
 }

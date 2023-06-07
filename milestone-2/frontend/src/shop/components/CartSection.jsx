@@ -1,68 +1,92 @@
-import React from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
+import {Link} from 'react-router-dom';
+import CartItem from './CartItem';
 import './CartSection.style.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Menu from '../components/Nav';
 
-const Checkout = ({}) => {
-  // Sample cart data
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 9.99,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 14.99,
-      quantity: 1,
-    },
-    // Add more items as needed
-  ];
+const CartSection = ({items, updateCartQuantity}) => {
+  const [cartItems, setCartItems] = useState(items);
 
-  // Calculate the total cost of the cart items
-  const cartTotal = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-  );
+  // Calculate the total price of items in the cart
+  const calculateTotalPrice = useCallback(() => {
+    return cartItems.reduce(
+        (acc, item) => acc + item.productPrice * item.quantity,
+        0,
+    );
+  }, [cartItems]);
+
+  const [totalPrice, setTotalPrice] = useState(calculateTotalPrice());
+
+  // Update the total price whenever cartItems changes
+  useEffect(() => {
+    setTotalPrice(calculateTotalPrice());
+  }, [calculateTotalPrice, cartItems]);
+
+  // Function to handle quantity changes for an item
+  const handleQuantityChange = (itemId, newQuantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? {...item, quantity: newQuantity} : item,
+      ),
+    );
+    setTotalPrice(calculateTotalPrice());
+  };
+
+  // Function to remove an item from the cart
+  const removeItem = (itemId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
+
+  useEffect(() => {
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+    updateCartQuantity(totalQuantity);
+  }, [cartItems, cartItems.length, updateCartQuantity]);
 
   return (
-    <>
-      <Header quantity={7} />
-      <Menu />
-      <main id='checkout-main'>
-        <section id='checkout-payee-information'>
-          {/* Payee information sections */}
-        </section>
-        <aside id='checkout-purchase-summary'>
-          <div className='checkout-summary-item'>
-            <h3>Summary</h3>
-            {cartItems.map((item) => (
-              <div key={item.id}>
-                <span>{item.name}</span>
-                <span>${item.price.toFixed(2)}</span>
-                <span>Qty: {item.quantity}</span>
-              </div>
-            ))}
+    <section className='cart-section'>
+      <h2>Shopping Cart</h2>
+      {cartItems.map((item) => (
+        <CartItem
+          key={item.id}
+          item={item}
+          handleQuantityChange={handleQuantityChange}
+          removeItem={removeItem}
+        />
+      ))}
+      {cartItems.length === 0 ? (
+        <div className='cart-empty'>
+          <h1>Cart is Empty</h1>
+          <Link to='/'>
+            <button className='pintastic-button' type='button'>
+              Go to Store
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <div className='cart-total'>
+            <h2>Total:</h2>
+            <h2>${totalPrice.toFixed(2)}</h2>
           </div>
-          <div className='checkout-summary-item'>
-            <h3>Promo Code</h3>
-            <input type='text' placeholder='Enter promo code' />
-          </div>
-          <div className='checkout-summary-item'>
-            <h3>Total</h3>
-            <span>Subtotal: ${cartTotal.toFixed(2)}</span>
-            <span>Delivery Tax: $5.00</span>
-            <span>Final Cost: ${(cartTotal + 5).toFixed(2)}</span>
-          </div>
-        </aside>
-      </main>
+          <div className='cart-actions'>
+            <Link to='/'>
+              <button className='pintastic-button' type='button'>
+                Continue Shopping
+              </button>
+            </Link>
 
-      <Footer />
-    </>
+            <Link to='/checkout'>
+
+              <button className='pintastic-button' type='button'>
+              Checkout
+              </button>
+            </Link>
+
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 
-export default Checkout;
+export default CartSection;
