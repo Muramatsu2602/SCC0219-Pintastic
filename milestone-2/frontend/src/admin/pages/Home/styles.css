@@ -60,3 +60,10 @@
 #admin-home-page .status.inactive:before {
     content: "Inativo";
 }
+
+#admin-home-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}

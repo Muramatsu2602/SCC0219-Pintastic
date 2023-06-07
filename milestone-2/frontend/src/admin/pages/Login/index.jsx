@@ -2,11 +2,12 @@ import {React, useState} from 'react';
 import './styles.css';
 
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
 
 import {useAuth} from '../../../contexts/Auth';
 import PintasticException from '../../../models/PinstaticException';
+import Input from '../../components/Input';
+import SubmitButton from '../../components/SubmitButton';
 
 export default function Login() {
   const auth = useAuth();
@@ -64,23 +65,3 @@ export default function Login() {
     </div>
   );
 };
-
-function Input(props) {
-  return (
-    <div className="input">
-      <label htmlFor={props.id}>
-        <FontAwesomeIcon icon={props.icon} />
-        { props.label }
-      </label>
-      <input { ...props }/>
-    </div>
-  );
-}
-
-function SubmitButton(props) {
-  return (
-    <button type='submit' className="submit-button">
-      { props.value }
-    </button>
-  );
-}
