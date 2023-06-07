@@ -24,7 +24,7 @@ const PinOfTheDay = ({
         <div className='pinoftheday-container'>
           <Confetti width={1000} height={1000} />
 
-          <h2 className='pinoftheday-title'>Pin of The Day</h2>
+          <h2 className='pinoftheday-title'>Pin of The Day 😎</h2>
           <div className='pinoftheday-details'>
             <div className='pinoftheday-image'>
               <img src={productImage} alt='Pin of The Day' />
@@ -45,10 +45,12 @@ const PinOfTheDay = ({
                 <span className='pinoftheday-sale-price'>
                   ${productDiscountPercentage}
                 </span>
-
-                <Link to='/cart'>
-                  <Button buttonText='Go To Cart !' />
-                </Link>
+                <div className='pinoftheday-addcart-button'>
+                  {' '}
+                  <Link to='/cart'>
+                    <Button buttonText='Go To Cart !' />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
