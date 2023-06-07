@@ -10,7 +10,7 @@ import StarRating from '../components/StarRating';
 import cardData from './mock/products.json';
 
 export default function Catalog({type}) {
-  const [ratingFilter, setRatingFilter] = useState([]);
+  const [ratingFilter, setRatingFilter] = useState([1, 2, 3, 4, 5]);
   const [priceFilter, setPriceFilter] = useState([0, 100]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(9);
@@ -22,8 +22,9 @@ export default function Catalog({type}) {
       // Apply rating filter
       if (
         ratingFilter.length > 0 &&
-        item.productRating < Math.max(...ratingFilter) &&
-        item.productRating >= Math.min(...ratingFilter)
+        !ratingFilter.some(
+            (rating) => item.productRating >= rating && item.productRating < rating + 1,
+        )
       ) {
         return false;
       }
@@ -75,34 +76,11 @@ export default function Catalog({type}) {
   };
 
   const handleApplyFilter = () => {
-    // Apply filters and update filtered data
-    const filteredItems = cardData.filter((item) => {
-      // Apply rating filter
-      if (
-        ratingFilter.length > 0 &&
-        item.productRating < Math.max(...ratingFilter) &&
-        item.productRating >= Math.min(...ratingFilter)
-      ) {
-        return false;
-      }
-
-      // Apply price filter
-      if (
-        item.productPrice < priceFilter[0] ||
-        item.productPrice > priceFilter[1]
-      ) {
-        return false;
-      }
-
-      return true;
-    });
-
-    setFilteredData(filteredItems);
     setCurrentPage(1); // Reset to first page when applying filters
   };
 
   const handleResetFilter = () => {
-    setRatingFilter([]);
+    setRatingFilter([1, 2, 3, 4, 5]);
     setPriceFilter([0, 100]);
     setCurrentPage(1); // Reset to first page when resetting filters
   };
@@ -117,75 +95,21 @@ export default function Catalog({type}) {
           <div className='filter-container'>
             <h3 className='filter-title'>Ratings</h3>
             <div className='rating-filter'>
-              <label htmlFor='rating-1'>
-                <input
-                  type='checkbox'
-                  id='rating-1'
-                  name='rating'
-                  value={1}
-                  checked={ratingFilter.includes(1)}
-                  onChange={(event) =>
-                    handleRatingFilterChange(parseInt(event.target.value))
-                  }
-                />
-                <StarRating rating={1} />
-              </label>
-
-              <label htmlFor='rating-2'>
-                <input
-                  type='checkbox'
-                  id='rating-2'
-                  name='rating'
-                  value={2}
-                  checked={ratingFilter.includes(2)}
-                  onChange={(event) =>
-                    handleRatingFilterChange(parseInt(event.target.value))
-                  }
-                />
-                <StarRating rating={2} />
-              </label>
-
-              <label htmlFor='rating-3'>
-                <input
-                  type='checkbox'
-                  id='rating-3'
-                  name='rating'
-                  value={3}
-                  checked={ratingFilter.includes(3)}
-                  onChange={(event) =>
-                    handleRatingFilterChange(parseInt(event.target.value))
-                  }
-                />
-                <StarRating rating={3} />
-              </label>
-
-              <label htmlFor='rating-4'>
-                <input
-                  type='checkbox'
-                  id='rating-4'
-                  name='rating'
-                  value={4}
-                  checked={ratingFilter.includes(4)}
-                  onChange={(event) =>
-                    handleRatingFilterChange(parseInt(event.target.value))
-                  }
-                />
-                <StarRating rating={4} />
-              </label>
-
-              <label htmlFor='rating-5'>
-                <input
-                  type='checkbox'
-                  id='rating-5'
-                  name='rating'
-                  value={5}
-                  checked={ratingFilter.includes(5)}
-                  onChange={(event) =>
-                    handleRatingFilterChange(parseInt(event.target.value))
-                  }
-                />
-                <StarRating rating={5} />
-              </label>
+              {[1, 2, 3, 4, 5].map((rating) => (
+                <label key={rating} htmlFor={`rating-${rating}`}>
+                  <input
+                    type='checkbox'
+                    id={`rating-${rating}`}
+                    name='rating'
+                    value={rating}
+                    checked={ratingFilter.includes(rating)}
+                    onChange={(event) =>
+                      handleRatingFilterChange(parseInt(event.target.value))
+                    }
+                  />
+                  <StarRating rating={rating} />
+                </label>
+              ))}
             </div>
           </div>
 

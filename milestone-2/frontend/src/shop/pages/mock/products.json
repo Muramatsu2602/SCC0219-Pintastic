@@ -5,7 +5,7 @@
     "productPrice": "9.99",
     "productDiscountPercentage": "10",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.5"
+    "productRating": "1.5"
   },
   {
     "productTitle": "Product Title 2",
@@ -13,7 +13,7 @@
     "productPrice": "14.99",
     "productDiscountPercentage": "20",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "3.8"
+    "productRating": "2.8"
   },
   {
     "productTitle": "Product Title 3",
@@ -21,7 +21,7 @@
     "productPrice": "19.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.2"
+    "productRating": "2.2"
   },
   {
     "productTitle": "Product Title 4",

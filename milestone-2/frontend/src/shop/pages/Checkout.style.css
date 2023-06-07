@@ -12,6 +12,21 @@
 	margin-right: 20px;
 }
 
+.checkout-input-group label {
+	display: block;
+	margin-bottom: 5px;
+  }
+  
+  .checkout-input-group input[type='text'],
+  .checkout-input-group input[type='email'],
+  .checkout-input-group textarea {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }
+  
+
 #checkout-purchase-summary {
 	flex: 0 0 300px; /* Adjust the width as needed */
 }
@@ -30,6 +45,7 @@
 
 	margin-bottom: 0.5rem;
 }
+
 
 /* Styles for the purchase summary section */
 #checkout-purchase-summary {

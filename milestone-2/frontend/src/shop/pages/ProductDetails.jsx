@@ -107,9 +107,9 @@ const ProductDetails = ({
           <div className='related-products-upper'>
             <h3 className='related-products-title'>Related Products</h3>
             <Button
-              className='product-details-other-products-butto abs'
+              className='product-details-other-products-button abs'
               onClick={() => {
-                navigate('/catalog/pins');
+                navigate('/catalog/metal');
               }}
               buttonText='Other Products'
             />{' '}

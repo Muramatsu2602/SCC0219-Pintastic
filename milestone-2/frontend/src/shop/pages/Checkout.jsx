@@ -35,27 +35,51 @@ const Checkout = ({}) => {
       <Menu />
       <main id='checkout-main'>
         <section id='checkout-payee-information'>
-          <section id='checkout-billing-info' className='checkout-payee-info-section-card'>
+          <section
+            id='checkout-billing-info'
+            className='checkout-payee-info-section-card'
+          >
             <h2>Basic Information</h2>
-
-            <div className='checkout-input-group'>
-              <label htmlFor='name'>Name, Surname</label>
-              <input type='text' id='name' />
-            </div>
-            <div className='checkout-input-group'>
-              <label htmlFor='email'>Email, Telephone Number</label>
-              <input type='email' id='email' />
-            </div>
-            <div className='checkout-input-group'>
-              <label htmlFor='address'>Address, City</label>
-              <input type='text' id='address' />
-            </div>
-            <div className='checkout-input-group'>
-              <label htmlFor='state'>State, CEP</label>
-              <input type='text' id='state' />
+            <div className='checkout-input-grid'>
+              <div className='checkout-input-group'>
+                <label htmlFor='name'>Name</label>
+                <input type='text' id='name' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='surname'>Surname</label>
+                <input type='text' id='surname' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='email'>Email</label>
+                <input type='email' id='email' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='telephone'>Telephone Number</label>
+                <input type='text' id='telephone' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='address'>Address</label>
+                <input type='text' id='address' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='city'>City</label>
+                <input type='text' id='city' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='state'>State</label>
+                <input type='text' id='state' />
+              </div>
+              <div className='checkout-input-group'>
+                <label htmlFor='cep'>CEP</label>
+                <input type='text' id='cep' />
+              </div>
             </div>
           </section>
-          <section id='checkout-delivery-method' className='checkout-payee-info-section-card'>
+
+          <section
+            id='checkout-delivery-method'
+            className='checkout-payee-info-section-card'
+          >
             <h2>Delivery Method</h2>
 
             <div className='checkout-input-group'>
@@ -67,7 +91,10 @@ const Checkout = ({}) => {
               <label htmlFor='dhl'>DHL</label>
             </div>
           </section>
-          <section id='checkout-payment-method' className='checkout-payee-info-section-card'>
+          <section
+            id='checkout-payment-method'
+            className='checkout-payee-info-section-card'
+          >
             <h2>Payment Method</h2>
 
             <div className='checkout-input-group'>
@@ -102,14 +129,20 @@ const Checkout = ({}) => {
               <label htmlFor='boleto'>Boleto</label>
             </div>
           </section>
-          <section id='checkout-additional-info' className='checkout-payee-info-section-card'>
+          <section
+            id='checkout-additional-info'
+            className='checkout-payee-info-section-card'
+          >
             <h2>Additional Information</h2>
             <div className='checkout-input-group'>
               <label htmlFor='observations'>Observations</label>
               <textarea id='observations' />
             </div>
           </section>
-          <section id='checkout-confirmation' className='checkout-payee-info-section-card'>
+          <section
+            id='checkout-confirmation'
+            className='checkout-payee-info-section-card'
+          >
             <h2>Confirmation</h2>
 
             <div className='checkout-input-group'>

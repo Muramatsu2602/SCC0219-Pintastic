@@ -40,33 +40,34 @@ const Card = ({
         </div>
       </Link>
       <div className='item-card-details'>
-        <Link
-          to={{
-            pathname: '/product',
-            state: {productId: 1},
-          }}
-        >
-          <div id='card-upper-section'>
-            <h4 id='item-title'>
-              {' '}
-              <div
-                className='item-card-wishlist-icon'
-                onClick={handleWishlistToggle}
-              >
-                <FontAwesomeIcon icon={heartIcon} />
-              </div>
-              {productTitle}{' '}
-            </h4>
-            <span id='item-description'>{productDescription}</span>
-            <div className='item-rating'>
-              <StarRating rating={productRating} />
+        <div id='card-upper-section'>
+          <h4 id='item-title'>
+            {' '}
+            <div
+              className='item-card-wishlist-icon'
+              onClick={handleWishlistToggle}
+            >
+              <FontAwesomeIcon icon={heartIcon} />
             </div>
+            <Link
+              to={{
+                pathname: '/product',
+                state: {productId: 1},
+              }}
+            >
+              {productTitle}{' '}
+            </Link>
+          </h4>
+          <span id='item-description'>{productDescription}</span>
+          <div className='item-rating'>
+            <StarRating rating={productRating} />
           </div>
-        </Link>
-
+        </div>
         <div id='item-card-bottom'>
           <span id='item-price'>R$ {productPrice}</span>
-          <Button buttonText={'Add to Cart'} />
+          <Link to='/cart'>
+            <Button buttonText={'Add to Cart'} />
+          </Link>
         </div>
       </div>
     </div>
