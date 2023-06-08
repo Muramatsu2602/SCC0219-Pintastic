@@ -6,6 +6,7 @@ import {useAuth} from '../contexts/Auth';
 import AdminLayout from './components/AdminLayout';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Admins from './pages/Admins';
 
 function AdminRouter(props) {
   const {signed} = useAuth();
@@ -25,7 +26,10 @@ function SignedRoutes() {
   return (
     <Routes>
       <Route element={<AdminLayout />}>
-        <Route index element={<Home />} />
+        <Route index element={<></>} />
+        <Route path='/products' element={<Home />} />
+        <Route path='/clients' element={<></>} />
+        <Route path='/administrators' element={<Admins />} />
       </Route>
     </Routes>
   );

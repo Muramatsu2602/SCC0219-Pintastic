@@ -8,7 +8,7 @@ import Datatable from '../../components/Datatable';
 import Input from '../../components/Input';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';
-import mockProducts from './products';
+import mockProducts from './mockProducts';
 
 import './styles.css';
 

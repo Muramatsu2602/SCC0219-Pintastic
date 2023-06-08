@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHome, faList, faUserGroup, faLock, faSignOut} from '@fortawesome/free-solid-svg-icons';
 
 import {useAuth} from '../../../contexts/Auth';
 
@@ -47,12 +51,20 @@ function RawSidebar(props) {
   return (
     <div className={props.className}>
       <ul className="navigation-buttons">
-        <a href=""><li><i className="fa fa-home"></i> Inicio</li></a>
-        <a href=""><li><i className="fa fa-list"></i> Produtos</li></a>
-        <a href=""><li><i className="fa fa-group"></i> Clientes</li></a>
-        <a href=""><li><i className="fa fa-lock"></i> Administradores</li></a>
-        <a onClick={handleLogout}><li><i className="fa fa-sign-out"></i> Sair</li></a>
+        <MenuButton to='/admin' icon={faHome} text='Inicio' />
+        <MenuButton to='/admin/products' icon={faList} text='Produtos' />
+        <MenuButton to='/admin/clients' icon={faUserGroup} text='Clientes' />
+        <MenuButton to='/admin/administrators' icon={faLock} text='Administradores' />
+        <MenuButton onClick={handleLogout} to='/admin' icon={faSignOut} text='Sair' />
       </ul>
     </div>
+  );
+}
+
+function MenuButton(props) {
+  return (
+    <Link to={props.to} onClick={props.onClick}>
+      <li><FontAwesomeIcon icon={props.icon} /> {props.text}</li>
+    </Link>
   );
 }
