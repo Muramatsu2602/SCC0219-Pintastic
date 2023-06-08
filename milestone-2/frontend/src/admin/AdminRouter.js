@@ -5,7 +5,8 @@ import {useAuth} from '../contexts/Auth';
 
 import AdminLayout from './components/AdminLayout';
 import Login from './pages/Login';
-import Home from './pages/Home';
+import Products from './pages/Products';
+import Clients from './pages/Clients';
 import Admins from './pages/Admins';
 
 function AdminRouter(props) {
@@ -27,8 +28,8 @@ function SignedRoutes() {
     <Routes>
       <Route element={<AdminLayout />}>
         <Route index element={<></>} />
-        <Route path='/products' element={<Home />} />
-        <Route path='/clients' element={<></>} />
+        <Route path='/products' element={<Products />} />
+        <Route path='/clients' element={<Clients />} />
         <Route path='/administrators' element={<Admins />} />
       </Route>
     </Routes>

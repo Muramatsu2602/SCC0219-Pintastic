@@ -12,7 +12,7 @@ import mockAdmins from './mockAdmins';
 
 import './styles.css';
 
-export default function Home() {
+export default function Admins() {
   const [admins, setAdmins] = useState(mockAdmins);
   const [modal, setModal] = useState(null);
 
@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <div id='admin-home-page'>
+      <div id='admin-administrators-page'>
         { modal }
         <div className='content-header'>
           <h1>Administradores</h1>

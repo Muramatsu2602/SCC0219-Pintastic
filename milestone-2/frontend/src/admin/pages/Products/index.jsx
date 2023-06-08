@@ -12,7 +12,7 @@ import mockProducts from './mockProducts';
 
 import './styles.css';
 
-export default function Home() {
+export default function Products() {
   const [products, setProducts] = useState(mockProducts);
   const [modal, setModal] = useState(null);
 
@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <div id='admin-home-page'>
+      <div id='admin-products-page'>
         { modal }
         <div className='content-header'>
           <h1>Produtos</h1>
