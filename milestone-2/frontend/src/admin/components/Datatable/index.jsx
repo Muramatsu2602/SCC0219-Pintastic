@@ -163,7 +163,7 @@ export default styled(RawDatatable)`
       text-align: left;
       font-family: 'Poppins';
       font-size: var(--font-sm);
-      z-index: 99;
+      z-index: 89;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 5px;
 
