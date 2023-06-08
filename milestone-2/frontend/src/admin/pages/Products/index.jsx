@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 
 import Swal from 'sweetalert2';
-import {faPencil, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPencil, faTrash, faPlus} from '@fortawesome/free-solid-svg-icons';
 
 import PintasticException from '../../../models/PinstaticException';
 import Datatable from '../../components/Datatable';
@@ -40,7 +41,7 @@ export default function Products() {
 
             setModal(createProductModal);
           }}>
-            <i className='fa fa-plus'></i> Criar novo
+            <FontAwesomeIcon icon={faPlus} /> Criar novo
           </button>
         </div>
         <hr />
