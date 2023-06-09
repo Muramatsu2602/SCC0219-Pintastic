@@ -40,8 +40,8 @@ function ShopRouter(props) {
       <Route path='/' element={<LandingPage />} />
       <Route path='/product' element={<ProductDetails {...mockDataProductDetails} />} />
       <Route path='/cart' element={<Cart />} />
-      <Route path='/catalog/button' element={<Catalog type={'button'} />} />
-      <Route path='/catalog/metal' element={<Catalog type={'metal'} />} />
+      <Route path='/catalog/pins' element={<Catalog type={'pins'} />} />
+      <Route path='/catalog/stickers' element={<Catalog type={'stickers'} />} />
 
       {
         signed ? (

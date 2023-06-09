@@ -103,8 +103,8 @@
 
 .item-card-wishlist-icon {
 	cursor: pointer;
+	color: pink;
 }
-
 
 .item-category-and-icon {
 	display: flex;

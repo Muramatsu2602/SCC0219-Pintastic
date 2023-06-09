@@ -10,10 +10,10 @@ const Menu = () => {
     <nav className='main-nav'>
       <ul>
         <li>
-          <Link to={'/catalog/button'}>Button Pins</Link>{' '}
+          <Link to={'/catalog/pins'}>Pins</Link>{' '}
         </li>
         <li>
-          <Link to={'/catalog/metal'}>Metal Pins</Link>{' '}
+          <Link to={'/catalog/stickers'}>Stickers</Link>{' '}
         </li>
         {signed ? (
           <li>
