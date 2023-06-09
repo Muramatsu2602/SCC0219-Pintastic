@@ -7,9 +7,12 @@ import {
   faUser,
   faHeart,
 } from '@fortawesome/free-solid-svg-icons';
+import {useAuth} from '../contexts/Auth';
 
 const Header = ({quantity}) => {
   const [cartItemCount] = useState(quantity);
+
+  const {signed} = useAuth();
 
   return (
     <header>
@@ -50,12 +53,15 @@ const Header = ({quantity}) => {
               )}
             </div>
           </Link>
-
-          <Link to='/wishlist'>
-            <div className='wishlist-icon'>
-              <FontAwesomeIcon icon={faHeart} />
-            </div>
-          </Link>
+          {signed ? (
+            <li>
+              <Link to='/wishlist'>
+                <div className='wishlist-icon'>
+                  <FontAwesomeIcon icon={faHeart} />
+                </div>
+              </Link>{' '}
+            </li>
+          ) : null}
         </div>
       </div>
     </header>

@@ -40,8 +40,6 @@ function ShopRouter(props) {
       <Route path='/' element={<LandingPage />} />
       <Route path='/product' element={<ProductDetails {...mockDataProductDetails} />} />
       <Route path='/cart' element={<Cart />} />
-      <Route path='/wishlist' element={<Wishlist />} />
-      <Route path='/day' element={<PinOfTheDay {...mockDataPinOfTheDay} />} />
       <Route path='/catalog/button' element={<Catalog type={'button'} />} />
       <Route path='/catalog/metal' element={<Catalog type={'metal'} />} />
 
@@ -50,6 +48,8 @@ function ShopRouter(props) {
           <>
             <Route path='/profile' element={<Profile />} />
             <Route path='/checkout' element={<Checkout />} />
+            <Route path='/wishlist' element={<Wishlist />} />
+            <Route path='/day' element={<PinOfTheDay {...mockDataPinOfTheDay} />} />
           </>
         ) : (
           <>
