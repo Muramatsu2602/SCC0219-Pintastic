@@ -129,5 +129,8 @@ Para o correto funcionamento da aplicação é necessária que o FrontEnd (prese
     localhost:3000/
      
     Lembrando que para acessar a página do administrador, você deve utilizar a URL localhost:3000/admin
+    Para logar utilize:
+      Email: admin@pintastic.com
+      Senha: 123
     
     Pronto! Você agora estará na página principal de nosso site!
