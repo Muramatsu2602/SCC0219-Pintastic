@@ -32,3 +32,13 @@
 #login .login-card form button {
     width: 138px;
 }
+
+#login .login-card form .link {
+    font-size: var(--font-sm);
+    color: var(--yellow);
+    text-decoration: underline;
+}
+
+#login .login-card form .link:hover {
+    filter: brightness(90%);
+}

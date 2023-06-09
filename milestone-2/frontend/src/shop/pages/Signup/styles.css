@@ -1,0 +1,48 @@
+#signup {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#signup .signup-wrapper {
+    min-width: 1070px;
+    max-width: 1070px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#signup .signup-wrapper h1 {
+    font-size: var(--font-xl);
+}
+
+#signup .signup-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#signup .signup-wrapper form .row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+}
+
+#signup .signup-wrapper form button {
+    width: 100%;
+}
+
+.col-md-4 {
+    width: calc((100% / 12) * 4);
+}
+
+.col-md-8 {
+    width: calc((100% / 12) * 8);
+}

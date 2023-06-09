@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -54,7 +55,7 @@ export default function Login() {
               required
             />
             <Input
-              label='Password'
+              label='Senha'
               type='password'
               id='password'
               placeholder='*****'
@@ -62,6 +63,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <Link className='link' to='/sign-up'>Não possui uma conta?</Link>
             <Button buttonText='Login' onClick={() => {}} />
           </form>
         </div>
