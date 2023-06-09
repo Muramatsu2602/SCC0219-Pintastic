@@ -89,7 +89,7 @@ A seguir estão listados os testes que iremos realizar:
 
 ## Procedimentos de build
 
-- Para a entrega do Milestone 2 foram apenas desenvolvidos todas as páginas do sistema ([link figma](https://www.figma.com/file/MftvtXlZh9A57ovjIyvspl/Mockup-Pintastic---Template-p%2F-Costumer-Side?type=design&node-id=17189%3A143372&t=uTBwirYr3YysFnDW-1)) utilizando o framework [React](https://react.dev/).
+- Para a entrega do Milestone 2, foram desenvolvidos todas as páginas do sistema ([link figma](https://www.figma.com/file/MftvtXlZh9A57ovjIyvspl/Mockup-Pintastic---Template-p%2F-Costumer-Side?type=design&node-id=17189%3A143372&t=uTBwirYr3YysFnDW-1)) utilizando o framework [React](https://react.dev/).
 
 - Todas as componentes do React (JSX + CSS) desenvolvidas estão presentes na pasta **milestone-2/frontend/src**, sendo que, para o desenvolvimento de uma SPA (Single Page Application) utilizou-se o [React Router](https://reactrouter.com/en/main), fazendo com que os componentes da página sejam dinamicamente carregados durante a nevegação do usuário.
 
@@ -102,7 +102,7 @@ A seguir estão listados os testes que iremos realizar:
     - **admin/pages/Login**: página de login do administrador.
     - **admin/pages/Products**: página de gerenciamento de produtos.
     - **shop/components**: componentes relacionados a loja.
-    - **shop/pages**: contém as páginas de Carrinho, Catálogo, Checkout, Landing Page, Pin Of the Day, Detalhes do Produto e Wishlist.
+    - **shop/pages**: contém as páginas de Cart, Catalogue, Checkout, Landing Page, Pin Of the Day, Product Details e Wishlist.
     - **shop/pages/mock**: mock de produtos.
 
 ### Tutorial de Build
