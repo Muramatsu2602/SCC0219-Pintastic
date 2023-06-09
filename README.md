@@ -73,3 +73,16 @@ A seguir estão listados os testes que iremos realizar:
 9) Testar inclusão de cartas e usuários por parte do administrador
 10) Testar alteração de perfil por parte do usuário
 11) Testar finalização de compra após itens serem adicionados ao carrinho.
+
+## Resultado dos testes
+1)
+2) Ao selecionar cada categoria, os pins exibidas no catálogo são atualizados conforme esperado
+3) A navegação nas diferentes páginas do catálogo funciona conforme esperado, alterando o número de páginas caso alguma categoria específica tenha sido selecionada.
+4)
+5)
+6) Na página do carrinho, ao clicar no botão Remove o produto será removida do carrinho independentemente da quantidade de um mesmo item conforme o esperado.
+7) A maioria dos campos numéricos possui máscaras de input.
+8) 
+9)
+10)
+11)
