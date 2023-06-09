@@ -54,13 +54,11 @@ const Header = ({quantity}) => {
             </div>
           </Link>
           {signed ? (
-            <li>
-              <Link to='/wishlist'>
-                <div className='wishlist-icon'>
-                  <FontAwesomeIcon icon={faHeart} />
-                </div>
-              </Link>{' '}
-            </li>
+            <Link to='/wishlist'>
+              <div className='wishlist-icon'>
+                <FontAwesomeIcon icon={faHeart} />
+              </div>
+            </Link>
           ) : null}
         </div>
       </div>

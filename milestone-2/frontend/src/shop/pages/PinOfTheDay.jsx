@@ -22,7 +22,12 @@ const PinOfTheDay = ({
       <Menu />
       <main id='pinoftheday-main'>
         <div className='pinoftheday-container'>
-          <Confetti width={1000} height={1000} />
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            recycle={false}
+            run={2}
+          />
 
           <h2 className='pinoftheday-title'>Pin of The Day 😎</h2>
           <div className='pinoftheday-details'>
