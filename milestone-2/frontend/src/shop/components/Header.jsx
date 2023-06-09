@@ -37,8 +37,8 @@ const Header = ({quantity, displaySearchBar = false, onSearch, onProductCategory
             <div className='search'>
               <select name='filter' onChange={handleProductCategoryFilterChange}>
                 <option value='all'>All</option>
-                <option value='pins'>Pins</option>
-                <option value='stickers'>Stickers</option>
+                <option value='pin'>Pins</option>
+                <option value='sticker'>Stickers</option>
               </select>
               <input type='text' placeholder='Search...' onChange={handleSearch} />
               <button>

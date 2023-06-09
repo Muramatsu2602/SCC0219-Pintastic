@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import './LandingPage.style.css';
+import cardData from './mock/products.json';
 
 import React, {useState, useEffect} from 'react';
 import Button from '../components/Button.jsx';
@@ -13,56 +14,6 @@ export default function LandingPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(4);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // Sample card data for demonstration purposes
-  const cardData = [
-    {
-      productTitle: 'Product Title 1',
-      productDescription: 'Space for a small product description',
-      productPrice: '5.99',
-      productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png',
-      productRating: '4.3',
-      productIsOnWishlist: false,
-    },
-    {
-      productTitle: 'Product Title 2',
-      productDescription: 'Space for a small product description',
-      productPrice: '5.99',
-      productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png',
-      productRating: '4.3',
-      productIsOnWishlist: false,
-    },
-    {
-      productTitle: 'Product Title 2',
-      productDescription: 'Space for a small product description',
-      productPrice: '5.99',
-      productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png',
-      productRating: '4.3',
-      productIsOnWishlist: false,
-    },
-    {
-      productTitle: 'Product Title 2',
-      productDescription: 'Space for a small product description',
-      productPrice: '5.99',
-      productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png',
-      productRating: '4.3',
-      productIsOnWishlist: false,
-    },
-    {
-      productTitle: 'Product Title 2',
-      productDescription: 'Space for a small product description',
-      productPrice: '5.99',
-      productDiscountPercentage: '4.3',
-      productImage: './assets/img/items/caramelo.png',
-      productRating: '4.3',
-      productIsOnWishlist: false,
-    },
-    // Add more card data as needed
-  ];
 
   useEffect(() => {
     // Update the number of cards per page based on the window width
