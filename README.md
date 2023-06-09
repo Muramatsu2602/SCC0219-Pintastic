@@ -69,8 +69,8 @@ A seguir estão listados os testes que iremos realizar:
 6) Remover um item do carrinho
     - Na página do carrinho testar se o item será removido ao clicar no botão **Remove**
 7) Testar a máscara de input em alguns dos campos presentes no site
-8) Testar funcionalidade de edição de carta quando logado como Administrador
-9) Testar inclusão de cartas e usuários por parte do administrador
+8) Testar funcionalidade de edição de pin quando logado como Administrador
+9) Testar inclusão de pins e usuários (outros admins) por parte do administrador
 10) Testar alteração de perfil por parte do usuário
 11) Testar finalização de compra após itens serem adicionados ao carrinho.
 
@@ -82,9 +82,9 @@ A seguir estão listados os testes que iremos realizar:
 5)
 6) Na página do carrinho, ao clicar no botão Remove o produto será removida do carrinho independentemente da quantidade de um mesmo item conforme o esperado.
 7) A maioria dos campos numéricos possui máscaras de input.
-8) 
-9)
-10)
+8) Quando logado como Administrador, ao selecionar um produto do catálogo e clicar para editar o item, as informações a serem editadas do item são exibidas e as alterações feitas são salvas conforme esperado.
+9) As inclusões de pins e usuários, quando logado como administrador, funcionam conforme o esperado, permitindo que um administrador faça o cadastro de outros administradores no sistema.
+10) 
 11)
 
 ## Procedimentos de build
