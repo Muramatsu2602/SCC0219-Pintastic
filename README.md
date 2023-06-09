@@ -86,3 +86,48 @@ A seguir estão listados os testes que iremos realizar:
 9)
 10)
 11)
+
+## Procedimentos de build
+
+- Para a entrega do Milestone 2 foram apenas desenvolvidos todas as páginas do sistema ([link figma](https://www.figma.com/file/MftvtXlZh9A57ovjIyvspl/Mockup-Pintastic---Template-p%2F-Costumer-Side?type=design&node-id=17189%3A143372&t=uTBwirYr3YysFnDW-1)) utilizando o framework [React](https://react.dev/).
+
+- Todas as componentes do React (JSX + CSS) desenvolvidas estão presentes na pasta **milestone-2/frontend/src**, sendo que, para o desenvolvimento de uma SPA (Single Page Application) utilizou-se o [React Router](https://reactrouter.com/en/main), fazendo com que os componentes da página sejam dinamicamente carregados durante a nevegação do usuário.
+
+- As componentes desenvolvidas são as seguintes:
+    - **App.js**: componente principal contendo header, footer e as demais componentes dinamicamente carregadas.
+    - **admin/components**: componentes relacionados ao administrador.
+    - **admin/pages/Admins**: página com informações dos administradores + mocks.
+    - **admin/pages/Clients**: página com informações sobre os clientes + mocks.
+    - **admin/pages/Home**: página principal (home) dos administradores + mocks.
+    - **admin/pages/Login**: página de login do administrador.
+    - **admin/pages/Products**: página de gerenciamento de produtos.
+    - **shop/components**: componentes relacionados a loja.
+    - **shop/pages**: contém as páginas de Carrinho, Catálogo, Checkout, Landing Page, Pin Of the Day, Detalhes do Produto e Wishlist.
+    - **shop/pages/mock**: mock de produtos.
+
+### Tutorial de Build
+
+Abaixo, um pequeno tutorial de como rodar e visualizar as páginas do site:
+
+Para executar a aplicação é preciso que o software Node.js esteja instalado em sua máquina através do tutorial abaixo:        
+https://nodejs.org/en/
+
+**IMPORTANTE!**
+
+Para o correto funcionamento da aplicação é necessária que o FrontEnd (presente neste repositório) esteja em execução. Dessa forma, temos o tutorial de build seguinte:
+#### **FrontEnd**
+
+    Faça download do projeto por meio do botão [Code] -> [Download ZIP] presente no GitHub e decompacte o arquivo .ZIP, ou clone o projeto em sua pasta de preferência.
+
+    Depois, por meio do terminal, dentro da pasta (milestone-2/frontend) do projeto, executar o comando abaixo:
+    > npm install
+
+    Em seguida, para executar o projeto, basta utilizado o comando abaixo:
+    > npm run
+
+    Por fim, em seu navegador, vá para a url abaixo: 
+    localhost:3000/
+     
+    Lembrando que para acessar a página do administrador, você deve utilizar a URL localhost:3000/admin
+    
+    Pronto! Você agora estará na página principal de nosso site!
