@@ -1,6 +1,6 @@
 [
   {
-    "productTitle": "Product Title 1",
+    "productTitle": "Captain America Pin",
     "productDescription": "Product Description 1",
     "productPrice": "9.99",
     "productDiscountPercentage": "10",
@@ -8,7 +8,7 @@
     "productRating": "1.5"
   },
   {
-    "productTitle": "Product Title 2",
+    "productTitle": "Iron Man Pin",
     "productDescription": "Product Description 2",
     "productPrice": "14.99",
     "productDiscountPercentage": "20",
@@ -16,7 +16,7 @@
     "productRating": "2.8"
   },
   {
-    "productTitle": "Product Title 3",
+    "productTitle": "Spider-Man Pin",
     "productDescription": "Product Description 3",
     "productPrice": "19.99",
     "productDiscountPercentage": "0",
@@ -24,7 +24,7 @@
     "productRating": "2.2"
   },
   {
-    "productTitle": "Product Title 4",
+    "productTitle": "Wonder Woman Pin",
     "productDescription": "Product Description 4",
     "productPrice": "7.99",
     "productDiscountPercentage": "5",
@@ -32,7 +32,7 @@
     "productRating": "4.7"
   },
   {
-    "productTitle": "Product Title 5",
+    "productTitle": "Superman Pin",
     "productDescription": "Product Description 5",
     "productPrice": "12.99",
     "productDiscountPercentage": "15",
@@ -40,7 +40,7 @@
     "productRating": "3.5"
   },
   {
-    "productTitle": "Product Title 6",
+    "productTitle": "Batman Pin",
     "productDescription": "Product Description 6",
     "productPrice": "11.99",
     "productDiscountPercentage": "0",
@@ -48,7 +48,7 @@
     "productRating": "4.9"
   },
   {
-    "productTitle": "Product Title 7",
+    "productTitle": "Hulk Pin",
     "productDescription": "Product Description 7",
     "productPrice": "16.99",
     "productDiscountPercentage": "10",
@@ -56,7 +56,7 @@
     "productRating": "3.2"
   },
   {
-    "productTitle": "Product Title 8",
+    "productTitle": "Black Widow Pin",
     "productDescription": "Product Description 8",
     "productPrice": "8.99",
     "productDiscountPercentage": "5",
@@ -64,7 +64,7 @@
     "productRating": "4.6"
   },
   {
-    "productTitle": "Product Title 9",
+    "productTitle": "Thor Pin",
     "productDescription": "Product Description 9",
     "productPrice": "13.99",
     "productDiscountPercentage": "0",
@@ -72,7 +72,7 @@
     "productRating": "3.9"
   },
   {
-    "productTitle": "Product Title 10",
+    "productTitle": "Black Panther Pin",
     "productDescription": "Product Description 10",
     "productPrice": "17.99",
     "productDiscountPercentage": "15",
@@ -80,7 +80,7 @@
     "productRating": "4.3"
   },
   {
-    "productTitle": "Product Title 11",
+    "productTitle": "Captain Marvel Pin",
     "productDescription": "Product Description 11",
     "productPrice": "10.99",
     "productDiscountPercentage": "0",
@@ -88,7 +88,7 @@
     "productRating": "4.1"
   },
   {
-    "productTitle": "Product Title 12",
+    "productTitle": "Doctor Strange Pin",
     "productDescription": "Product Description 12",
     "productPrice": "15.99",
     "productDiscountPercentage": "10",
@@ -96,7 +96,7 @@
     "productRating": "3.7"
   },
   {
-    "productTitle": "Product Title 13",
+    "productTitle": "Ant-Man Pin",
     "productDescription": "Product Description 13",
     "productPrice": "9.99",
     "productDiscountPercentage": "5",
@@ -104,7 +104,7 @@
     "productRating": "4.4"
   },
   {
-    "productTitle": "Product Title 14",
+    "productTitle": "Wolverine Pin",
     "productDescription": "Product Description 14",
     "productPrice": "14.99",
     "productDiscountPercentage": "0",
