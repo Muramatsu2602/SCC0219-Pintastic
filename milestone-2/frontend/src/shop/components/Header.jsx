@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import './Header.style.css';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faShoppingCart,
-  faUser,
-  faHeart,
-} from '@fortawesome/free-solid-svg-icons';
+import {faShoppingCart, faUser, faHeart} from '@fortawesome/free-solid-svg-icons';
 import {useAuth} from '../contexts/Auth';
 
-const Header = ({quantity}) => {
+const Header = ({quantity, displaySearchBar = false, onSearch}) => {
   const [cartItemCount] = useState(quantity);
-
   const {signed} = useAuth();
+
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+    onSearch(searchQuery);
+  };
 
   return (
     <header>
@@ -27,19 +27,22 @@ const Header = ({quantity}) => {
             />
           </Link>
         </div>
-        <div className='search-bar'>
-          <div className='search'>
-            <select name='filter'>
-              <option value='all'>All</option>
-              <option value='pins'>Pins</option>
-              <option value='stickers'>Stickers</option>
-            </select>
-            <input type='text' placeholder='Search...' />
-            <button>
-              <i className='fa fa-search'></i>
-            </button>
+        {displaySearchBar && (
+          <div className='search-bar'>
+            <div className='search'>
+              {/* <select name='filter'>
+                <option value='all'>All</option>
+                <option value='pins'>Pins</option>
+                <option value='stickers'>Stickers</option>
+              </select> */}
+              <input type='text' placeholder='Search...' onChange={handleSearch} />
+              <button>
+                <i className='fa fa-search'></i>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
+
         <div className='user-icons'>
           <Link to='/profile'>
             <FontAwesomeIcon icon={faUser} />

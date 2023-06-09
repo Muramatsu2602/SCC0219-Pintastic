@@ -15,6 +15,7 @@ export default function Catalog({type}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(9);
   const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     // Apply filters and update filtered data
@@ -23,18 +24,19 @@ export default function Catalog({type}) {
       if (
         ratingFilter.length > 0 &&
         !ratingFilter.some(
-            (rating) =>
-              item.productRating >= rating && item.productRating < rating + 1,
+            (rating) => item.productRating >= rating && item.productRating < rating + 1,
         )
       ) {
         return false;
       }
 
       // Apply price filter
-      if (
-        item.productPrice < priceFilter[0] ||
-        item.productPrice > priceFilter[1]
-      ) {
+      if (item.productPrice < priceFilter[0] || item.productPrice > priceFilter[1]) {
+        return false;
+      }
+
+      // Apply search query filter
+      if (searchQuery && !item.productTitle.toLowerCase().includes(searchQuery.toLowerCase())) {
         return false;
       }
 
@@ -43,7 +45,7 @@ export default function Catalog({type}) {
 
     setFilteredData(filteredItems);
     setCurrentPage(1); // Reset to first page when changing filters
-  }, [ratingFilter, priceFilter]);
+  }, [ratingFilter, priceFilter, searchQuery]);
 
   // Get current cards
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -86,9 +88,13 @@ export default function Catalog({type}) {
     setCurrentPage(1); // Reset to first page when resetting filters
   };
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   return (
     <>
-      <Header quantity={3} />
+      <Header quantity={3} displaySearchBar={true} onSearch={handleSearch} />
       <Nav />
 
       <main id='catalog-main'>
@@ -174,17 +180,16 @@ export default function Catalog({type}) {
 
           {filteredData.length > cardsPerPage && (
             <div className='pagination'>
-              {Array.from(
-                  Array(Math.ceil(filteredData.length / cardsPerPage)),
-                  (_, index) => index + 1,
-              ).map((pageNumber) => (
-                <Button
-                  key={pageNumber}
-                  buttonText={pageNumber}
-                  className={currentPage === pageNumber ? 'active' : ''}
-                  onClick={() => handlePageChange(pageNumber)}
-                />
-              ))}
+              {Array.from(Array(Math.ceil(filteredData.length / cardsPerPage)), (_, index) => index + 1).map(
+                  (pageNumber) => (
+                    <Button
+                      key={pageNumber}
+                      buttonText={pageNumber}
+                      className={currentPage === pageNumber ? 'active' : ''}
+                      onClick={() => handlePageChange(pageNumber)}
+                    />
+                  ),
+              )}
             </div>
           )}
         </section>
