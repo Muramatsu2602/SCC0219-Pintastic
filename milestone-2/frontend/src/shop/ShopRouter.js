@@ -12,6 +12,7 @@ import Catalog from './pages/Catalog';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile';
 
 function ShopRouter(props) {
   const {signed} = useAuth();
@@ -47,7 +48,7 @@ function ShopRouter(props) {
       {
         signed ? (
           <>
-            <Route path='/profile' element={<Checkout />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path='/checkout' element={<Checkout />} />
           </>
         ) : (
