@@ -84,7 +84,7 @@ A seguir estão listados os testes que iremos realizar:
 7) A maioria dos campos numéricos possui máscaras de input.
 8) Quando logado como Administrador, ao selecionar um produto do catálogo e clicar para editar o item, as informações a serem editadas do item são exibidas e as alterações feitas são salvas conforme esperado.
 9) As inclusões de pins e usuários, quando logado como administrador, funcionam conforme o esperado, permitindo que um administrador faça o cadastro de outros administradores no sistema.
-10) 
+10) Quando logado como um usuário comum, é possível editar as informações de perfil que são salvas conforme esperado.
 11)
 
 ## Procedimentos de build
