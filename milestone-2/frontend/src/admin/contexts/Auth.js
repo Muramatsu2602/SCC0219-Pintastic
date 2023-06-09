@@ -4,7 +4,8 @@ import React, {
   useContext,
   createContext,
 } from 'react';
-import PintasticException from '../models/PinstaticException';
+
+import PintasticException from '../../models/PinstaticException';
 
 const AuthContext = createContext({});
 
@@ -29,7 +30,7 @@ export function AuthProvider({children}) {
 
       setUser(response.data);
 
-      localStorage.setItem('@App:user', JSON.stringify(response.data));
+      localStorage.setItem('@PintasticAdmin:user', JSON.stringify(response.data));
     } catch (error) {
       // if(error.code == 'incorrectUserOrPassword') {
       //   throw new PintasticException('Incorrect user or password', 'O usuário ou senha estão incorretos');
@@ -54,7 +55,7 @@ export function AuthProvider({children}) {
 
   function loadStorageData() {
     try {
-      const storagedUser = localStorage.getItem('@App:user');
+      const storagedUser = localStorage.getItem('@PintasticAdmin:user');
 
       const parsedUser = JSON.parse(storagedUser);
 

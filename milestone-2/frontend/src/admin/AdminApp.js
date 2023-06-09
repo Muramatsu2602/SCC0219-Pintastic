@@ -2,12 +2,12 @@ import React from 'react';
 
 import {AuthProvider} from './contexts/Auth';
 
-import ShopRouter from './ShopRouter';
+import AdminRouter from './AdminRouter';
 
-export default function ShopApp() {
+export default function AdminApp() {
   return (
     <AuthProvider>
-      <ShopRouter />
+      <AdminRouter />
     </AuthProvider>
   );
 }

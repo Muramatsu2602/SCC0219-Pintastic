@@ -1,16 +1,16 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import ShopRouter from './shop/ShopRouter';
-import AdminRouter from './admin/AdminRouter';
+import ShopApp from './shop/ShopApp';
+import AdminApp from './admin/AdminApp';
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/admin/*" element={<AdminRouter />} />
-        <Route path="/*" element={<ShopRouter />} />
+        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/*" element={<ShopApp />} />
       </Routes>
     </Router>
   );

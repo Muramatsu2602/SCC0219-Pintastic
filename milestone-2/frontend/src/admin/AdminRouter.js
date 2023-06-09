@@ -1,7 +1,7 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 
-import {useAuth} from '../contexts/Auth';
+import {useAuth} from './contexts/Auth';
 
 import AdminLayout from './components/AdminLayout';
 import Login from './pages/Login';

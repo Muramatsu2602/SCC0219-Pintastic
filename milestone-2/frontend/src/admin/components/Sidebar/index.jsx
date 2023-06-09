@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHome, faList, faUserGroup, faLock, faSignOut} from '@fortawesome/free-solid-svg-icons';
 
-import {useAuth} from '../../../contexts/Auth';
+import {useAuth} from '../../contexts/Auth';
 
 export default styled(RawSidebar)`
   min-width: 250px;

@@ -1,13 +1,17 @@
-import {React, useState} from 'react';
-import './styles.css';
+import React, {useState} from 'react';
 
-import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Button from '../../components/Button';
+import Menu from '../../components/Nav';
+import Input from '../../components/Input';
+
+import PintasticException from '../../../models/PinstaticException';
+import {useAuth} from '../../contexts/Auth';
+
 import Swal from 'sweetalert2';
 
-import {useAuth} from '../../contexts/Auth';
-import PintasticException from '../../../models/PinstaticException';
-import Input from '../../components/Input';
-import SubmitButton from '../../components/SubmitButton';
+import './styles.css';
 
 export default function Login() {
   const auth = useAuth();
@@ -32,37 +36,38 @@ export default function Login() {
   }
 
   return (
-    <div id="admin-login-page">
-      <div className="login-wrapper">
-        <div className="title">
-          <p>Pintastic<span>Admin</span></p>
-        </div>
-        <div className="card">
+    <>
+      <Header quantity={7} />
+      <Menu />
+
+      <main id='login'>
+        <div className="login-card">
+          <h3>Entrar</h3>
           <form onSubmit={handleLogin}>
             <Input
+              label='Email'
               type='email'
               id='email'
-              icon={faEnvelope}
-              label='Email'
+              placeholder='client@pintastic.com'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <Input
+              label='Password'
               type='password'
               id='password'
-              icon={faLock}
-              label='Senha'
+              placeholder='*****'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <SubmitButton
-              value='Entrar'
-            />
+            <Button buttonText='Login' onClick={() => {}} />
           </form>
         </div>
-      </div>
-    </div>
+      </main>
+
+      <Footer />
+    </>
   );
 };
