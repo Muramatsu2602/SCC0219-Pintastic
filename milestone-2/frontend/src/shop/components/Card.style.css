@@ -40,6 +40,25 @@
 	text-transform: uppercase;
 }
 
+.category-pill {
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	margin-left: 0.5rem;
+	background-color: #333333;
+	border-radius: 20px;
+	color: #ffffff;
+	font-size: 12px;
+}
+
+.category-pill svg {
+	margin-right: 4px;
+}
+
+.category-pill span {
+	margin-left: 4px;
+}
+
 .item-card-img img {
 	background-size: cover;
 	background-position: center;
@@ -77,15 +96,17 @@
 	font-weight: bold;
 }
 
-.product-rating {
+.item-rating {
 	display: flex;
 	align-items: center;
 }
 
-
 .item-card-wishlist-icon {
-	align-self: flex-end;
 	cursor: pointer;
-	/* margin-right: 8px;
-	margin-top: 8px; */
+}
+
+
+.item-category-and-icon {
+	display: flex;
+	margin-bottom: 0.5rem;
 }

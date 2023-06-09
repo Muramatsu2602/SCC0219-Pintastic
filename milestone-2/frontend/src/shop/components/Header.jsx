@@ -5,13 +5,18 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart, faUser, faHeart} from '@fortawesome/free-solid-svg-icons';
 import {useAuth} from '../contexts/Auth';
 
-const Header = ({quantity, displaySearchBar = false, onSearch}) => {
+const Header = ({quantity, displaySearchBar = false, onSearch, onProductCategoryFilterChange}) => {
   const [cartItemCount] = useState(quantity);
   const {signed} = useAuth();
 
   const handleSearch = (event) => {
     const searchQuery = event.target.value;
     onSearch(searchQuery);
+  };
+
+  const handleProductCategoryFilterChange = (event) => {
+    const {value} = event.target;
+    onProductCategoryFilterChange(value);
   };
 
   return (
@@ -30,11 +35,11 @@ const Header = ({quantity, displaySearchBar = false, onSearch}) => {
         {displaySearchBar && (
           <div className='search-bar'>
             <div className='search'>
-              {/* <select name='filter'>
+              <select name='filter' onChange={handleProductCategoryFilterChange}>
                 <option value='all'>All</option>
                 <option value='pins'>Pins</option>
                 <option value='stickers'>Stickers</option>
-              </select> */}
+              </select>
               <input type='text' placeholder='Search...' onChange={handleSearch} />
               <button>
                 <i className='fa fa-search'></i>

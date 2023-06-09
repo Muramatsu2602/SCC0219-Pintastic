@@ -5,7 +5,8 @@
     "productPrice": "9.99",
     "productDiscountPercentage": "10",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "1.5"
+    "productRating": "1.5",
+    "productCategory": "pin"
   },
   {
     "productTitle": "Iron Man Pin",
@@ -13,7 +14,8 @@
     "productPrice": "14.99",
     "productDiscountPercentage": "20",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "2.8"
+    "productRating": "2.8",
+    "productCategory": "pin"
   },
   {
     "productTitle": "Spider-Man Pin",
@@ -21,23 +23,26 @@
     "productPrice": "19.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "2.2"
+    "productRating": "2.2",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Wonder Woman Pin",
+    "productTitle": "Wonder Woman Sticker",
     "productDescription": "Product Description 4",
     "productPrice": "7.99",
     "productDiscountPercentage": "5",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.7"
+    "productRating": "4.7",
+    "productCategory": "sticker"
   },
   {
-    "productTitle": "Superman Pin",
+    "productTitle": "Superman Sticker",
     "productDescription": "Product Description 5",
     "productPrice": "12.99",
     "productDiscountPercentage": "15",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "3.5"
+    "productRating": "3.5",
+    "productCategory": "sticker"
   },
   {
     "productTitle": "Batman Pin",
@@ -45,23 +50,26 @@
     "productPrice": "11.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.9"
+    "productRating": "4.9",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Hulk Pin",
+    "productTitle": "Hulk Sticker",
     "productDescription": "Product Description 7",
     "productPrice": "16.99",
     "productDiscountPercentage": "10",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "3.2"
+    "productRating": "3.2",
+    "productCategory": "sticker"
   },
   {
-    "productTitle": "Black Widow Pin",
+    "productTitle": "Black Widow Sticker",
     "productDescription": "Product Description 8",
     "productPrice": "8.99",
     "productDiscountPercentage": "5",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.6"
+    "productRating": "4.6",
+    "productCategory": "sticker"
   },
   {
     "productTitle": "Thor Pin",
@@ -69,7 +77,8 @@
     "productPrice": "13.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "3.9"
+    "productRating": "3.9",
+    "productCategory": "pin"
   },
   {
     "productTitle": "Black Panther Pin",
@@ -77,38 +86,43 @@
     "productPrice": "17.99",
     "productDiscountPercentage": "15",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.3"
+    "productRating": "4.3",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Captain Marvel Pin",
+    "productTitle": "Doctor Strange Pin",
     "productDescription": "Product Description 11",
     "productPrice": "10.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.1"
+    "productRating": "4.1",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Doctor Strange Pin",
+    "productTitle": "Ant-Man Pin",
     "productDescription": "Product Description 12",
     "productPrice": "15.99",
     "productDiscountPercentage": "10",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "3.7"
+    "productRating": "3.7",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Ant-Man Pin",
+    "productTitle": "Wolverine Pin",
     "productDescription": "Product Description 13",
     "productPrice": "9.99",
     "productDiscountPercentage": "5",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.4"
+    "productRating": "4.4",
+    "productCategory": "pin"
   },
   {
-    "productTitle": "Wolverine Pin",
+    "productTitle": "Iron Fist Sticker",
     "productDescription": "Product Description 14",
     "productPrice": "14.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
-    "productRating": "4.0"
+    "productRating": "4.0",
+    "productCategory": "sticker"
   }
 ]

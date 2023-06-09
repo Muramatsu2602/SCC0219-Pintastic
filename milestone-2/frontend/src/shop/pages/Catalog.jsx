@@ -16,6 +16,7 @@ export default function Catalog({type}) {
   const [cardsPerPage] = useState(9);
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [productCategoryFilter, setProductCategoryFilter] = useState('all');
 
   useEffect(() => {
     // Apply filters and update filtered data
@@ -24,7 +25,8 @@ export default function Catalog({type}) {
       if (
         ratingFilter.length > 0 &&
         !ratingFilter.some(
-            (rating) => item.productRating >= rating && item.productRating < rating + 1,
+            (rating) =>
+              item.productRating >= rating && item.productRating < rating + 1,
         )
       ) {
         return false;
@@ -35,8 +37,19 @@ export default function Catalog({type}) {
         return false;
       }
 
+      // Apply product category filter
+      if (
+        productCategoryFilter != 'all' && // Use loose equality here
+        item.productCategory != productCategoryFilter // Use loose equality here
+      ) {
+        return false;
+      }
+
       // Apply search query filter
-      if (searchQuery && !item.productTitle.toLowerCase().includes(searchQuery.toLowerCase())) {
+      if (
+        searchQuery &&
+        !item.productTitle.toLowerCase().includes(searchQuery.toLowerCase())
+      ) {
         return false;
       }
 
@@ -45,7 +58,7 @@ export default function Catalog({type}) {
 
     setFilteredData(filteredItems);
     setCurrentPage(1); // Reset to first page when changing filters
-  }, [ratingFilter, priceFilter, searchQuery]);
+  }, [ratingFilter, priceFilter, productCategoryFilter, searchQuery]);
 
   // Get current cards
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -78,6 +91,10 @@ export default function Catalog({type}) {
     setPriceFilter([parseInt(value), parseInt(value)]);
   };
 
+  const handleProductCategoryFilterChange = (value) => {
+    setProductCategoryFilter(value);
+  };
+
   const handleApplyFilter = () => {
     setCurrentPage(1); // Reset to first page when applying filters
   };
@@ -85,6 +102,7 @@ export default function Catalog({type}) {
   const handleResetFilter = () => {
     setRatingFilter([1, 2, 3, 4, 5]);
     setPriceFilter([0, 100]);
+    setProductCategoryFilter('all');
     setCurrentPage(1); // Reset to first page when resetting filters
   };
 
@@ -94,7 +112,12 @@ export default function Catalog({type}) {
 
   return (
     <>
-      <Header quantity={3} displaySearchBar={true} onSearch={handleSearch} />
+      <Header
+        quantity={3}
+        displaySearchBar={true}
+        onSearch={handleSearch}
+        onProductCategoryFilterChange={handleProductCategoryFilterChange}
+      />
       <Nav />
 
       <main id='catalog-main'>
@@ -150,6 +173,23 @@ export default function Catalog({type}) {
             </div>
           </div>
 
+          <div className='filter-container'>
+            <h3 className='filter-title'>Product Category</h3>
+            <div className='product-category-filter'>
+              <select
+                name='product-category'
+                value={productCategoryFilter}
+                onChange={(event) =>
+                  handleProductCategoryFilterChange(event.target.value)
+                }
+              >
+                <option value='all'>All</option>
+                <option value='pin'>Pins</option>
+                <option value='sticker'>Stickers</option>
+              </select>
+            </div>
+          </div>
+
           <div className='filter-buttons'>
             <Button buttonText='Apply' onClick={handleApplyFilter} />
             <Button buttonText='Reset' onClick={handleResetFilter} />
@@ -169,6 +209,7 @@ export default function Catalog({type}) {
                   productDiscountPercentage={item.productDiscountPercentage}
                   productImage={item.productImage}
                   productRating={item.productRating}
+                  productCategory={item.productCategory}
                 />
               ))}
             </div>
@@ -180,16 +221,17 @@ export default function Catalog({type}) {
 
           {filteredData.length > cardsPerPage && (
             <div className='pagination'>
-              {Array.from(Array(Math.ceil(filteredData.length / cardsPerPage)), (_, index) => index + 1).map(
-                  (pageNumber) => (
-                    <Button
-                      key={pageNumber}
-                      buttonText={pageNumber}
-                      className={currentPage === pageNumber ? 'active' : ''}
-                      onClick={() => handlePageChange(pageNumber)}
-                    />
-                  ),
-              )}
+              {Array.from(
+                  Array(Math.ceil(filteredData.length / cardsPerPage)),
+                  (_, index) => index + 1,
+              ).map((pageNumber) => (
+                <Button
+                  key={pageNumber}
+                  buttonText={pageNumber}
+                  className={currentPage === pageNumber ? 'active' : ''}
+                  onClick={() => handlePageChange(pageNumber)}
+                />
+              ))}
             </div>
           )}
         </section>

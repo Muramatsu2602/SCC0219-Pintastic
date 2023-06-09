@@ -3,9 +3,13 @@ import './Card.style.css';
 import Button from './Button';
 import StarRating from './StarRating';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart as faHeartSolid,
+  faTag,
+} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {Link} from 'react-router-dom';
+
 const Card = ({
   productPrice,
   productTitle,
@@ -13,6 +17,7 @@ const Card = ({
   productDiscountPercentage,
   productImage,
   productRating,
+  productCategory,
 }) => {
   const [isOnWishlist, setIsOnWishlist] = useState(false);
 
@@ -42,13 +47,19 @@ const Card = ({
       <div className='item-card-details'>
         <div id='card-upper-section'>
           <h4 id='item-title'>
-            {' '}
-            <div
-              className='item-card-wishlist-icon'
-              onClick={handleWishlistToggle}
-            >
-              <FontAwesomeIcon icon={heartIcon} />
+            <div className='item-category-and-icon'>
+              <div
+                className='item-card-wishlist-icon'
+                onClick={handleWishlistToggle}
+              >
+                <FontAwesomeIcon icon={heartIcon} />
+              </div>
+              <div className='category-pill'>
+                <FontAwesomeIcon icon={faTag} />
+                <span>{productCategory}</span>
+              </div>
             </div>
+
             <Link
               to={{
                 pathname: '/product',
