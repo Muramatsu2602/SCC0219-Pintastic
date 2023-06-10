@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import Swal from 'sweetalert2';
 
 const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
   const [quantity, setQuantity] = useState(item.quantity);
@@ -8,7 +9,22 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     setQuantity(newQuantity);
-    handleQuantityChange(item.productId, newQuantity); // Call the callback function with the updated values
+    handleQuantityChange(item.productId, newQuantity);
+  };
+
+  const confirmRemoveItem = () => {
+    Swal.fire({
+      title: 'Remove Item',
+      text: 'Are you sure you want to remove this item from your cart?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleRemoveItem(item.productId);
+      }
+    });
   };
 
   return (
@@ -34,7 +50,7 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
             <div className="cart-price">
               <h3>${(item.productPrice * quantity).toFixed(2)}</h3>
             </div>
-            <button type="button" onClick={() => handleRemoveItem(item.productId)}>
+            <button type="button" onClick={confirmRemoveItem}>
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
           </div>
