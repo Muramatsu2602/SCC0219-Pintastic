@@ -22,7 +22,7 @@ const Card = ({
   productRating,
   productCategory,
 }) => {
-  const {addToCart} = useContext(CartContext);
+  const {cartItems, addToCart} = useContext(CartContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
 
@@ -42,8 +42,22 @@ const Card = ({
       quantity: 1,
     };
 
-    addToCart(product);
-    showAddToCartConfirmation(); // Call confirmation popup function
+    // Check if the product already exists in the cart
+    const isProductInCart = cartItems.some((item) => item.productId === productId);
+
+    if (isProductInCart) {
+      // Show error or alert indicating that the product is already in the cart
+      Swal.fire({
+        title: 'Product Already in Cart',
+        text: 'This product is already in your cart.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    } else {
+      // Product is not in the cart, add it
+      addToCart(product);
+      showAddToCartConfirmation(); // Call confirmation popup function
+    }
   };
 
   const showAddToCartConfirmation = () => {
