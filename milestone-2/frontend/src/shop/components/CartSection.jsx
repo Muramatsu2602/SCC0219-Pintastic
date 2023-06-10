@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useContext, useCallback, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 import './CartSection.style.css';
+import {CartContext} from '../contexts/Cart';
 
-const CartSection = ({items, updateCartQuantity}) => {
-  const [cartItems, setCartItems] = useState(items);
+const CartSection = () => {
+  const {cartItems, updateCartQuantity, removeFromCart} = useContext(CartContext);
 
-  // Calculate the total price of items in the cart
   const calculateTotalPrice = useCallback(() => {
     return cartItems.reduce(
         (acc, item) => acc + item.productPrice * item.quantity,
@@ -14,69 +14,55 @@ const CartSection = ({items, updateCartQuantity}) => {
     );
   }, [cartItems]);
 
-  const [totalPrice, setTotalPrice] = useState(calculateTotalPrice());
+  const totalPrice = calculateTotalPrice();
 
-  // Update the total price whenever cartItems changes
-  useEffect(() => {
-    setTotalPrice(calculateTotalPrice());
-  }, [calculateTotalPrice, cartItems]);
-
-  // Function to handle quantity changes for an item
   const handleQuantityChange = (itemId, newQuantity) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? {...item, quantity: newQuantity} : item,
-      ),
-    );
-    setTotalPrice(calculateTotalPrice());
+    updateCartQuantity(itemId, newQuantity);
   };
 
-  // Function to remove an item from the cart
-  const removeItem = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  const handleRemoveItem = (productId) => {
+    removeFromCart(productId);
   };
 
   useEffect(() => {
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
-    updateCartQuantity(totalQuantity);
-  }, [cartItems, cartItems.length, updateCartQuantity]);
+    updateCartQuantity('', totalQuantity);
+  }, [cartItems, updateCartQuantity]);
 
   return (
-    <section className='cart-section'>
+    <section className="cart-section">
       <h2>Shopping Cart</h2>
       {cartItems.map((item) => (
         <CartItem
-          key={item.id}
+          key={item.productId}
           item={item}
           handleQuantityChange={handleQuantityChange}
-          removeItem={removeItem}
+          handleRemoveItem={handleRemoveItem}
         />
       ))}
       {cartItems.length === 0 ? (
-        <div className='cart-empty'>
+        <div className="cart-empty">
           <h1>Cart is Empty</h1>
-          <Link to='/'>
-            <button className='pintastic-button' type='button'>
+          <Link to="/">
+            <button className="pintastic-button" type="button">
               Go to Store
             </button>
           </Link>
         </div>
       ) : (
         <div>
-          <div className='cart-total'>
+          <div className="cart-total">
             <h2>Total:</h2>
             <h2>${totalPrice.toFixed(2)}</h2>
           </div>
-          <div className='cart-actions'>
-            <Link to='/'>
-              <button className='pintastic-button' type='button'>
+          <div className="cart-actions">
+            <Link to="/">
+              <button className="pintastic-button" type="button">
                 Continue Shopping
               </button>
             </Link>
-
-            <Link to='/checkout'>
-              <button className='pintastic-button' type='button'>
+            <Link to="/checkout">
+              <button className="pintastic-button" type="button">
                 Checkout
               </button>
             </Link>
