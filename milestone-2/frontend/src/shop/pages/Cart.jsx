@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CartSection from '../components/CartSection';
 import Menu from '../components/Nav';
+// import cardData from './mock/products.json';
 
 const Cart = () => {
   // Mock data for cart items

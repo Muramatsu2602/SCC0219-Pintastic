@@ -17,15 +17,6 @@ import Profile from './pages/Profile';
 function ShopRouter(props) {
   const {signed} = useAuth();
 
-  // const mockDataProductDetails = {
-  //   productPrice: 39.99,
-  //   productTitle: 'Sample Product',
-  //   productDescription: 'This is a sample product description.',
-  //   productDiscountPercentage: 20,
-  //   productImage: './assets/img/items/caramelo.png',
-  //   productRating: 4.5,
-  // };
-
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />

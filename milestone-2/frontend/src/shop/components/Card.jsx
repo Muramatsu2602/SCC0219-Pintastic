@@ -9,6 +9,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {Link} from 'react-router-dom';
+import {useAuth} from '../contexts/Auth';
+
 
 const Card = ({
   productId,
@@ -20,6 +22,8 @@ const Card = ({
   productRating,
   productCategory,
 }) => {
+  const {signed} = useAuth();
+
   const [isOnWishlist, setIsOnWishlist] = useState(false);
 
   const handleWishlistToggle = () => {
@@ -30,15 +34,17 @@ const Card = ({
 
   return (
     <div className='item-card-container'>
-      <Link to={`/product/${productId}`}> {/* Update the Link's to prop */}
-        <div className='item-card-img'>
-          <div className='item-card-top-section'>
-            {productDiscountPercentage !== 0 ? (
+      <div className='item-card-top-section'>
+        {productDiscountPercentage > 0 ? (
               <div className='discount-pill'>
                 {productDiscountPercentage}% OFF
               </div>
             ) : null}
-          </div>
+      </div>
+      <Link to={`/product/${productId}`}> {/* Update the Link's to prop */}
+
+        <div className='item-card-img'>
+
           <img src={productImage} alt='card_image' />
         </div>
       </Link>
@@ -46,19 +52,20 @@ const Card = ({
         <div id='card-upper-section'>
           <h4 id='item-title'>
             <div className='item-category-and-icon'>
-              <div
+              {signed ? ( <div
                 className='item-card-wishlist-icon'
                 onClick={handleWishlistToggle}
               >
                 <FontAwesomeIcon icon={heartIcon} />
-              </div>
+              </div>) : null}
+
               <div className='category-pill'>
                 <FontAwesomeIcon icon={faTag} />
                 <span>{productCategory}</span>
               </div>
             </div>
 
-            <Link to={`/product/${productId}`}> {/* Update the Link's to prop */}
+            <Link to={`/product/${productId}`}>
               {productTitle}{' '}
             </Link>
           </h4>

@@ -32,6 +32,9 @@ const ProductDetails = () => {
   );
 
   // Use placeholder image if the product image is not available
+  const placeholderImage =
+    'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
+
   const productImageUrl = selectedProduct.productImage || placeholderImage;
 
   if (!selectedProduct) {
@@ -82,15 +85,20 @@ const ProductDetails = () => {
             </div>
             <div className='product-details-price'>
               <div className='product-details-prices-container'>
-                <span className='product-details-original-price'>{`$${selectedProduct.productPrice}`}</span>
-                {selectedProduct.productDiscountPercentage && (
+                {selectedProduct.productDiscountPercentage == 0 ? (
+                  <span className='product-details-no-discount'> {`$${selectedProduct.productPrice}`}</span>
+                ) : (
+                  <span className='product-details-original-price'>{`$${selectedProduct.productPrice}`}</span>
+                )}
+
+                {selectedProduct.productDiscountPercentage > 0 ? (
                   <div className='product-details-discount'>
                     <span className='product-details-discounted-price'>{`$${calculateDiscountedPrice(
                         selectedProduct.productPrice,
                         selectedProduct.productDiscountPercentage,
                     )}`}</span>
                   </div>
-                )}
+                ) : null}
               </div>
               <div className=''>
                 <span className='product-details-quantity-label'>

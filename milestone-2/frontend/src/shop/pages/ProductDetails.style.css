@@ -92,6 +92,11 @@
 	margin-right: 0.5rem;
 }
 
+.product-details-no-discount {
+	font-size: var(--font-xl);
+	margin-right: 0.5rem;
+}
+
 .product-details-discounted-price {
 	color: red;
 	font-size: var(--font-xl);

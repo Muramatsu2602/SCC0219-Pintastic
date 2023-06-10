@@ -88,6 +88,7 @@ export default function LandingPage() {
                     {currentCards.map((card, index) => (
                       <Card
                         key={index}
+                        productId={card.productId}
                         productTitle={card.productTitle}
                         productDescription={card.productDescription}
                         productPrice={card.productPrice}

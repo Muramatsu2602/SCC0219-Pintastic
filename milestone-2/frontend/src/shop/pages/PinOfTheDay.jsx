@@ -8,6 +8,7 @@ import Confetti from 'react-confetti';
 import Menu from '../components/Nav';
 import {Link} from 'react-router-dom';
 import productsData from './mock/products.json';
+import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
 
 const PinOfTheDay = () => {
   const [pinOfTheDay, setPinOfTheDay] = useState(null);
@@ -64,7 +65,11 @@ const PinOfTheDay = () => {
                   ${productPrice}
                 </span>
                 <span className='pinoftheday-sale-price'>
-                  ${productDiscountPercentage}
+                  $
+                  {calculateDiscountedPrice(
+                      productPrice,
+                      productDiscountPercentage,
+                  )}
                 </span>
                 <div className='pinoftheday-addcart-button'>
                   {' '}
