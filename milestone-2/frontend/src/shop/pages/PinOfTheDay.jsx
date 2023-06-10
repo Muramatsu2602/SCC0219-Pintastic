@@ -34,6 +34,12 @@ const PinOfTheDay = () => {
     productRating,
   } = pinOfTheDay;
 
+  const totalDiscountPercentage = parseInt(specialDiscountPercentage) + parseInt(productDiscountPercentage);
+  const totalDiscountPrice = calculateDiscountedPrice(
+      productPrice,
+      totalDiscountPercentage,
+  );
+
   return (
     <>
       <Header quantity={7} />
@@ -62,16 +68,12 @@ const PinOfTheDay = () => {
                 {productDescription}
               </div>
               <div className='pinoftheday-price'>
-                <span className='pinoftheday-discount'>Special Discount! </span>
+                <span className='pinoftheday-discount'>Special Discount of {totalDiscountPercentage}% ! </span>
                 <span className='pinoftheday-original-price'>
                   ${productPrice}
                 </span>
                 <span className='pinoftheday-sale-price'>
-                  $
-                  {calculateDiscountedPrice(
-                      productPrice,
-                      (productDiscountPercentage+specialDiscountPercentage),
-                  )}
+                  ${parseInt(totalDiscountPrice)}
                 </span>
                 <div className='pinoftheday-addcart-button'>
                   {' '}
