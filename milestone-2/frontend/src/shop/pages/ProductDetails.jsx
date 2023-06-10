@@ -9,6 +9,7 @@ import StarRating from '../components/StarRating';
 import Menu from '../components/Nav';
 import Card from '../components/Card';
 import {useNavigate} from 'react-router-dom';
+import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
 
 const ProductDetails = ({
   productPrice,
@@ -27,11 +28,6 @@ const ProductDetails = ({
     setQuantity(event.target.value);
   };
 
-  function calculateDiscountedPrice(originalPrice, discountPercentage) {
-    const discountAmount = (originalPrice * discountPercentage) / 100;
-    const discountedPrice = originalPrice - discountAmount;
-    return discountedPrice.toFixed(2);
-  }
 
   const handleAddToCart = () => {
     // Logic to add the product to the cart
@@ -132,7 +128,6 @@ const ProductDetails = ({
               productImage='./assets/img/items/caramelo.png'
               productRating={4.5}
             />
-            {/* Add more Card components as needed */}
           </div>
         </section>
       </main>

@@ -41,6 +41,8 @@
 }
 
 .wishlist-rating {
+	margin-top: 0.4rem;
+	margin-bottom: 0.2rem;
 	display: flex;
 	align-items: center;
 }
@@ -54,7 +56,6 @@
 	object-fit: cover;
 	margin-right: 20px;
 	border-radius: 10px;
-	
 }
 
 .wishlist-remove-button {
@@ -81,9 +82,16 @@
 	margin-right: 1rem;
 }
 
-.wishlist-discount-price {
-	font-size: 14px;
+.wishlist-original-price {
+	text-decoration: line-through;
 	color: #666;
+	margin-right: 0.5rem;
+}
+
+.wishlist-discount-price {
+	font-size: 16px;
+	color: red;
+	font-weight: bold;
 }
 
 .wishlist-item-count {

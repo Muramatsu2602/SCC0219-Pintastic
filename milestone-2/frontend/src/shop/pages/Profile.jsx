@@ -1,39 +1,52 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Menu from '../../components/Nav';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Menu from '../components/Nav';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
-import PintasticException from '../../../models/PinstaticException';
-import {useAuth} from '../../contexts/Auth';
+import PintasticException from '../../models/PinstaticException';
+import {useAuth} from '../contexts/Auth';
 
-import './styles.css';
+import './Profile.style.css';
 import Swal from 'sweetalert2';
 
-export default function Login() {
+export default function Profile() {
   const auth = useAuth();
 
-  const [email, setEmail] = useState('');
+  const mockUser = {
+    'name': 'Cliente',
+    'cep': '12900-000',
+    'state': 'São Paulo',
+    'address': 'Rua 1, Jardim B, São Paulo',
+    'complement': 'Número 15',
+  };
+
+  const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
-  const [cep, setCep] = useState('');
-  const [state, setState] = useState('');
-  const [address, setAddress] = useState('');
-  const [complement, setComplement] = useState('');
+  const [name, setName] = useState(mockUser.name);
+  const [cep, setCep] = useState(mockUser.cep);
+  const [state, setState] = useState(mockUser.state);
+  const [address, setAddress] = useState(mockUser.address);
+  const [complement, setComplement] = useState(mockUser.complement);
 
-  async function handleSignup(e) {
+  async function handleUpdateProfile(e) {
     try {
       e.preventDefault();
+
+      if (currentPassword != '123') {
+        throw new PintasticException('Current password is invalid', 'A senha atual está incorreta!');
+      }
 
       if (password != confirmPassword) {
         throw new PintasticException('Passwords do not match', 'As senhas não estão iguais!');
       }
 
-      const newUser = {
-        email,
+      const updatedUser = {
+        currentPassword,
         password,
         name,
         cep,
@@ -42,9 +55,9 @@ export default function Login() {
         complement,
       };
 
-      console.log(newUser);
+      console.log(updatedUser);
 
-      await auth.login('client@pintastic.com', '123');
+      Swal.fire('Dados atualizados!', 'Seus dados foram atualizados com sucesso', 'success');
     } catch (error) {
       if (error instanceof PintasticException) {
         Swal.fire('Ocorreu um erro', error.getBusinessMessage(), 'error');
@@ -56,30 +69,49 @@ export default function Login() {
     }
   }
 
+  async function handleLogout(e) {
+    try {
+      e.preventDefault();
+
+      await auth.logout();
+    } catch (error) {
+      if (error instanceof PintasticException) {
+        Swal.fire('Ocorreu um erro', error.getBusinessMessage(), 'error');
+        return;
+      }
+
+      console.error(error);
+      Swal.fire('Ocorreu um erro', 'Não foi possível realizar sair da sua conta, tente novamente mais tarde', 'error');
+    }
+  }
+
   return (
     <>
       <Header quantity={7} />
       <Menu />
 
-      <main id='signup'>
-        <div className="signup-wrapper">
-          <h1>Cadastro</h1>
-          <form onSubmit={handleSignup}>
+      <main id='profile'>
+        <div className="profile-wrapper">
+          <div className="header">
+            <h1>Meu perfil</h1>
+            <Link onClick={handleLogout} className='link'>Sair da minha conta</Link>
+          </div>
+          <form onSubmit={handleUpdateProfile}>
             <div className="row">
               <div className="col-md-4">
                 <Input
-                  label='Email'
-                  type='email'
-                  id='email'
-                  placeholder='cliente@pintastic.com'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  label='Senha atual'
+                  type='password'
+                  id='currentPassword'
+                  placeholder='*****'
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
                   required
                 />
               </div>
               <div className="col-md-4">
                 <Input
-                  label='Senha'
+                  label='Nova senha'
                   type='password'
                   id='password'
                   placeholder='*****'
@@ -90,7 +122,7 @@ export default function Login() {
               </div>
               <div className="col-md-4">
                 <Input
-                  label='Confirmar senha'
+                  label='Confirmar nova senha'
                   type='password'
                   id='confirmPassword'
                   placeholder='*****'
@@ -176,7 +208,7 @@ export default function Login() {
               <div className="col-md-4"></div>
               <div className="col-md-4">
                 <Button
-                  buttonText='Criar conta'
+                  buttonText='Salvar'
                 />
               </div>
             </div>

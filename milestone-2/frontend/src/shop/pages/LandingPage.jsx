@@ -97,6 +97,7 @@ export default function LandingPage() {
                         productImage={card.productImage}
                         productRating={card.productRating}
                         productIsOnWishlist={card.productIsOnWishlist}
+                        productCategory={card.productCategory}
                       />
                     ))}
                   </div>

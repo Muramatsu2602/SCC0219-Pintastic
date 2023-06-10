@@ -1,5 +1,6 @@
 [
   {
+    "productId": 1,
     "productTitle": "Captain America Pin",
     "productDescription": "Product Description 1",
     "productPrice": "9.99",
@@ -9,6 +10,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 2,
     "productTitle": "Iron Man Pin",
     "productDescription": "Product Description 2",
     "productPrice": "14.99",
@@ -18,6 +20,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 3,
     "productTitle": "Spider-Man Pin",
     "productDescription": "Product Description 3",
     "productPrice": "19.99",
@@ -27,6 +30,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 4,
     "productTitle": "Wonder Woman Sticker",
     "productDescription": "Product Description 4",
     "productPrice": "7.99",
@@ -36,6 +40,7 @@
     "productCategory": "sticker"
   },
   {
+    "productId": 5,
     "productTitle": "Superman Sticker",
     "productDescription": "Product Description 5",
     "productPrice": "12.99",
@@ -45,6 +50,7 @@
     "productCategory": "sticker"
   },
   {
+    "productId": 6,
     "productTitle": "Batman Pin",
     "productDescription": "Product Description 6",
     "productPrice": "11.99",
@@ -54,6 +60,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 7,
     "productTitle": "Hulk Sticker",
     "productDescription": "Product Description 7",
     "productPrice": "16.99",
@@ -63,6 +70,7 @@
     "productCategory": "sticker"
   },
   {
+    "productId": 8,
     "productTitle": "Black Widow Sticker",
     "productDescription": "Product Description 8",
     "productPrice": "8.99",
@@ -72,15 +80,19 @@
     "productCategory": "sticker"
   },
   {
+    "productId": 9,
     "productTitle": "Thor Pin",
     "productDescription": "Product Description 9",
     "productPrice": "13.99",
     "productDiscountPercentage": "0",
     "productImage": "./assets/img/items/caramelo.png",
     "productRating": "3.9",
-    "productCategory": "pin"
+   
+
+ "productCategory": "pin"
   },
   {
+    "productId": 10,
     "productTitle": "Black Panther Pin",
     "productDescription": "Product Description 10",
     "productPrice": "17.99",
@@ -90,6 +102,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 11,
     "productTitle": "Doctor Strange Pin",
     "productDescription": "Product Description 11",
     "productPrice": "10.99",
@@ -99,6 +112,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 12,
     "productTitle": "Ant-Man Pin",
     "productDescription": "Product Description 12",
     "productPrice": "15.99",
@@ -108,6 +122,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 13,
     "productTitle": "Wolverine Pin",
     "productDescription": "Product Description 13",
     "productPrice": "9.99",
@@ -117,6 +132,7 @@
     "productCategory": "pin"
   },
   {
+    "productId": 14,
     "productTitle": "Iron Fist Sticker",
     "productDescription": "Product Description 14",
     "productPrice": "14.99",
