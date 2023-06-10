@@ -9,6 +9,7 @@ import Menu from '../components/Nav';
 import {Link} from 'react-router-dom';
 import productsData from './mock/products.json';
 import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
+import {specialDiscountPercentage} from './utils/specialDiscountPercentage';
 
 const PinOfTheDay = () => {
   const [pinOfTheDay, setPinOfTheDay] = useState(null);
@@ -47,6 +48,7 @@ const PinOfTheDay = () => {
           />
 
           <h2 className='pinoftheday-title'>Pin of The Day 😎</h2>
+          <h3>An additional 5% discount to a pin on your wishlist</h3>
           <div className='pinoftheday-details'>
             <div className='pinoftheday-image'>
               <img src={productImage} alt='Pin of The Day' />
@@ -68,7 +70,7 @@ const PinOfTheDay = () => {
                   $
                   {calculateDiscountedPrice(
                       productPrice,
-                      productDiscountPercentage,
+                      (productDiscountPercentage+specialDiscountPercentage),
                   )}
                 </span>
                 <div className='pinoftheday-addcart-button'>
