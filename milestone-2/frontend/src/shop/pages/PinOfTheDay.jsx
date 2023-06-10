@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './PinOfTheDay.style.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,15 +7,31 @@ import StarRating from '../components/StarRating';
 import Confetti from 'react-confetti';
 import Menu from '../components/Nav';
 import {Link} from 'react-router-dom';
+import productsData from './mock/products.json';
 
-const PinOfTheDay = ({
-  productPrice,
-  productTitle,
-  productDescription,
-  productDiscountPercentage,
-  productImage,
-  productRating,
-}) => {
+const PinOfTheDay = () => {
+  const [pinOfTheDay, setPinOfTheDay] = useState(null);
+
+  useEffect(() => {
+    // Select a random product from the products array
+    const randomIndex = Math.floor(Math.random() * productsData.length);
+    const randomProduct = productsData[randomIndex];
+    setPinOfTheDay(randomProduct);
+  }, []);
+
+  if (!pinOfTheDay) {
+    return null; // Render null or a loading spinner while waiting for the random product
+  }
+
+  const {
+    productTitle,
+    productDescription,
+    productPrice,
+    productDiscountPercentage,
+    productImage,
+    productRating,
+  } = pinOfTheDay;
+
   return (
     <>
       <Header quantity={7} />

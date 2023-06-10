@@ -10,15 +10,9 @@ import Menu from '../components/Nav';
 import Card from '../components/Card';
 import {useNavigate} from 'react-router-dom';
 import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
+import productsData from './mock/products.json';
 
-const ProductDetails = ({
-  productPrice,
-  productTitle,
-  productDescription,
-  productDiscountPercentage,
-  productImage,
-  productRating,
-}) => {
+const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const {productId} = useParams();
 
@@ -28,15 +22,36 @@ const ProductDetails = ({
     setQuantity(event.target.value);
   };
 
-
   const handleAddToCart = () => {
     // Logic to add the product to the cart
   };
 
+  // Get the selected product
+  const selectedProduct = productsData.find(
+      (product) => product.productId === parseInt(productId),
+  );
+
   // Use placeholder image if the product image is not available
-  const placeholderImage =
-    'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
-  const productImageUrl = placeholderImage;
+  const productImageUrl = selectedProduct.productImage || placeholderImage;
+
+  if (!selectedProduct) {
+    // Handle the case when the product with the specified ID is not found
+    return (
+      <>
+        <Header quantity={quantity} />
+        <Menu />
+        <main id='product-details-main'>
+          <div className='product-not-found-message'>Product not found.</div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
+  // Get related products
+  const relatedProducts = productsData
+      .filter((product) => product.productId !== productId)
+      .slice(0, 3);
 
   return (
     <>
@@ -44,16 +59,19 @@ const ProductDetails = ({
       <Menu />
       <main id='product-details-main'>
         <section className='product-details-container'>
-          {' '}
           <div className='product-details-image'>
             <img src={productImageUrl} alt='Product Image' />
           </div>
           <div className='product-details-info'>
-            <h2 className='product-details-title'>{productTitle}</h2>
+            <h2 className='product-details-title'>
+              {selectedProduct.productTitle}
+            </h2>
             <div className='product-details-rating'>
-              <StarRating rating={productRating} />
+              <StarRating rating={selectedProduct.productRating} />
             </div>
-            <p className='product-details-description'>{productDescription}</p>
+            <p className='product-details-description'>
+              {selectedProduct.productDescription}
+            </p>
             <div className='product-details-specs'>
               {/* <div>
                 <strong>Height:</strong> 10cm
@@ -64,12 +82,12 @@ const ProductDetails = ({
             </div>
             <div className='product-details-price'>
               <div className='product-details-prices-container'>
-                <span className='product-details-original-price'>{`$${productPrice}`}</span>
-                {productDiscountPercentage && (
+                <span className='product-details-original-price'>{`$${selectedProduct.productPrice}`}</span>
+                {selectedProduct.productDiscountPercentage && (
                   <div className='product-details-discount'>
                     <span className='product-details-discounted-price'>{`$${calculateDiscountedPrice(
-                        productPrice,
-                        productDiscountPercentage,
+                        selectedProduct.productPrice,
+                        selectedProduct.productDiscountPercentage,
                     )}`}</span>
                   </div>
                 )}
@@ -89,7 +107,6 @@ const ProductDetails = ({
             </div>
 
             <div className='product-details-button-container'>
-              {' '}
               <Button
                 className='product-details-add-to-cart-button'
                 onClick={handleAddToCart}
@@ -105,33 +122,29 @@ const ProductDetails = ({
             <Button
               className='product-details-other-products-button abs'
               onClick={() => {
-                navigate('/catalog/metal');
+                navigate('/catalog/');
               }}
               buttonText='Other Products'
-            />{' '}
+            />
           </div>
 
           <div className='related-products-carousel'>
-            <Card
-              productPrice={24.99}
-              productTitle='Related Product 1'
-              productDescription='Related product description 1'
-              productDiscountPercentage={10}
-              productImage='./assets/img/items/caramelo.png'
-              productRating={4.0}
-            />
-            <Card
-              productPrice={19.99}
-              productTitle='Related Product 2'
-              productDescription='Related product description 2'
-              productDiscountPercentage={20}
-              productImage='./assets/img/items/caramelo.png'
-              productRating={4.5}
-            />
+            {relatedProducts.map((product, index) => (
+              <Card
+                key={index}
+                productId={product.productId}
+                productPrice={product.productPrice}
+                productTitle={product.productTitle}
+                productDescription={product.productDescription}
+                productDiscountPercentage={product.productDiscountPercentage}
+                productImage={product.productImage}
+                productRating={product.productRating}
+                productCategory={product.productCategory}
+              />
+            ))}
           </div>
         </section>
       </main>
-
       <Footer />
     </>
   );

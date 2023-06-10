@@ -11,6 +11,7 @@ import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {Link} from 'react-router-dom';
 
 const Card = ({
+  productId,
   productPrice,
   productTitle,
   productDescription,
@@ -29,19 +30,16 @@ const Card = ({
 
   return (
     <div className='item-card-container'>
-      <Link
-        to={{
-          pathname: '/product',
-          state: {productId: 1},
-        }}
-      >
+      <Link to={`/product/${productId}`}> {/* Update the Link's to prop */}
         <div className='item-card-img'>
           <div className='item-card-top-section'>
-            <div className='discount-pill'>
-              {productDiscountPercentage}% OFF
-            </div>
+            {productDiscountPercentage !== 0 ? (
+              <div className='discount-pill'>
+                {productDiscountPercentage}% OFF
+              </div>
+            ) : null}
           </div>
-          <img src={require(`${productImage}`)} alt='card_image' />
+          <img src={productImage} alt='card_image' />
         </div>
       </Link>
       <div className='item-card-details'>
@@ -60,12 +58,7 @@ const Card = ({
               </div>
             </div>
 
-            <Link
-              to={{
-                pathname: '/product',
-                state: {productId: 1},
-              }}
-            >
+            <Link to={`/product/${productId}`}> {/* Update the Link's to prop */}
               {productTitle}{' '}
             </Link>
           </h4>

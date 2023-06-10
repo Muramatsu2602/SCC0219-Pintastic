@@ -17,7 +17,7 @@
 .product-details-image img {
 	height: auto;
 	width: auto;
-	min-width: 500px;
+	max-width: 500px;
 
 	border-radius: 8px;
 }

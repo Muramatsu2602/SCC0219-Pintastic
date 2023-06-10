@@ -17,31 +17,23 @@ import Profile from './pages/Profile';
 function ShopRouter(props) {
   const {signed} = useAuth();
 
-  const mockDataPinOfTheDay = {
-    productPrice: 49.99,
-    productTitle: 'Product Title 3',
-    productDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    productDiscountPercentage: 39.99,
-    // eslint-disable-next-line max-len
-    productImage: 'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_vira_lata_caramelo_pipi_49_1_04dd5557995b5579f30d600218d8717f.jpg',
-    productRating: 3.5,
-  };
-  const mockDataProductDetails = {
-    productPrice: 39.99,
-    productTitle: 'Sample Product',
-    productDescription: 'This is a sample product description.',
-    productDiscountPercentage: 20,
-    productImage: './assets/img/items/caramelo.png',
-    productRating: 4.5,
-  };
+  // const mockDataProductDetails = {
+  //   productPrice: 39.99,
+  //   productTitle: 'Sample Product',
+  //   productDescription: 'This is a sample product description.',
+  //   productDiscountPercentage: 20,
+  //   productImage: './assets/img/items/caramelo.png',
+  //   productRating: 4.5,
+  // };
 
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
-      <Route path='/product' element={<ProductDetails {...mockDataProductDetails} />} />
+      <Route path='/product/:productId' element={<ProductDetails />} />
       <Route path='/cart' element={<Cart />} />
-      <Route path='/catalog/pins' element={<Catalog type={'pins'} />} />
-      <Route path='/catalog/stickers' element={<Catalog type={'stickers'} />} />
+      <Route path='/catalog/' element={<Catalog type={'all'} />} />
+      <Route path='/catalog/pins' element={<Catalog type={'pin'} />} />
+      <Route path='/catalog/stickers' element={<Catalog type={'sticker'} />} />
 
       {
         signed ? (
@@ -49,7 +41,7 @@ function ShopRouter(props) {
             <Route path='/profile' element={<Profile />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/wishlist' element={<Wishlist />} />
-            <Route path='/day' element={<PinOfTheDay {...mockDataPinOfTheDay} />} />
+            <Route path='/day' element={<PinOfTheDay />} />
           </>
         ) : (
           <>

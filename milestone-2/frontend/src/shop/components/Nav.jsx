@@ -10,6 +10,12 @@ const Menu = () => {
     <nav className='main-nav'>
       <ul>
         <li>
+          <Link to={'/'}>Home</Link>{' '}
+        </li>
+        <li>
+          <Link to={'/catalog/'}>All Products !</Link>{' '}
+        </li>
+        <li>
           <Link to={'/catalog/pins'}>Pins</Link>{' '}
         </li>
         <li>

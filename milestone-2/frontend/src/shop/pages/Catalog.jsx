@@ -16,7 +16,13 @@ export default function Catalog({type}) {
   const [cardsPerPage] = useState(9);
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [productCategoryFilter, setProductCategoryFilter] = useState('all');
+  const [productCategoryFilter, setProductCategoryFilter] = useState(
+      type || 'all',
+  );
+
+  useEffect(() => {
+    setProductCategoryFilter(type || 'all');
+  }, [type]);
 
   useEffect(() => {
     // Apply filters and update filtered data
@@ -33,14 +39,17 @@ export default function Catalog({type}) {
       }
 
       // Apply price filter
-      if (item.productPrice < priceFilter[0] || item.productPrice > priceFilter[1]) {
+      if (
+        item.productPrice < priceFilter[0] ||
+        item.productPrice > priceFilter[1]
+      ) {
         return false;
       }
 
       // Apply product category filter
       if (
-        productCategoryFilter != 'all' && // Use loose equality here
-        item.productCategory != productCategoryFilter // Use loose equality here
+        productCategoryFilter !== 'all' &&
+        item.productCategory !== productCategoryFilter
       ) {
         return false;
       }
@@ -102,7 +111,7 @@ export default function Catalog({type}) {
   const handleResetFilter = () => {
     setRatingFilter([1, 2, 3, 4, 5]);
     setPriceFilter([0, 100]);
-    setProductCategoryFilter('all');
+    setProductCategoryFilter(type || 'all');
     setCurrentPage(1); // Reset to first page when resetting filters
   };
 
@@ -117,6 +126,7 @@ export default function Catalog({type}) {
         displaySearchBar={true}
         onSearch={handleSearch}
         onProductCategoryFilterChange={handleProductCategoryFilterChange}
+        selectedProductCategory={productCategoryFilter}
       />
       <Nav />
 
@@ -176,17 +186,39 @@ export default function Catalog({type}) {
           <div className='filter-container'>
             <h3 className='filter-title'>Product Category</h3>
             <div className='product-category-filter'>
-              <select
-                name='product-category'
-                value={productCategoryFilter}
-                onChange={(event) =>
-                  handleProductCategoryFilterChange(event.target.value)
-                }
-              >
-                <option value='all'>All</option>
-                <option value='pin'>Pins</option>
-                <option value='sticker'>Stickers</option>
-              </select>
+              <label htmlFor='category-all'>
+                <input
+                  type='radio'
+                  id='category-all'
+                  name='product-category'
+                  value='all'
+                  checked={productCategoryFilter === 'all'}
+                  onChange={() => handleProductCategoryFilterChange('all')}
+                />
+                All
+              </label>
+              <label htmlFor='category-pin'>
+                <input
+                  type='radio'
+                  id='category-pin'
+                  name='product-category'
+                  value='pin'
+                  checked={productCategoryFilter === 'pin'}
+                  onChange={() => handleProductCategoryFilterChange('pin')}
+                />
+                Pins
+              </label>
+              <label htmlFor='category-sticker'>
+                <input
+                  type='radio'
+                  id='category-sticker'
+                  name='product-category'
+                  value='sticker'
+                  checked={productCategoryFilter === 'sticker'}
+                  onChange={() => handleProductCategoryFilterChange('sticker')}
+                />
+                Stickers
+              </label>
             </div>
           </div>
 
@@ -203,6 +235,7 @@ export default function Catalog({type}) {
               {currentCards.map((item, index) => (
                 <Card
                   key={index}
+                  productId={item.productId}
                   productTitle={item.productTitle}
                   productDescription={item.productDescription}
                   productPrice={item.productPrice}
