@@ -4,8 +4,12 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import Menu from '../components/Nav';
+import {useAuth} from '../contexts/Auth';
 
-const Checkout = ({ }) => {
+
+const Checkout = ({}) => {
+  const {signed} = useAuth();
+
   // Sample cart data
   const cartItems = [
     {
@@ -39,8 +43,8 @@ const Checkout = ({ }) => {
     city: '',
     state: '',
     cep: '',
-    delivery: '',
-    payment: '',
+    delivery: 'sedex', // Set default value for delivery method
+    payment: 'credit-card', // Set default value for payment method
     cardNumber: '',
     fullName: '',
     expirationDate: '',
@@ -54,18 +58,19 @@ const Checkout = ({ }) => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.id]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-    });
+    const {id, value, type, checked} = e.target;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [id]: type === 'checkbox' ? checked : value,
+    }));
 
     // Reset individual error
-    setErrors({
-      ...errors,
-      [e.target.id]: '',
-    });
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: '',
+    }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -114,19 +119,40 @@ const Checkout = ({ }) => {
       newErrors.cep = 'CEP is invalid';
     }
 
-    if (!form.paymentMethod) {
-      newErrors.paymentMethod = 'Payment method is required';
+    if (!form.delivery) {
+      newErrors.delivery = 'Delivery method is required';
     }
 
-    if (form.paymentMethod === 'credit-card') {
-      if (!form.cardNumber || !form.fullName || !form.expirationDate || !form.securityNumber) {
-        newErrors.creditCardDetails = 'All credit card details are required';
+    if (!form.payment) {
+      newErrors.payment = 'Payment method is required';
+    }
+
+    if (form.payment === 'credit-card') {
+      // Additional validation for credit card fields
+      if (!form.cardNumber) {
+        newErrors.cardNumber = 'Card Number is required';
+      }
+
+      if (!form.fullName) {
+        newErrors.fullName = 'Full Name is required';
+      }
+
+      if (!form.expirationDate) {
+        newErrors.expirationDate = 'Expiration Date is required';
+      } else if (!/^\d{2}\/\d{2}$/.test(form.expirationDate)) {
+        newErrors.expirationDate = 'Invalid Expiration Date format (MM/YY)';
+      }
+
+      if (!form.securityNumber) {
+        newErrors.securityNumber = 'Security Number is required';
+      } else if (!/^\d{3,4}$/.test(form.securityNumber)) {
+        newErrors.securityNumber = 'Invalid Security Number';
       }
     }
 
-    // if (!form.newsletter) {
-    //   newErrors.newsletter = 'You must subscribe to our newsletter';
-    // }
+    if (!form.newsletter) {
+      newErrors.newsletter = 'You must subscribe to our newsletter';
+    }
 
     if (!form.privacyPolicy) {
       newErrors.privacyPolicy = 'You must accept the privacy policy';
@@ -146,6 +172,9 @@ const Checkout = ({ }) => {
       <Menu />
       <main id='checkout-main'>
         <section id='checkout-payee-information'>
+          {/* Basic Information  */}
+          {!signed ? (
+
           <section
             id='checkout-billing-info'
             className='checkout-payee-info-section-card'
@@ -161,7 +190,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.name ? 'invalid-input' : ''}
                 />
-                {errors.name && <div className='error-message'>{errors.name}</div>}
+                {errors.name && (
+                  <div className='error-message'>{errors.name}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='surname'>Surname</label>
@@ -172,7 +203,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.surname ? 'invalid-input' : ''}
                 />
-                {errors.surname && <div className='error-message'>{errors.surname}</div>}
+                {errors.surname && (
+                  <div className='error-message'>{errors.surname}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='email'>Email</label>
@@ -183,7 +216,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.email ? 'invalid-input' : ''}
                 />
-                {errors.email && <div className='error-message'>{errors.email}</div>}
+                {errors.email && (
+                  <div className='error-message'>{errors.email}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='telephone'>Telephone</label>
@@ -194,7 +229,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.telephone ? 'invalid-input' : ''}
                 />
-                {errors.telephone && <div className='error-message'>{errors.telephone}</div>}
+                {errors.telephone && (
+                  <div className='error-message'>{errors.telephone}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='address'>Address</label>
@@ -205,7 +242,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.address ? 'invalid-input' : ''}
                 />
-                {errors.address && <div className='error-message'>{errors.address}</div>}
+                {errors.address && (
+                  <div className='error-message'>{errors.address}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='city'>City</label>
@@ -216,7 +255,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.city ? 'invalid-input' : ''}
                 />
-                {errors.city && <div className='error-message'>{errors.city}</div>}
+                {errors.city && (
+                  <div className='error-message'>{errors.city}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='state'>State</label>
@@ -227,7 +268,9 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.state ? 'invalid-input' : ''}
                 />
-                {errors.state && <div className='error-message'>{errors.state}</div>}
+                {errors.state && (
+                  <div className='error-message'>{errors.state}</div>
+                )}
               </div>
               <div className='checkout-input-group'>
                 <label htmlFor='cep'>CEP</label>
@@ -238,24 +281,176 @@ const Checkout = ({ }) => {
                   onChange={handleInputChange}
                   className={errors.cep ? 'invalid-input' : ''}
                 />
-                {errors.cep && <div className='error-message'>{errors.cep}</div>}
+                {errors.cep && (
+                  <div className='error-message'>{errors.cep}</div>
+                )}
               </div>
             </div>
+          </section> ) : (
+               <section
+                 id='checkout-billing-info'
+                 className='checkout-payee-info-section-card'
+               >
+                 <div className='checkout-info-message'>
+              Basic information, including address, obtained from logged-in user.
+                 </div>
+               </section>
+          )}
+          {/* Delivery Method  */}
+          <section
+            id='checkout-delivery-method'
+            className='checkout-payee-info-section-card'
+          >
+            <h2>Delivery Method</h2>
+            <div className='checkout-input-group'>
+              <input
+                type='radio'
+                id='sedex'
+                name='delivery'
+                value='sedex'
+                checked={form.delivery === 'sedex'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor='sedex'>SEDEX</label>
+            </div>
+            <div className='checkout-input-group'>
+              <input
+                type='radio'
+                id='dhl'
+                name='delivery'
+                value='dhl'
+                // checked={form.delivery === 'dhl'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor='dhl'>DHL</label>
+            </div>
+            {errors.delivery && (
+              <div className='error-message'>{errors.delivery}</div>
+            )}
+          </section>
+          {/* Payment Method  */}
+          <section
+            id='checkout-payment-method'
+            className='checkout-payee-info-section-card'
+          >
+            <h2>Payment Method</h2>
+
+            <div className='checkout-input-group'>
+              <input
+                type='radio'
+                id='credit-card'
+                name='payment'
+                value='credit-card'
+                checked={form.payment === 'credit-card'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor='credit-card'>Credit Card</label>
+              <div className='credit-card-details'>
+                <input
+                  type='text'
+                  id='cardNumber'
+                  placeholder='Card Number'
+                  value={form.cardNumber}
+                  onChange={handleInputChange}
+                  className={errors.cardNumber ? 'invalid-input' : ''}
+                />
+                {errors.cardNumber && (
+                  <div className='error-message'>{errors.cardNumber}</div>
+                )}
+
+                <input
+                  type='text'
+                  id='fullName'
+                  placeholder='Full Name'
+                  value={form.fullName}
+                  onChange={handleInputChange}
+                  className={errors.fullName ? 'invalid-input' : ''}
+                />
+                {errors.fullName && (
+                  <div className='error-message'>{errors.fullName}</div>
+                )}
+
+                <input
+                  type='text'
+                  id='expirationDate'
+                  placeholder='Expiration Date'
+                  value={form.expirationDate}
+                  onChange={handleInputChange}
+                  className={errors.expirationDate ? 'invalid-input' : ''}
+                />
+                {errors.expirationDate && (
+                  <div className='error-message'>{errors.expirationDate}</div>
+                )}
+
+                <input
+                  type='text'
+                  id='securityNumber'
+                  placeholder='Security Number'
+                  value={form.securityNumber}
+                  onChange={handleInputChange}
+                  className={errors.securityNumber ? 'invalid-input' : ''}
+                />
+                {errors.securityNumber && (
+                  <div className='error-message'>{errors.securityNumber}</div>
+                )}
+              </div>
+            </div>
+            <div className='checkout-input-group'>
+              <input
+                type='radio'
+                id='pix'
+                name='payment'
+                value='pix'
+                // checked={form.payment === 'pix'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor='pix'>PIX</label>
+            </div>
+            <div className='checkout-input-group'>
+              <input
+                type='radio'
+                id='boleto'
+                name='payment'
+                value='boleto'
+                // checked={form.payment === 'boleto'}
+                onChange={handleInputChange}
+              />
+              <label htmlFor='boleto'>Boleto</label>
+            </div>
+            {errors.payment && errors.payment !== 'credit-card' && (
+              <div className='error-message'>{errors.payment}</div>
+            )}
           </section>
 
-          {/* Add remaining sections */}
+          {/* Additional Information */}
+          <section
+            id='checkout-additional-info'
+            className='checkout-payee-info-section-card'
+          >
+            <h2>Additional Information</h2>
+            <div className='checkout-input-group'>
+              <label htmlFor='observations'>Observations</label>
+              <textarea
+                id='observations'
+                value={form.observations}
+                onChange={handleInputChange}
+              />
+            </div>
+          </section>
 
           <div className='checkout-confirmation-inputs'>
             <label htmlFor='newsletter'>
               <input
                 type='checkbox'
                 id='newsletter'
-                checked={form.newsletter}
+                // checked={form.newsletter}
                 onChange={handleInputChange}
               />
               I would like to receive newsletters and promotions
             </label>
-            {errors.newsletter && <div className='error-message'>{errors.newsletter}</div>}
+            {errors.newsletter && (
+              <div className='error-message'>{errors.newsletter}</div>
+            )}
 
             <label htmlFor='privacyPolicy'>
               <input
@@ -266,22 +461,34 @@ const Checkout = ({ }) => {
               />
               I agree with the Privacy Policy
             </label>
-            {errors.privacyPolicy && <div className='error-message'>{errors.privacyPolicy}</div>}
+            {errors.privacyPolicy && (
+              <div className='error-message'>{errors.privacyPolicy}</div>
+            )}
           </div>
 
-          <Button type='submit' text='Checkout' />
+          <Button type='submit' buttonText='Checkout' onSubmit={handleSubmit} />
         </section>
-        <section id='checkout-cart'>
-          <h2>Shopping Cart</h2>
-          <ul>
+
+        <aside id='checkout-purchase-summary'>
+          <div className='checkout-summary-item'>
+            <h3>Summary</h3>
             {cartItems.map((item) => (
-              <li key={item.id}>
-                {item.name} x {item.quantity}: ${item.price * item.quantity}
-              </li>
+              <div key={item.id}>
+                <span>{item.name}</span>
+                <span>${item.price.toFixed(2)}</span>
+                <span>Qty: {item.quantity}</span>
+              </div>
             ))}
-          </ul>
-          <div>Total: ${cartTotal.toFixed(2)}</div>
-        </section>
+          </div>
+          <div className="checkout-summary-item">
+            <h2>Total</h2>
+          </div>
+          <div className='checkout-summary-item'>
+            <span>Subtotal: ${cartTotal.toFixed(2)}</span> <hr />
+            <span>Delivery Tax: $5.00</span> <hr />
+            <span>Final Cost: ${(cartTotal + 5).toFixed(2)}</span>
+          </div>
+        </aside>
       </main>
       <Footer />
     </form>
