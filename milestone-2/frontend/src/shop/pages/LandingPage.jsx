@@ -45,7 +45,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <Header quantity={3} />
+      <Header />
       <Nav />
       <div className='landing-hero'>
         <div className='hero-text'>

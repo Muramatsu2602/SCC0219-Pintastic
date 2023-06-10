@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import './Header.style.css';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart, faUser, faHeart} from '@fortawesome/free-solid-svg-icons';
-import {useAuth} from '../contexts/Auth';
+import {CartContext} from '../contexts/Cart'; // Import CartContext
 
-const Header = ({quantity, displaySearchBar = false, onSearch, onProductCategoryFilterChange}) => {
-  const [cartItemCount] = useState(quantity);
-  const {signed} = useAuth();
+const Header = ({displaySearchBar = false, onSearch, onProductCategoryFilterChange}) => {
+  const {cartItems} = useContext(CartContext); // Access cartItems from CartContext
+
+  const cartItemCount = cartItems.length; // Calculate the cart item count
 
   const handleSearch = (event) => {
     const searchQuery = event.target.value;
@@ -61,13 +62,11 @@ const Header = ({quantity, displaySearchBar = false, onSearch, onProductCategory
               )}
             </div>
           </Link>
-          {signed ? (
-            <Link to='/wishlist'>
-              <div className='wishlist-icon'>
-                <FontAwesomeIcon icon={faHeart} />
-              </div>
-            </Link>
-          ) : null}
+          <Link to='/wishlist'>
+            <div className='wishlist-icon'>
+              <FontAwesomeIcon icon={faHeart} />
+            </div>
+          </Link>
         </div>
       </div>
     </header>

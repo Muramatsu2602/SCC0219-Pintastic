@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Wishlist from './pages/Wishlist';
 
 function ShopRouter(props) {
   const {signed} = useAuth();
@@ -30,6 +31,7 @@ function ShopRouter(props) {
       {
         signed ? (
           <>
+            <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/day' element={<PinOfTheDay />} />
           </>

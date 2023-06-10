@@ -1,59 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import './Cart.style.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CartSection from '../components/CartSection';
 import Menu from '../components/Nav';
-// import cardData from './mock/products.json';
+import {CartContext} from '../contexts/Cart';
 
 const Cart = () => {
-  // Mock data for cart items
-  const [cartItems] = useState([
-    {
-      id: 1,
-      productTitle: 'Product Title 1',
-      productDescription: 'Product Description 1',
-      productPrice: 49.99,
-      productImage:
-        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_cafezinho_73_5_86434fddbfff039553cd7f504cc08641.jpg',
-      quantity: 1,
-    },
-    {
-      id: 2,
-      productTitle: 'Product Title 2',
-      productDescription: 'Product Description 2',
-      productPrice: 44.99,
-      productImage:
-        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_cafezinho_73_5_86434fddbfff039553cd7f504cc08641.jpg',
-      quantity: 3,
-    },
-    {
-      id: 3,
-      productTitle: 'Product Title 3',
-      productDescription: 'Product Description 2',
-      productPrice: 1.99,
-      productImage:
-        'https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_cafezinho_73_5_86434fddbfff039553cd7f504cc08641.jpg',
-      quantity: 3,
-    },
-    // Add more mock data items as needed
-  ]);
-  const [cartQuantity, setCartQuantity] = useState(cartItems.length);
-
-  const updateCartQuantity = (quantity) => {
-    setCartQuantity(quantity);
-  };
+  const {cartItems, updateCartQuantity} = useContext(CartContext);
 
   return (
     <>
-      <Header key={cartQuantity} quantity={cartQuantity} />
+      <Header quantity={cartItems.length} />
       <Menu />
 
       <main id='cart-main'>
-        <CartSection
-          items={cartItems}
-          updateCartQuantity={updateCartQuantity}
-        />
+        <CartSection items={cartItems} updateCartQuantity={updateCartQuantity} />
       </main>
 
       <Footer />

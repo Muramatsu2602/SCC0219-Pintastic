@@ -76,12 +76,10 @@ const CartSection = ({items, updateCartQuantity}) => {
             </Link>
 
             <Link to='/checkout'>
-
               <button className='pintastic-button' type='button'>
-              Checkout
+                Checkout
               </button>
             </Link>
-
           </div>
         </div>
       )}

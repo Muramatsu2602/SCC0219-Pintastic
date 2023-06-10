@@ -35,7 +35,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Header quantity={wishlistItems.length} />
+      <Header />
       <Menu />
       <main id='wishlist-main'>
         <div id='wishlist-container'>

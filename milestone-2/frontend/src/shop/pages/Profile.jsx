@@ -87,7 +87,7 @@ export default function Profile() {
 
   return (
     <>
-      <Header quantity={7} />
+      <Header />
       <Menu />
 
       <main id='profile'>
