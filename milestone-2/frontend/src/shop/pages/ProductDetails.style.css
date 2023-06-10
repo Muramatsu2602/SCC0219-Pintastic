@@ -124,3 +124,10 @@
 	align-items: center;
 	margin-bottom: 4rem;
 }
+
+.product-details-wishlist-icon {
+	cursor: pointer;
+	color: pink;
+	margin-right: 0.2rem;
+	margin-bottom: 0.3rem;
+}

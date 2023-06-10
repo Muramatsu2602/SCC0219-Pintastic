@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
+import './ProductDetails.style.css';
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import './ProductDetails.style.css';
+import {useAuth} from '../contexts/Auth';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
@@ -11,11 +12,23 @@ import Card from '../components/Card';
 import {useNavigate} from 'react-router-dom';
 import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
 import productsData from './mock/products.json';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 
 const ProductDetails = () => {
+  const {signed} = useAuth();
+
   const [quantity, setQuantity] = useState(1);
   const {productId} = useParams();
 
+  const [isOnWishlist, setIsOnWishlist] = useState(false);
+
+  const handleWishlistToggle = () => {
+    setIsOnWishlist(!isOnWishlist);
+  };
+
+  const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
   const navigate = useNavigate();
 
   const handleQuantityChange = (event) => {
@@ -75,18 +88,24 @@ const ProductDetails = () => {
             <p className='product-details-description'>
               {selectedProduct.productDescription}
             </p>
-            <div className='product-details-specs'>
-              {/* <div>
-                <strong>Height:</strong> 10cm
-              </div>
-              <div>
-                <strong>Width:</strong> 20cm
-              </div> */}
+            <div className='product-details-wishlist-icon-container'>
+              {signed ? (
+                <div
+                  className='product-details-wishlist-icon'
+                  onClick={handleWishlistToggle}
+                >
+                  <FontAwesomeIcon icon={heartIcon} />
+                  <span>Add to Wishlist</span>
+                </div>
+              ) : null}
             </div>
             <div className='product-details-price'>
               <div className='product-details-prices-container'>
                 {selectedProduct.productDiscountPercentage == 0 ? (
-                  <span className='product-details-no-discount'> {`$${selectedProduct.productPrice}`}</span>
+                  <span className='product-details-no-discount'>
+                    {' '}
+                    {`$${selectedProduct.productPrice}`}
+                  </span>
                 ) : (
                   <span className='product-details-original-price'>{`$${selectedProduct.productPrice}`}</span>
                 )}
