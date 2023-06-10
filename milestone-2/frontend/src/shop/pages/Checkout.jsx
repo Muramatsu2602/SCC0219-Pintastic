@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import './Checkout.style.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,34 +7,13 @@ import Menu from '../components/Nav';
 import {useAuth} from '../contexts/Auth';
 import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import {CartContext} from '../contexts/Cart';
 
-
-const Checkout = ({}) => {
+const Checkout = () => {
   const navigate = useNavigate();
+  const {cartItems, clearCart} = useContext(CartContext);
+  const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
   const {signed} = useAuth();
-
-  // Sample cart data
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 9.99,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 14.99,
-      quantity: 1,
-    },
-    // Add more items as needed
-  ];
-
-  // Calculate the total cost of the cart items
-  const cartTotal = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-  );
 
   // State for form fields
   const [form, setForm] = useState({
@@ -100,6 +79,7 @@ const Checkout = ({}) => {
         // Submit the form or perform any necessary actions
         // For example, you can redirect to a thank you page
         navigate('/catalog/');
+        clearCart(); // Clear the cart after checkout
       }
     });
   };
@@ -197,7 +177,10 @@ const Checkout = ({}) => {
       newErrors.privacyPolicy = 'You must accept the privacy policy';
     }
 
-    if (Object.keys(newErrors).length === 0 || signed && Object.keys(newErrors).length === 8) {
+    if (
+      Object.keys(newErrors).length === 0 ||
+      (signed && Object.keys(newErrors).length === 8)
+    ) {
       // Form is valid
       // Call the submitCheckout function to display the confirmation modal
       submitCheckout(e);
@@ -207,9 +190,18 @@ const Checkout = ({}) => {
     }
   };
 
+  const cartTotal = cartItems.reduce(
+      (total, item) => {
+        console.log(item.productPrice, item.quantity); // Print the values of ProductPrice and quantity for each item
+        return total + item.productPrice * item.quantity;
+      },
+      0,
+  );
+
+
   return (
     <form onSubmit={handleSubmit}>
-      <Header quantity={7} />
+      <Header quantity={quantity} />
       <Menu />
       <main id='checkout-main'>
         <section id='checkout-payee-information'>
@@ -230,7 +222,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.name ? 'invalid-input' : ''}`}
                   />
-                  {errors.name && <div className='error-message'>{errors.name}</div>}
+                  {errors.name && (
+                    <div className='error-message'>{errors.name}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -242,7 +236,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.surname ? 'invalid-input' : ''}`}
                   />
-                  {errors.surname && <div className='error-message'>{errors.surname}</div>}
+                  {errors.surname && (
+                    <div className='error-message'>{errors.surname}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -254,7 +250,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.email ? 'invalid-input' : ''}`}
                   />
-                  {errors.email && <div className='error-message'>{errors.email}</div>}
+                  {errors.email && (
+                    <div className='error-message'>{errors.email}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -266,7 +264,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.telephone ? 'invalid-input' : ''}`}
                   />
-                  {errors.telephone && <div className='error-message'>{errors.telephone}</div>}
+                  {errors.telephone && (
+                    <div className='error-message'>{errors.telephone}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -278,7 +278,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.address ? 'invalid-input' : ''}`}
                   />
-                  {errors.address && <div className='error-message'>{errors.address}</div>}
+                  {errors.address && (
+                    <div className='error-message'>{errors.address}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -290,7 +292,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.city ? 'invalid-input' : ''}`}
                   />
-                  {errors.city && <div className='error-message'>{errors.city}</div>}
+                  {errors.city && (
+                    <div className='error-message'>{errors.city}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -302,7 +306,9 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.state ? 'invalid-input' : ''}`}
                   />
-                  {errors.state && <div className='error-message'>{errors.state}</div>}
+                  {errors.state && (
+                    <div className='error-message'>{errors.state}</div>
+                  )}
                 </div>
 
                 <div className='checkout-input-group'>
@@ -314,9 +320,10 @@ const Checkout = ({}) => {
                     onChange={handleInputChange}
                     className={`${errors.cep ? 'invalid-input' : ''}`}
                   />
-                  {errors.cep && <div className='error-message'>{errors.cep}</div>}
+                  {errors.cep && (
+                    <div className='error-message'>{errors.cep}</div>
+                  )}
                 </div>
-
               </div>
             </section>
           ) : (
@@ -508,23 +515,29 @@ const Checkout = ({}) => {
         <aside id='checkout-purchase-summary'>
           <div className='checkout-summary-item'>
             <h3>Summary</h3>
-            {cartItems.map((item) => (
-              <div key={item.id}>
-                <span>{item.name}</span>
-                <span>${item.price.toFixed(2)}</span>
+            {cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <div key={item.productId}>
+                <span>{item.productTitle}</span>
+                <span>${item.productPrice}</span>
                 <span>Qty: {item.quantity}</span>
               </div>
-            ))}
+            ))
+          ) : (
+            <div>No items in the cart</div>
+          )}
           </div>
           <div className='checkout-summary-item'>
             <h2>Total</h2>
           </div>
-          <div className='checkout-summary-item'>
-            <span>Subtotal: ${cartTotal.toFixed(2)}</span> <hr />
-            <span>Delivery Tax: $5.00</span> <hr />
-            <span>Final Cost: ${(cartTotal + 5).toFixed(2)}</span>
-          </div>
+          {cartItems.length > 0 && ( // Add conditional check here
+            <div className='checkout-summary-item'>
+              <span>Delivery Tax: $5.00</span> <hr />
+              <span>Final Cost: ${((cartTotal) + 5.0).toFixed(2)}</span>
+            </div>
+          )}
         </aside>
+
       </main>
       <Footer />
     </form>
