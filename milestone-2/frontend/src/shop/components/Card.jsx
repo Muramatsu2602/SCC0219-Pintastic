@@ -39,6 +39,7 @@ const Card = ({
         productPrice,
         productTitle,
         productDescription,
+        productDiscountPercentage,
         productImage,
         productRating,
         productCategory,
