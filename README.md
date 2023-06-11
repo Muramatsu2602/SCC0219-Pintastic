@@ -58,8 +58,8 @@ Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.<br>
 A seguir estão listados os testes que iremos realizar:
 1) Busca de pin/adesivo por nome
     - Buscar por um pin/adesivo no catálogo por meio de uma string de busca a partir da barra de pesquisa presente no cabeçalho do site.
-2) Filtragem por categoria
-    - Verificar retorno ao selecionar uma categoria de pin/adesivo na barra de navegação do cabeçalho.
+2) Filtragem por categoria, preço e avaliação
+    - Verificar retorno ao selecionar uma categoria/preço/avaliacao de pin/adesivo na barra de navegação do cabeçalho.
 3) Navegação nas diferentes páginas do catálogo
     - Verificar se a barra de navegação do cabeçalho funciona conforme esperado.
 4) Adicionar item ao carrinho
@@ -75,17 +75,17 @@ A seguir estão listados os testes que iremos realizar:
 11) Testar finalização de compra após itens serem adicionados ao carrinho.
 
 ## Resultado dos testes
-1)
-2) Ao selecionar cada categoria, os pins exibidas no catálogo são atualizados conforme esperado
+1) As buscas por pins e adesivos funcionam conforme esperado
+2) Ao selecionar cada filtro, os pins/stickers exibidas no catálogo são atualizados conforme esperado
 3) A navegação nas diferentes páginas do catálogo funciona conforme esperado, alterando o número de páginas caso alguma categoria específica tenha sido selecionada.
-4)
-5)
+4) O item é adicionado ao carrinho em ambos os casos, sendo que na página do item é possível adicionar a quantidade especificada no campo de quantidade a ser adicionada ao carrinho.
+5) O item é adicionado a wishlist conforme esperado
 6) Na página do carrinho, ao clicar no botão Remove o produto será removida do carrinho independentemente da quantidade de um mesmo item conforme o esperado.
 7) A maioria dos campos numéricos possui máscaras de input.
 8) Quando logado como Administrador, ao selecionar um produto do catálogo e clicar para editar o item, as informações a serem editadas do item são exibidas e as alterações feitas são salvas conforme esperado.
 9) As inclusões de pins e usuários, quando logado como administrador, funcionam conforme o esperado, permitindo que um administrador faça o cadastro de outros administradores no sistema.
 10) Quando logado como um usuário comum, é possível editar as informações de perfil que são salvas conforme esperado.
-11)
+11) Após os dados referentes às informações bancárias (dados fictícios) serem preenchidos, a compra é finalizada e o carrinho é esvaziado, conforme o esperado.
 
 ## Procedimentos de build
 
