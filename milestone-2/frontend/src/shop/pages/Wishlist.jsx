@@ -11,13 +11,26 @@ import {WishlistContext} from '../contexts/Wishlist';
 import {CartContext} from '../contexts/Cart';
 import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
 import Swal from 'sweetalert2';
+import {useNavigate} from 'react-router-dom';
 
 const Wishlist = () => {
+  const navigate = useNavigate();
   const {wishlistItems, removeFromWishlist} = useContext(WishlistContext);
   const {cartItems, addToCart} = useContext(CartContext);
 
   const handleRemoveItem = (itemId) => {
-    removeFromWishlist(itemId);
+    Swal.fire({
+      title: 'Remove Item',
+      text: 'Are you sure you want to remove this item from your wishlist?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeFromWishlist(itemId);
+      }
+    });
   };
 
   const handleAddToCart = (productId) => {
@@ -27,9 +40,7 @@ const Wishlist = () => {
       return;
     }
 
-    const isProductInCart = cartItems.some(
-        (item) => item.productId === productId,
-    );
+    const isProductInCart = cartItems.some((item) => item.productId === productId);
 
     if (isProductInCart) {
       Swal.fire({
@@ -41,6 +52,7 @@ const Wishlist = () => {
     } else {
       addToCart(item);
       showAddToCartConfirmation();
+      removeFromWishlist(productId); // Remove the item from the wishlist after adding it to the cart
     }
   };
 
@@ -53,7 +65,7 @@ const Wishlist = () => {
       cancelButtonText: 'Continue Shopping',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Redirect to cart
+        navigate('/cart');
       }
     });
   };
@@ -62,43 +74,44 @@ const Wishlist = () => {
     <>
       <Header />
       <Menu />
-      <main id="wishlist-main">
-        <div id="wishlist-container">
-          <h2 className="wishlist-title">Wishlist</h2>
+      <main id='wishlist-main'>
+        <div id='wishlist-container'>
+          <h2 className='wishlist-title'>Wishlist</h2>
 
           {wishlistItems.length === 0 ? (
-            <p className="wishlist-empty">Your wishlist is empty.</p>
+            <p className='wishlist-empty'>Your wishlist is empty.</p>
           ) : (
-            <ul className="wishlist-items">
+            <ul className='wishlist-items'>
               {wishlistItems.map((item) => (
-                <li key={item.productId} className="wishlist-item">
-                  <div className="wishlist-details">
-                    <div className="wishlist-image-remove">
+                <li key={item.productId} className='wishlist-item'>
+                  <div className='wishlist-details'>
+                    <div className='wishlist-image-remove'>
                       <img
-                        id="wishlist-item-image"
+                        id='wishlist-item-image'
                         src={item.productImage}
-                        alt="Product"
+                        alt='Product'
                       />
                     </div>
-                    <div className="wishlist-info">
-                      <h3 className="wishlist-product-title">
+                    <div className='wishlist-info'>
+                      <h3 className='wishlist-product-title'>
                         {item.productTitle}
                       </h3>
-                      <div className="wishlist-rating">
+                      <div className='wishlist-rating'>
                         <StarRating rating={item.productRating} />
                       </div>
-                      <div className="wishlist-prices">
+                      <div className='wishlist-prices'>
                         {item.productDiscountPercentage === 0 ? (
-                          <span className="wishlist-price">
+                          <span className='wishlist-price'>
                             ${item.productPrice}
                           </span>
                         ) : (
                           <>
-                            <span className="wishlist-original-price">
+                            <span className='wishlist-original-price'>
                               ${item.productPrice}
                             </span>
-                            <span className="wishlist-discount-price">
-                              ${calculateDiscountedPrice(
+                            <span className='wishlist-discount-price'>
+                              $
+                              {calculateDiscountedPrice(
                                   item.productPrice,
                                   item.productDiscountPercentage,
                               )}
@@ -109,25 +122,25 @@ const Wishlist = () => {
                     </div>
                   </div>
                   <button
-                    className="wishlist-remove-button"
+                    className='wishlist-remove-button'
                     onClick={() => handleRemoveItem(item.productId)}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
-                    <span className="wishlist-remove-text">Remover</span>
+                    <span className='wishlist-remove-text'>Remove</span>
                   </button>
                   <Button
-                    className="wishlist-add-to-cart-button"
+                    className='wishlist-add-to-cart-button'
                     onClick={() => handleAddToCart(item.productId)}
-                    buttonText="+ Add to Cart"
+                    buttonText='+ Add to Cart'
                   />
                 </li>
               ))}
             </ul>
           )}
 
-          <p className="wishlist-item-count">
+          <p className='wishlist-item-count'>
             Number of items in wishlist:{' '}
-            <span id="wishlist-item-count">
+            <span id='wishlist-item-count'>
               {wishlistItems.length}{' '}
               {wishlistItems.length === 1 ? 'Item' : 'Items'}
             </span>

@@ -15,30 +15,39 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {WishlistContext} from '../contexts/Wishlist';
+import Swal from 'sweetalert2';
+import {CartContext} from '../contexts/Cart';
 
 const ProductDetails = () => {
+  const {cartItems, addToCart} = useContext(CartContext);
   const {signed} = useAuth();
   const {productId} = useParams();
-  const {addToWishlist, removeFromWishlist, wishlistItems} = useContext(WishlistContext);
+  const {addToWishlist, removeFromWishlist, wishlistItems} =
+    useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const productInWishlist = wishlistItems.some((item) => item.productId === parseInt(productId));
+    const productInWishlist = wishlistItems.some(
+        (item) => item.productId === parseInt(productId),
+    );
     setIsOnWishlist(productInWishlist);
   }, [wishlistItems, productId]);
 
   const handleWishlistToggle = () => {
-    const product = productsData.find((product) => product.productId === parseInt(productId));
+    const product = productsData.find(
+        (product) => product.productId === parseInt(productId),
+    );
 
     if (isOnWishlist) {
       removeFromWishlist(productId);
+      setIsOnWishlist(false);
     } else {
       addToWishlist(product);
+      setIsOnWishlist(true);
     }
-
-    setIsOnWishlist(!isOnWishlist);
   };
+
   const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
   const [quantity, setQuantity] = useState(1);
 
@@ -47,9 +56,46 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    // Logic to add the product to the cart
+    const product = {
+      productId: selectedProduct.productId,
+      productPrice: selectedProduct.productPrice,
+      productTitle: selectedProduct.productTitle,
+      productDescription: selectedProduct.productDescription,
+      productImage: selectedProduct.productImage,
+      quantity: parseInt(quantity),
+    };
+
+    // Check if the product already exists in the cart
+    const isProductInCart = cartItems.some(
+        (item) => item.productId === product.productId,
+    );
+
+    if (isProductInCart) {
+      Swal.fire({
+        title: 'Product Already in Cart',
+        text: 'This product is already in your cart.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    } else {
+      addToCart(product);
+      showAddToCartConfirmation();
+    }
   };
 
+  const showAddToCartConfirmation = () => {
+    Swal.fire({
+      title: 'Item Added to Cart',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'View Cart',
+      cancelButtonText: 'Continue Shopping',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/cart');
+      }
+    });
+  };
   // Get the selected product
   const selectedProduct = productsData.find(
       (product) => product.productId === parseInt(productId),
@@ -67,8 +113,8 @@ const ProductDetails = () => {
       <>
         <Header quantity={quantity} />
         <Menu />
-        <main id="product-details-main">
-          <div className="product-not-found-message">Product not found.</div>
+        <main id='product-details-main'>
+          <div className='product-not-found-message'>Product not found.</div>
         </main>
         <Footer />
       </>
@@ -84,25 +130,25 @@ const ProductDetails = () => {
     <>
       <Header quantity={quantity} />
       <Menu />
-      <main id="product-details-main">
-        <section className="product-details-container">
-          <div className="product-details-image">
-            <img src={productImageUrl} alt="Product Image" />
+      <main id='product-details-main'>
+        <section className='product-details-container'>
+          <div className='product-details-image'>
+            <img src={productImageUrl} alt='Product Image' />
           </div>
-          <div className="product-details-info">
-            <h2 className="product-details-title">
+          <div className='product-details-info'>
+            <h2 className='product-details-title'>
               {selectedProduct.productTitle}
             </h2>
-            <div className="product-details-rating">
+            <div className='product-details-rating'>
               <StarRating rating={selectedProduct.productRating} />
             </div>
-            <p className="product-details-description">
+            <p className='product-details-description'>
               {selectedProduct.productDescription}
             </p>
-            <div className="product-details-wishlist-icon-container">
+            <div className='product-details-wishlist-icon-container'>
               {signed ? (
                 <div
-                  className="product-details-wishlist-icon"
+                  className='product-details-wishlist-icon'
                   onClick={handleWishlistToggle}
                 >
                   <FontAwesomeIcon icon={heartIcon} />
@@ -110,22 +156,23 @@ const ProductDetails = () => {
                 </div>
               ) : null}
             </div>
-            <div className="product-details-price">
-              <div className="product-details-prices-container">
+            <div className='product-details-price'>
+              <div className='product-details-prices-container'>
                 {selectedProduct.productDiscountPercentage == 0 ? (
-                  <span className="product-details-no-discount">
+                  <span className='product-details-no-discount'>
                     ${selectedProduct.productPrice}
                   </span>
                 ) : (
-                  <span className="product-details-original-price">
+                  <span className='product-details-original-price'>
                     ${selectedProduct.productPrice}
                   </span>
                 )}
 
                 {selectedProduct.productDiscountPercentage > 0 ? (
-                  <div className="product-details-discount">
-                    <span className="product-details-discounted-price">
-                      ${calculateDiscountedPrice(
+                  <div className='product-details-discount'>
+                    <span className='product-details-discounted-price'>
+                      $
+                      {calculateDiscountedPrice(
                           selectedProduct.productPrice,
                           selectedProduct.productDiscountPercentage,
                       )}
@@ -133,43 +180,43 @@ const ProductDetails = () => {
                   </div>
                 ) : null}
               </div>
-              <div className="">
-                <span className="product-details-quantity-label">
+              <div className=''>
+                <span className='product-details-quantity-label'>
                   Quantity:
                 </span>
                 <input
-                  className="product-details-input"
-                  type="number"
-                  min="1"
+                  className='product-details-input'
+                  type='number'
+                  min='1'
                   value={quantity}
                   onChange={handleQuantityChange}
                 />
               </div>
             </div>
 
-            <div className="product-details-button-container">
+            <div className='product-details-button-container'>
               <Button
-                className="product-details-add-to-cart-button"
+                className='product-details-add-to-cart-button'
                 onClick={handleAddToCart}
-                buttonText="Add to Cart"
+                buttonText='Add to Cart'
               />
             </div>
           </div>
         </section>
 
-        <section className="related-products-container">
-          <div className="related-products-upper">
-            <h3 className="related-products-title">Related Products</h3>
+        <section className='related-products-container'>
+          <div className='related-products-upper'>
+            <h3 className='related-products-title'>Related Products</h3>
             <Button
-              className="product-details-other-products-button abs"
+              className='product-details-other-products-button abs'
               onClick={() => {
                 navigate('/catalog/');
               }}
-              buttonText="Other Products"
+              buttonText='Other Products'
             />
           </div>
 
-          <div className="related-products-carousel">
+          <div className='related-products-carousel'>
             {relatedProducts.map((product, index) => (
               <Card
                 key={index}
