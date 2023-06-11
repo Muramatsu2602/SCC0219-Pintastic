@@ -8,8 +8,12 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
 
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);
-    setQuantity(newQuantity);
-    handleQuantityChange(item.productId, newQuantity);
+    if (isNaN(newQuantity)) {
+      setQuantity(1);
+    } else {
+      setQuantity(newQuantity);
+    }
+    handleQuantityChange(item.productId, quantity);
   };
 
   const confirmRemoveItem = () => {

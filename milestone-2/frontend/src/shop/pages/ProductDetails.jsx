@@ -62,7 +62,7 @@ const ProductDetails = () => {
       productTitle: selectedProduct.productTitle,
       productDescription: selectedProduct.productDescription,
       productImage: selectedProduct.productImage,
-      quantity: parseInt(quantity),
+      quantity: quantity, // Use the value from the `quantity` state
     };
 
     // Check if the product already exists in the cart
