@@ -9,11 +9,13 @@ import Header from '../components/Header.jsx';
 import Nav from '../components/Nav.jsx';
 import Card from '../components/Card.jsx';
 import Testimonial from '../components/Testimonial.jsx';
+import {useNavigate} from 'react-router-dom';
 
 export default function LandingPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(4);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Update the number of cards per page based on the window width
@@ -75,7 +77,9 @@ export default function LandingPage() {
                 </li>
               </ul>
 
-              <Button buttonText={'More Products'} />
+              <Button buttonText={'More Products'} onClick={() => {
+                navigate('/catalog/');
+              }}/>
             </div>
             <div id='highlighted-items'>
               <section id='landing-cards-pagination'>

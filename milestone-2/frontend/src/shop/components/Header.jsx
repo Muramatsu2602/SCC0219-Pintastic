@@ -4,10 +4,12 @@ import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart, faUser, faHeart} from '@fortawesome/free-solid-svg-icons';
 import {CartContext} from '../contexts/Cart'; // Import CartContext
+import {useAuth} from '../contexts/Auth';
+
 
 const Header = ({displaySearchBar = false, onSearch, onProductCategoryFilterChange}) => {
+  const {signed} = useAuth();
   const {cartItems} = useContext(CartContext); // Access cartItems from CartContext
-
   const cartItemCount = cartItems.length; // Calculate the cart item count
 
   const handleSearch = (event) => {
@@ -62,11 +64,12 @@ const Header = ({displaySearchBar = false, onSearch, onProductCategoryFilterChan
               )}
             </div>
           </Link>
-          <Link to='/wishlist'>
+          {signed? ( <Link to='/wishlist'>
             <div className='wishlist-icon'>
               <FontAwesomeIcon icon={faHeart} />
             </div>
-          </Link>
+          </Link>) : null}
+
         </div>
       </div>
     </header>
