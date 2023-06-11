@@ -1,16 +1,14 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import './Card.style.css';
 import Button from './Button';
 import StarRating from './StarRating';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-  faHeart as faHeartSolid,
-  faTag,
-} from '@fortawesome/free-solid-svg-icons';
+import {faHeart as faHeartSolid, faTag} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {Link, useNavigate} from 'react-router-dom';
 import {CartContext} from '../contexts/Cart';
-import Swal from 'sweetalert2'; // Import Swal
+import {WishlistContext} from '../contexts/Wishlist';
+import Swal from 'sweetalert2';
 
 const Card = ({
   productId,
@@ -23,10 +21,29 @@ const Card = ({
   productCategory,
 }) => {
   const {cartItems, addToCart} = useContext(CartContext);
+  const {wishlistItems, addToWishlist, removeFromWishlist} = useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const isProductWishlisted = wishlistItems.some((item) => item.productId === productId);
+    setIsOnWishlist(isProductWishlisted);
+  }, [wishlistItems, productId]);
+
   const handleWishlistToggle = () => {
+    if (isOnWishlist) {
+      removeFromWishlist(productId);
+    } else {
+      addToWishlist({
+        productId,
+        productPrice,
+        productTitle,
+        productDescription,
+        productImage,
+        productRating,
+        productCategory,
+      });
+    }
     setIsOnWishlist(!isOnWishlist);
   };
 
@@ -42,11 +59,11 @@ const Card = ({
       quantity: 1,
     };
 
-    // Check if the product already exists in the cart
-    const isProductInCart = cartItems.some((item) => item.productId === productId);
+    const isProductInCart = cartItems.some(
+        (item) => item.productId === productId,
+    );
 
     if (isProductInCart) {
-      // Show error or alert indicating that the product is already in the cart
       Swal.fire({
         title: 'Product Already in Cart',
         text: 'This product is already in your cart.',
@@ -54,9 +71,8 @@ const Card = ({
         confirmButtonText: 'OK',
       });
     } else {
-      // Product is not in the cart, add it
       addToCart(product);
-      showAddToCartConfirmation(); // Call confirmation popup function
+      showAddToCartConfirmation();
     }
   };
 
@@ -69,7 +85,7 @@ const Card = ({
       cancelButtonText: 'Continue Shopping',
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate('/cart'); // Redirect to cart
+        navigate('/cart');
       }
     });
   };
@@ -77,9 +93,9 @@ const Card = ({
   return (
     <div className='item-card-container'>
       <div className='item-card-top-section'>
-        {productDiscountPercentage > 0 ? (
+        {productDiscountPercentage > 0 && (
           <div className='discount-pill'>{productDiscountPercentage}% OFF</div>
-        ) : null}
+        )}
       </div>
       <Link to={`/product/${productId}`}>
         <div className='item-card-img'>

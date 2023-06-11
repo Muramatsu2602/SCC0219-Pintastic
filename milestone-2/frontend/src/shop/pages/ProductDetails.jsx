@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
+import React, {useState, useContext, useEffect} from 'react';
 import './ProductDetails.style.css';
-import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAuth} from '../contexts/Auth';
 import Header from '../components/Header';
@@ -15,21 +14,33 @@ import productsData from './mock/products.json';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
+import {WishlistContext} from '../contexts/Wishlist';
 
 const ProductDetails = () => {
   const {signed} = useAuth();
-
-  const [quantity, setQuantity] = useState(1);
   const {productId} = useParams();
-
+  const {addToWishlist, removeFromWishlist, wishlistItems} = useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const productInWishlist = wishlistItems.some((item) => item.productId === parseInt(productId));
+    setIsOnWishlist(productInWishlist);
+  }, [wishlistItems, productId]);
 
   const handleWishlistToggle = () => {
+    const product = productsData.find((product) => product.productId === parseInt(productId));
+
+    if (isOnWishlist) {
+      removeFromWishlist(productId);
+    } else {
+      addToWishlist(product);
+    }
+
     setIsOnWishlist(!isOnWishlist);
   };
-
   const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
-  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
@@ -56,8 +67,8 @@ const ProductDetails = () => {
       <>
         <Header quantity={quantity} />
         <Menu />
-        <main id='product-details-main'>
-          <div className='product-not-found-message'>Product not found.</div>
+        <main id="product-details-main">
+          <div className="product-not-found-message">Product not found.</div>
         </main>
         <Footer />
       </>
@@ -73,25 +84,25 @@ const ProductDetails = () => {
     <>
       <Header quantity={quantity} />
       <Menu />
-      <main id='product-details-main'>
-        <section className='product-details-container'>
-          <div className='product-details-image'>
-            <img src={productImageUrl} alt='Product Image' />
+      <main id="product-details-main">
+        <section className="product-details-container">
+          <div className="product-details-image">
+            <img src={productImageUrl} alt="Product Image" />
           </div>
-          <div className='product-details-info'>
-            <h2 className='product-details-title'>
+          <div className="product-details-info">
+            <h2 className="product-details-title">
               {selectedProduct.productTitle}
             </h2>
-            <div className='product-details-rating'>
+            <div className="product-details-rating">
               <StarRating rating={selectedProduct.productRating} />
             </div>
-            <p className='product-details-description'>
+            <p className="product-details-description">
               {selectedProduct.productDescription}
             </p>
-            <div className='product-details-wishlist-icon-container'>
+            <div className="product-details-wishlist-icon-container">
               {signed ? (
                 <div
-                  className='product-details-wishlist-icon'
+                  className="product-details-wishlist-icon"
                   onClick={handleWishlistToggle}
                 >
                   <FontAwesomeIcon icon={heartIcon} />
@@ -99,63 +110,66 @@ const ProductDetails = () => {
                 </div>
               ) : null}
             </div>
-            <div className='product-details-price'>
-              <div className='product-details-prices-container'>
+            <div className="product-details-price">
+              <div className="product-details-prices-container">
                 {selectedProduct.productDiscountPercentage == 0 ? (
-                  <span className='product-details-no-discount'>
-                    {' '}
-                    {`$${selectedProduct.productPrice}`}
+                  <span className="product-details-no-discount">
+                    ${selectedProduct.productPrice}
                   </span>
                 ) : (
-                  <span className='product-details-original-price'>{`$${selectedProduct.productPrice}`}</span>
+                  <span className="product-details-original-price">
+                    ${selectedProduct.productPrice}
+                  </span>
                 )}
 
                 {selectedProduct.productDiscountPercentage > 0 ? (
-                  <div className='product-details-discount'>
-                    <span className='product-details-discounted-price'>{`$${calculateDiscountedPrice(
-                        selectedProduct.productPrice,
-                        selectedProduct.productDiscountPercentage,
-                    )}`}</span>
+                  <div className="product-details-discount">
+                    <span className="product-details-discounted-price">
+                      ${calculateDiscountedPrice(
+                          selectedProduct.productPrice,
+                          selectedProduct.productDiscountPercentage,
+                      )}
+                    </span>
                   </div>
                 ) : null}
               </div>
-              <div className=''>
-                <span className='product-details-quantity-label'>
+              <div className="">
+                <span className="product-details-quantity-label">
                   Quantity:
                 </span>
                 <input
-                  className='product-details-input'
-                  type='number'
-                  min='1'
+                  className="product-details-input"
+                  type="number"
+                  min="1"
                   value={quantity}
                   onChange={handleQuantityChange}
                 />
               </div>
             </div>
 
-            <div className='product-details-button-container'>
+            <div className="product-details-button-container">
               <Button
-                className='product-details-add-to-cart-button'
+                className="product-details-add-to-cart-button"
                 onClick={handleAddToCart}
-                buttonText='Add to Cart'
+                buttonText="Add to Cart"
               />
             </div>
           </div>
         </section>
 
-        <section className='related-products-container'>
-          <div className='related-products-upper'>
-            <h3 className='related-products-title'>Related Products</h3>
+        <section className="related-products-container">
+          <div className="related-products-upper">
+            <h3 className="related-products-title">Related Products</h3>
             <Button
-              className='product-details-other-products-button abs'
+              className="product-details-other-products-button abs"
               onClick={() => {
                 navigate('/catalog/');
               }}
-              buttonText='Other Products'
+              buttonText="Other Products"
             />
           </div>
 
-          <div className='related-products-carousel'>
+          <div className="related-products-carousel">
             {relatedProducts.map((product, index) => (
               <Card
                 key={index}
@@ -167,6 +181,9 @@ const ProductDetails = () => {
                 productImage={product.productImage}
                 productRating={product.productRating}
                 productCategory={product.productCategory}
+                isOnWishlist={wishlistItems.some(
+                    (item) => item.productId === product.productId,
+                )}
               />
             ))}
           </div>
