@@ -100,11 +100,8 @@ const Wishlist = () => {
                         <StarRating rating={item.productRating} />
                       </div>
                       <div className='wishlist-prices'>
-                        {item.productDiscountPercentage === 0 ? (
-                          <span className='wishlist-price'>
-                            ${item.productPrice}
-                          </span>
-                        ) : (
+                        {item.productDiscountPercentage &&
+                        item.productDiscountPercentage > 0 ? (
                           <>
                             <span className='wishlist-original-price'>
                               ${item.productPrice}
@@ -117,6 +114,10 @@ const Wishlist = () => {
                               )}
                             </span>
                           </>
+                        ) : (
+                          <span className='wishlist-price'>
+                            ${item.productPrice}
+                          </span>
                         )}
                       </div>
                     </div>
