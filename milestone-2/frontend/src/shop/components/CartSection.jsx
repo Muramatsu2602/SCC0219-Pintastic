@@ -1,4 +1,4 @@
-import React, {useContext, useCallback, useEffect, useState} from 'react';
+import React, {useContext, useCallback, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 import './CartSection.style.css';
@@ -6,15 +6,12 @@ import {CartContext} from '../contexts/Cart';
 
 const CartSection = () => {
   const {cartItems, updateCartQuantity, removeFromCart} = useContext(CartContext);
-  const [totalPrice, setTotalPrice] = useState(0);
 
   const calculateTotalPrice = useCallback(() => {
-    const totalPrice = cartItems.reduce(
-        (acc, item) => acc + item.productPrice * item.quantity,
-        0,
-    );
-    setTotalPrice(totalPrice);
+    return cartItems.reduce((acc, item) => acc + item.productPrice * item.quantity, 0);
   }, [cartItems]);
+
+  const totalPrice = calculateTotalPrice();
 
   const handleQuantityChange = (itemId, newQuantity) => {
     updateCartQuantity(itemId, newQuantity);
@@ -23,10 +20,6 @@ const CartSection = () => {
   const handleRemoveItem = (productId) => {
     removeFromCart(productId);
   };
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [cartItems, calculateTotalPrice]);
 
   useEffect(() => {
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -42,6 +35,7 @@ const CartSection = () => {
           item={item}
           handleQuantityChange={handleQuantityChange}
           handleRemoveItem={handleRemoveItem}
+          cartItems={cartItems} // Pass the cartItems array as a prop
         />
       ))}
       {cartItems.length === 0 ? (

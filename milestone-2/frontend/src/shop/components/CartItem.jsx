@@ -10,8 +10,8 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const {cartItems} = useContext(CartContext);
 
-  // const productStock = cartItems.find((cartItem) => cartItem.productId === item.productId)?.productStock;
-  const productStock = 10;
+  const productStock = cartItems.find((cartItem) => cartItem.productId === item.productId)?.productStock;
+  // const productStock = 10;
 
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);

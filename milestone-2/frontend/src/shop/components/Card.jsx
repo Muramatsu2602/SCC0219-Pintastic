@@ -59,6 +59,7 @@ const Card = ({
       productDescription,
       productImage,
       quantity: 1,
+      productStock,
     };
 
     const isProductInCart = cartItems.some((item) => item.productId === productId);
