@@ -243,6 +243,7 @@ export default function Catalog({type}) {
                   productImage={item.productImage}
                   productRating={item.productRating}
                   productCategory={item.productCategory}
+                  productStock={item.productStock}
                 />
               ))}
             </div>

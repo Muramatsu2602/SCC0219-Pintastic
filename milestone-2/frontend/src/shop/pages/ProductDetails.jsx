@@ -17,27 +17,23 @@ import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {WishlistContext} from '../contexts/Wishlist';
 import Swal from 'sweetalert2';
 import {CartContext} from '../contexts/Cart';
+import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = () => {
   const {cartItems, addToCart} = useContext(CartContext);
   const {signed} = useAuth();
   const {productId} = useParams();
-  const {addToWishlist, removeFromWishlist, wishlistItems} =
-    useContext(WishlistContext);
+  const {addToWishlist, removeFromWishlist, wishlistItems} = useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const productInWishlist = wishlistItems.some(
-        (item) => item.productId === parseInt(productId),
-    );
+    const productInWishlist = wishlistItems.some((item) => item.productId === parseInt(productId));
     setIsOnWishlist(productInWishlist);
   }, [wishlistItems, productId]);
 
   const handleWishlistToggle = () => {
-    const product = productsData.find(
-        (product) => product.productId === parseInt(productId),
-    );
+    const product = productsData.find((product) => product.productId === parseInt(productId));
 
     if (isOnWishlist) {
       removeFromWishlist(productId);
@@ -63,23 +59,31 @@ const ProductDetails = () => {
       productDescription: selectedProduct.productDescription,
       productImage: selectedProduct.productImage,
       quantity: quantity, // Use the value from the `quantity` state
+      productStock: selectedProduct.productStock,
     };
 
-    // Check if the product already exists in the cart
-    const isProductInCart = cartItems.some(
-        (item) => item.productId === product.productId,
-    );
-
-    if (isProductInCart) {
+    if (selectedProduct.productStock === 0) {
       Swal.fire({
-        title: 'Product Already in Cart',
-        text: 'This product is already in your cart.',
+        title: 'Out of Stock',
+        text: 'This product is currently out of stock.',
         icon: 'error',
         confirmButtonText: 'OK',
       });
     } else {
-      addToCart(product);
-      showAddToCartConfirmation();
+      // Check if the product already exists in the cart
+      const isProductInCart = cartItems.some((item) => item.productId === product.productId);
+
+      if (isProductInCart) {
+        Swal.fire({
+          title: 'Product Already in Cart',
+          text: 'This product is already in your cart.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      } else {
+        addToCart(product);
+        showAddToCartConfirmation();
+      }
     }
   };
 
@@ -96,10 +100,9 @@ const ProductDetails = () => {
       }
     });
   };
+
   // Get the selected product
-  const selectedProduct = productsData.find(
-      (product) => product.productId === parseInt(productId),
-  );
+  const selectedProduct = productsData.find((product) => product.productId === parseInt(productId));
 
   // Use placeholder image if the product image is not available
   const placeholderImage =
@@ -122,9 +125,7 @@ const ProductDetails = () => {
   }
 
   // Get related products
-  const relatedProducts = productsData
-      .filter((product) => product.productId !== productId)
-      .slice(0, 3);
+  const relatedProducts = productsData.filter((product) => product.productId !== productId).slice(0, 3);
 
   return (
     <>
@@ -145,20 +146,17 @@ const ProductDetails = () => {
             <p className='product-details-description'>
               {selectedProduct.productDescription}
             </p>
-            <div className='product-details-wishlist-icon-container'>
-              {signed ? (
-                <div
-                  className='product-details-wishlist-icon'
-                  onClick={handleWishlistToggle}
-                >
+            {signed && (
+              <div className='product-details-wishlist-icon-container'>
+                <div className='product-details-wishlist-icon' onClick={handleWishlistToggle}>
                   <FontAwesomeIcon icon={heartIcon} />
                   <span>Add to Wishlist</span>
                 </div>
-              ) : null}
-            </div>
+              </div>
+            )}
             <div className='product-details-price'>
               <div className='product-details-prices-container'>
-                {selectedProduct.productDiscountPercentage == 0 ? (
+                {selectedProduct.productDiscountPercentage === 0 ? (
                   <span className='product-details-no-discount'>
                     ${selectedProduct.productPrice}
                   </span>
@@ -167,8 +165,7 @@ const ProductDetails = () => {
                     ${selectedProduct.productPrice}
                   </span>
                 )}
-
-                {selectedProduct.productDiscountPercentage > 0 ? (
+                {selectedProduct.productDiscountPercentage > 0 && (
                   <div className='product-details-discount'>
                     <span className='product-details-discounted-price'>
                       $
@@ -178,29 +175,38 @@ const ProductDetails = () => {
                       )}
                     </span>
                   </div>
-                ) : null}
+                )}
               </div>
-              <div className=''>
-                <span className='product-details-quantity-label'>
-                  Quantity:
-                </span>
-                <input
-                  className='product-details-input'
-                  type='number'
-                  min='1'
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                />
-              </div>
+              {selectedProduct.productStock > 0 && (
+                <div className='product-details-quantity'>
+                  <span className='product-details-quantity-label'>Quantity:</span>
+                  <input
+                    className='product-details-input'
+                    type='number'
+                    min='1'
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                  />
+                </div>
+              )}
             </div>
 
-            <div className='product-details-button-container'>
-              <Button
-                className='product-details-add-to-cart-button'
-                onClick={handleAddToCart}
-                buttonText='Add to Cart'
-              />
-            </div>
+            {selectedProduct.productStock > 0 && (
+              <div className='product-details-button-container'>
+                <Button
+                  className='product-details-add-to-cart-button'
+                  onClick={handleAddToCart}
+                  buttonText='Add to Cart'
+                />
+              </div>
+            )}
+
+            {selectedProduct.productStock === 0 && (
+              <div className='out-of-stock-message'>
+                <FontAwesomeIcon icon={faExclamationTriangle} className='out-of-stock-icon' />
+                <span className='out-of-stock-text'>Out of Stock</span>
+              </div>
+            )}
           </div>
         </section>
 
@@ -228,9 +234,8 @@ const ProductDetails = () => {
                 productImage={product.productImage}
                 productRating={product.productRating}
                 productCategory={product.productCategory}
-                isOnWishlist={wishlistItems.some(
-                    (item) => item.productId === product.productId,
-                )}
+                productStock={product.productStock}
+                isOnWishlist={wishlistItems.some((item) => item.productId === product.productId)}
               />
             ))}
           </div>

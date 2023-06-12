@@ -131,3 +131,20 @@
 	margin-right: 0.2rem;
 	margin-bottom: 0.3rem;
 }
+
+.out-of-stock-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	background-color: #f44336;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	border-radius: 5px;
+
+  }
+  
+  .out-of-stock-icon {
+	margin-right: 5px;
+  }

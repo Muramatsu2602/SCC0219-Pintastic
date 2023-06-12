@@ -7,7 +7,8 @@
     "productDiscountPercentage": 10,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 1.5,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 10
   },
   {
     "productId": 2,
@@ -17,7 +18,8 @@
     "productDiscountPercentage": 20,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 2.8,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 0
   },
   {
     "productId": 3,
@@ -27,7 +29,8 @@
     "productDiscountPercentage": 10,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 2.2,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 2
   },
   {
     "productId": 4,
@@ -37,7 +40,8 @@
     "productDiscountPercentage": 5,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.7,
-    "productCategory": "sticker"
+    "productCategory": "sticker",
+    "productStock": 20
   },
   {
     "productId": 5,
@@ -47,7 +51,8 @@
     "productDiscountPercentage": 15,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 3.5,
-    "productCategory": "sticker"
+    "productCategory": "sticker",
+    "productStock": 8
   },
   {
     "productId": 6,
@@ -57,7 +62,8 @@
     "productDiscountPercentage": 40,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.9,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 15
   },
   {
     "productId": 7,
@@ -67,7 +73,8 @@
     "productDiscountPercentage": 10,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 3.2,
-    "productCategory": "sticker"
+    "productCategory": "sticker",
+    "productStock": 0
   },
   {
     "productId": 8,
@@ -77,7 +84,8 @@
     "productDiscountPercentage": 5,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.6,
-    "productCategory": "sticker"
+    "productCategory": "sticker",
+    "productStock": 4
   },
   {
     "productId": 9,
@@ -87,7 +95,8 @@
     "productDiscountPercentage": 0,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 3.9,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 12
   },
   {
     "productId": 10,
@@ -97,7 +106,8 @@
     "productDiscountPercentage": 15,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.3,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 6
   },
   {
     "productId": 11,
@@ -107,7 +117,8 @@
     "productDiscountPercentage": 0,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.1,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 3
   },
   {
     "productId": 12,
@@ -117,7 +128,8 @@
     "productDiscountPercentage": 10,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 3.7,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 18
   },
   {
     "productId": 13,
@@ -127,7 +139,8 @@
     "productDiscountPercentage": 5,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.4,
-    "productCategory": "pin"
+    "productCategory": "pin",
+    "productStock": 7
   },
   {
     "productId": 14,
@@ -137,6 +150,73 @@
     "productDiscountPercentage": 0,
     "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
     "productRating": 4.0,
-    "productCategory": "sticker"
+    "productCategory": "sticker",
+    "productStock": 9
+  },
+  {
+    "productId": 15,
+    "productTitle": "Green Lantern Sticker",
+    "productDescription": "Product Description 15",
+    "productPrice": 11.99,
+    "productDiscountPercentage": 10,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 3.6,
+    "productCategory": "sticker",
+    "productStock": 11
+  },
+  {
+    "productId": 16,
+    "productTitle": "Aquaman Pin",
+    "productDescription": "Product Description 16",
+    "productPrice": 16.99,
+    "productDiscountPercentage": 20,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 3.8,
+    "productCategory": "pin",
+    "productStock": 13
+  },
+  {
+    "productId": 17,
+    "productTitle": "Catwoman Sticker",
+    "productDescription": "Product Description 17",
+    "productPrice": 9.99,
+    "productDiscountPercentage": 5,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 4.2,
+    "productCategory": "sticker",
+    "productStock": 14
+  },
+  {
+    "productId": 18,
+    "productTitle": "Deadpool Pin",
+    "productDescription": "Product Description 18",
+    "productPrice": 12.99,
+    "productDiscountPercentage": 15,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 4.9,
+    "productCategory": "pin",
+    "productStock": 16
+  },
+  {
+    "productId": 19,
+    "productTitle": "Supergirl Sticker",
+    "productDescription": "Product Description 19",
+    "productPrice": 7.99,
+    "productDiscountPercentage": 0,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 4.7,
+    "productCategory": "sticker",
+    "productStock": 19
+  },
+  {
+    "productId": 20,
+    "productTitle": "Storm Pin",
+    "productDescription": "Product Description 20",
+    "productPrice": 14.99,
+    "productDiscountPercentage": 10,
+    "productImage": "https://images.tcdn.com.br/img/img_prod/731014/pin_icebrg_dollynho_7_1_58ee3bbaaf3358bf2afff54e57ac932c.jpg",
+    "productRating": 3.5,
+    "productCategory": "pin",
+    "productStock": 17
   }
 ]
