@@ -5,23 +5,49 @@ import '@testing-library/jest-dom';
 import Datatable from '../../../src/admin/components/Datatable';
 
 describe('Admin datatable component', () => {
-  it('Should render the datatable successfuly', () => {
-    const columns = [
+  let columns;
+  let data;
+
+  beforeEach(() => {
+    columns = [
       'Email',
       'Compras realizadas',
       'Status',
     ];
 
-    const data = [
+    data = [
       [
         {'type': 'text', 'value': 'email'},
         {'type': 'text', 'value': 'purchases'},
         {'type': 'text', 'value': 'status'},
       ],
     ];
+  });
 
+  it('Should render even when an unmapped data type is passed', () => {
+    const invalidData = [
+      [
+        {'type': 'unmappedType', 'value': 'email'},
+        {'type': 'text', 'value': 'purchases'},
+        {'type': 'text', 'value': 'status'},
+      ],
+    ];
+
+    const consoleSpy = jest.spyOn(console, 'error');
+
+    render(<Datatable columns={columns} data={invalidData} />);
+
+    assertThatTableWasRendered(columns, data);
+    expect(consoleSpy).toBeCalledWith('Column type is not mapped: unmappedType');
+  });
+
+  it('Should render the datatable successfuly', () => {
     render(<Datatable columns={columns} data={data} />);
 
+    assertThatTableWasRendered(columns, data);
+  });
+
+  function assertThatTableWasRendered(columns, data) {
     const renderedTable = screen.getByRole('table');
     expect(renderedTable).toBeInTheDocument();
 
@@ -36,5 +62,5 @@ describe('Admin datatable component', () => {
         expect(renderedCell).toBeInTheDocument();
       });
     });
-  });
+  }
 });

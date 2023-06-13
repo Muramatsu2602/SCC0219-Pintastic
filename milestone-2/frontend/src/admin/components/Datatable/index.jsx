@@ -93,7 +93,7 @@ function buildColumnElement(column, index) {
     console.error('Column type is not mapped: ' + column.type);
 
     return (
-      <td key={index}></td>
+      <td key={index}>{column.value}</td>
     );
   }
 
