@@ -24,5 +24,6 @@ export default styled(RawSubmitButton)`
 
     :hover {
         filter: brightness(95%);
+        background-color: var(--yellow);
     }
 `;

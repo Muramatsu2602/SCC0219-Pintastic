@@ -7,7 +7,7 @@ import Nav from '../components/Nav';
 import Card from '../components/Card';
 import StarRating from '../components/StarRating';
 
-import cardData from './mock/products.json';
+import cardData from '../../mock/products.json';
 
 export default function Catalog({type}) {
   const [ratingFilter, setRatingFilter] = useState([1, 2, 3, 4, 5]);
