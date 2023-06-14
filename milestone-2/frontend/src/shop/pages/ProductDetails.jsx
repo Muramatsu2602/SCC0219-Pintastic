@@ -10,7 +10,7 @@ import Menu from '../components/Nav';
 import Card from '../components/Card';
 import {useNavigate} from 'react-router-dom';
 import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
-import productsData from './mock/products.json';
+import productsData from '../../mock/products.json';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';

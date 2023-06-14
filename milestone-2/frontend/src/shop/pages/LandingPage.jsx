@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import './LandingPage.style.css';
-import cardData from './mock/products.json';
+import cardData from '../../mock/products.json';
 
 import React, {useState, useEffect} from 'react';
 import Button from '../components/Button.jsx';

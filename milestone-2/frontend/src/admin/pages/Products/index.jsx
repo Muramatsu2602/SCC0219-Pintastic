@@ -7,9 +7,10 @@ import {faPencil, faTrash, faPlus} from '@fortawesome/free-solid-svg-icons';
 import PintasticException from '../../../models/PinstaticException';
 import Datatable from '../../components/Datatable';
 import Input from '../../components/Input';
+import Select from '../../components/Select';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';
-import mockProducts from './mockProducts';
+import mockProducts from '../../../mock/products.json';
 
 import './styles.css';
 
@@ -57,13 +58,14 @@ function CreateProductModal(props) {
       e.preventDefault();
 
       const product = {
-        title,
-        description,
-        image,
-        price,
-        discount,
-        stock,
-        status: 'active',
+        'productCategory': category,
+        'productTitle': title,
+        'productDescription': description,
+        'productImage': image,
+        'productPrice': price,
+        'productDiscountPercentage': discount,
+        'productStock': stock,
+        'productStatus': 'active',
       };
 
       props.setProducts([product, ...props.products]);
@@ -82,6 +84,7 @@ function CreateProductModal(props) {
     }
   }
 
+  const [category, setCategory] = useState('pin');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -95,6 +98,16 @@ function CreateProductModal(props) {
       title='Novo produto'
       body={(
         <form onSubmit={handleCreateProduct}>
+          <Select
+            label='Categoria'
+            options={[
+              {value: 'pin', text: 'Pin'},
+              {value: 'sticker', text: 'Sticker'},
+            ]}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
           <Input
             type='text'
             placeholder='Título do produto'
@@ -166,12 +179,14 @@ function EditProductModal(props) {
       e.preventDefault();
 
       const updatedProduct = {
-        title,
-        description,
-        image,
-        price,
-        discount,
-        stock,
+        'productCategory': category,
+        'productTitle': title,
+        'productDescription': description,
+        'productImage': image,
+        'productPrice': price,
+        'productDiscountPercentage': discount,
+        'productStock': stock,
+        'productStatus': 'active',
       };
 
       Object.assign(props.product, updatedProduct);
@@ -190,12 +205,13 @@ function EditProductModal(props) {
     }
   }
 
-  const [title, setTitle] = useState(props?.product?.title || '');
-  const [description, setDescription] = useState(props?.product?.description || '');
-  const [image, setImage] = useState(props?.product?.image || '');
-  const [price, setPrice] = useState(props?.product?.price || '');
-  const [discount, setDiscount] = useState(props?.product?.discount || '');
-  const [stock, setStock] = useState(props?.product?.stock || '');
+  const [category, setCategory] = useState(props?.product?.productCategory || 'pin');
+  const [title, setTitle] = useState(props?.product?.productTitle || '');
+  const [description, setDescription] = useState(props?.product?.productDescription || '');
+  const [image, setImage] = useState(props?.product?.productImage || '');
+  const [price, setPrice] = useState(props?.product?.productPrice || '');
+  const [discount, setDiscount] = useState(props?.product?.productDiscountPercentage || '');
+  const [stock, setStock] = useState(props?.product?.productStock || '');
 
   return (
     <Modal
@@ -203,6 +219,16 @@ function EditProductModal(props) {
       title='Editar produto'
       body={(
         <form onSubmit={handleEditProduct}>
+          <Select
+            label='Categoria'
+            options={[
+              {value: 'pin', text: 'Pin'},
+              {value: 'sticker', text: 'Sticker'},
+            ]}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
           <Input
             type='text'
             placeholder='Título do produto'
@@ -274,7 +300,7 @@ function ToggleProductStatusModal(props) {
       e.preventDefault();
 
       const updatedProduct = props.product;
-      updatedProduct.status = updatedProduct.status == 'active' ? 'inactive' : 'active';
+      updatedProduct.productStatus = updatedProduct.productStatus == 'active' ? 'inactive' : 'active';
 
       console.log(updatedProduct);
 
@@ -312,7 +338,7 @@ function DeleteProductModal(props) {
       e.preventDefault();
 
       const updatedProduct = props.product;
-      updatedProduct.deleted = true;
+      updatedProduct.productDeleted = true;
 
       console.log(updatedProduct);
 
@@ -351,35 +377,35 @@ function formatProductsIntoDatatable(products, setModal) {
   });
 
   return products
-      .filter((product) => !product.deleted)
+      .filter((product) => !product.productDeleted)
       .map((product) => {
         return [
           {
             'type': 'image',
             'value': {
-              'image': product.image,
-              'alt': product.title,
+              'image': product.productImage,
+              'alt': product.productTitle,
             },
           },
           {
             'type': 'text',
-            'value': product.title,
+            'value': product.productTitle,
           },
           {
             'type': 'text',
-            'value': product.stock,
+            'value': product.productStock,
           },
           {
             'type': 'text',
-            'value': formatter.format(product.price),
+            'value': formatter.format(product.productPrice),
           },
           {
             'type': 'text',
-            'value': product.discount + '%',
+            'value': product.productDiscountPercentage + '%',
           },
           {
             'type': 'status',
-            'value': product.status,
+            'value': product.productStatus,
           },
           {
             'type': 'options',
@@ -399,7 +425,7 @@ function formatProductsIntoDatatable(products, setModal) {
                 },
               },
               {
-                'title': product.status == 'active' ? 'Desativar' : 'Ativar',
+                'title': product.productStatus == 'active' ? 'Desativar' : 'Ativar',
                 'icon': faPencil,
                 'action': () => {
                   const toggleProductStatusModal = (
