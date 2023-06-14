@@ -43,10 +43,10 @@ Group project for SCC0219 Introduction to Web Development Course @ ICMC-USP.<br>
 - Além disso, como admin poderá visitar as páginas de **Customers Management** e **Products Management** para modificações dos produtos selecionados.
 
 ### Informações armazenadas no servidor
-- Informações sobre os usuários-clientes: nome completo, email, senha, endereço de entrega e telefone para contato.
-- Informações sobre os administradores: nome completo, email, senha e endereço (opcional).
+- Informações sobre os usuários-clientes: ID, nome completo, email, senha, endereço de entrega e telefone para contato.
+- Informações sobre os administradores: ID, nome completo, email, senha e endereço (opcional).
 - Informações sobre pins e adesivos: ID, nome do produto, categoria, preço de venda e quantidade em estoque.
-- Informações sobre o Pin do Dia: nome do pin sorteado de cada usuário, data e valor de desconto.
+- Informações sobre o Pin do Dia: ID do produto, nome do pin sorteado de cada usuário, data e valor de desconto.
 
 ## Comentários sobre o código
 - O arquivo de estilização CSS está dividido em sessões para cada parte essencial das páginas. Essa divisão é feita de forma simples através de comentários que explicitam o inicio e fim dos blocos de código de cada página. Vide exemplo abaixo:
