@@ -3,7 +3,10 @@ import './Card.style.css';
 import Button from './Button';
 import StarRating from './StarRating';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTag} from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart as faHeartSolid,
+  faTag,
+} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
 import {Link, useNavigate} from 'react-router-dom';
 import {CartContext} from '../contexts/Cart';
