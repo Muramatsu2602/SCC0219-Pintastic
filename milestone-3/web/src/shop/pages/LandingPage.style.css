@@ -1,0 +1,150 @@
+.landing-hero {
+	background-image: url('./assets/img/hero-image.png');
+	background-size: cover;
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #f1f1f1;
+	padding: 20px;
+	text-align: center;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.section-title {
+	padding: 20px;
+	font-size: var(--font-lg);
+}
+
+.hero-text {
+	text-align: center;
+	color: white;
+}
+
+.hero-text h1 {
+	font-size: 50px;
+	margin-bottom: 20px;
+}
+
+.hero-text p {
+	font-size: 25px;
+}
+
+#landing-highlighted {
+	width: 100%;
+	margin-bottom: 4rem;
+}
+
+#highlighted-options {
+	width: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 20px;
+}
+
+#highlighted-options ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#highlighted-options li {
+	margin-bottom: 10px;
+}
+
+#highlighted-options li a {
+	color: var(--yellow);
+	font-size: var(--font-sm);
+	margin-bottom: 3rem;
+	text-decoration: none;
+}
+
+#highlighted-options li a:hover {
+	background-color: #ddd;
+}
+
+#highlighted-content {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+#highlighted-items {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#landing-testimonials {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	margin-top: 60px;
+}
+
+#testimonials-content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+	#testimonials-content {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+#landing-main {
+	display: flex;
+	flex-direction: column;
+}
+
+
+#cards-content.horizontal-scroll {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#cards-content .card {
+	flex: 0 0 auto;
+	margin-right: 16px;
+}
+
+#cards-content .card {
+	flex: 0 0 auto;
+	margin-right: 16px;
+	scroll-snap-align: start;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+}
+
+.pagination button {
+	background: none;
+	border: none;
+	margin: 0 4px;
+	cursor: pointer;
+}
+
+.pagination button.active {
+	font-weight: bold;
+}
+
+.cards-container {
+	overflow-x: auto;
+	max-width: 100%;
+}
+
+
+#landing-cards-pagination {
+	/* background-color: red; */
+	width: 100%;
+}

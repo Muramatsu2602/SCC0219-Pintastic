@@ -1,0 +1,136 @@
+.main-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-bottom: 10px 45px;
+	gap: 39px;
+	width: 100%;
+	height: 50px;
+	background: var(--yellow);
+	border-radius: 0px;
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+}
+
+a:-webkit-any-link {
+	text-decoration: none;
+	color: inherit;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	position: relative;
+	margin-right: 20px;
+}
+
+nav ul li ul {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul li:hover ul {
+	display: block;
+}
+
+nav ul li ul li {
+	margin: 0;
+}
+
+nav ul li ul li a {
+	display: block;
+	padding: 10px;
+	font-size: 14px;
+	color: #333;
+	text-decoration: none;
+}
+
+nav ul li a {
+	display: block;
+	padding: 10px;
+	font-size: 16px;
+	color: #333;
+	text-decoration: none;
+}
+
+nav ul li a:hover {
+	color: var(--white);
+}
+/* Utils */
+@import 'reset.css';
+@import 'fonts.css';
+/* End Utils */
+
+@media screen and (max-width: 1200px) {
+	/* .card-buy {
+		flex-direction: column;
+		flex-wrap: nowrap;
+	} */
+}
+
+/* background colors  */
+
+:root {
+	--black: #000000;
+	--black2: #151515;
+	--yellow: #f2bf18;
+	--light-yellow: #f9df8c;
+	--white: #ffffff;
+	--lighter-gray: #d1d1d1;
+	--light-gray: #a9a9a9;
+	--lightest-gray: #f9f9f9;
+	--gray: #575757;
+
+	--red: #c5330b;
+	--green: #2dbc44;
+
+	--font-xs: 12px;
+	--font-sm: 14px;
+	--font-md: 16px;
+	--font-lg: 18px;
+	--font-xl: 20px;
+}
+
+.background-yellow {
+	background-color: var(--yellow);
+}
+
+.background-white {
+	background-color: var(--white);
+}
+
+.background-gray {
+	background-color: var(--gray);
+}
+
+.background-red {
+	background-color: var(--red);
+}
+
+.background-green {
+	background-color: var(--green);
+}
+
+/* end background colors */
+
+/* General CSS */
+body {
+	background-color: var(--white);
+	margin: 0;
+	font-family: 'Poppins';
+}
+
+/* End of General CSS */

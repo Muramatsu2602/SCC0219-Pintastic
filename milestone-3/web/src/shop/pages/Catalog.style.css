@@ -1,0 +1,105 @@
+/* Catalog.style.css */
+
+#catalog-main {
+	display: flex;
+}
+
+aside {
+	width: 200px;
+	padding: 1rem;
+}
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+.pagination button {
+	margin: 0 0.5rem;
+	padding: 0.5rem;
+	border: none;
+	background-color: transparent;
+	color: #333;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.rating-filter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.pagination button.active {
+	font-weight: bold;
+}
+
+.filter-container {
+	margin-bottom: 1rem;
+}
+
+.filter-title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.rating-filter label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.rating-filter {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5rem;
+}
+
+.rating-filter label {
+	display: flex;
+	align-items: center;
+	margin-right: 1rem;
+	cursor: pointer;
+}
+
+.price-filter {
+	margin-top: 0.5rem;
+}
+
+.price-filter input[type='range'] {
+	width: 100%;
+}
+
+.price-range-values {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.5rem;
+	font-size: 14px;
+}
+
+.exact-price-input {
+	border: nones;
+	margin-top: 10px;
+}
+
+.filter-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+}
+
+.no-items-message {
+	text-align: center;
+	padding: 20px;
+	font-size: 16px;
+	color: #555555;
+  }
+  

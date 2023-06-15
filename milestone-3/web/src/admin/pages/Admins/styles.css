@@ -1,0 +1,69 @@
+#admin-administrators-page {
+    width: 100%;
+}
+
+#admin-administrators-page a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#admin-administrators-page hr {
+    border: 1px solid var(--lightest-gray);
+}
+
+#admin-administrators-page .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#admin-administrators-page .content-header h1 {
+    font-size: var(--font-xl);
+}
+
+#admin-administrators-page .content-header button {
+    background-color: var(--yellow);
+    border: none;
+    padding: 10px 20px;
+    color: var(--white);
+    font-family: 'Poppins';
+    border-radius: 5px;
+    cursor: pointer;
+    transition: filter .2s;
+}
+
+#admin-administrators-page .content-header button:hover {
+    filter: brightness(90%);
+}
+
+/* Status CSS */
+#admin-administrators-page .status {
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 50px;
+}
+
+#admin-administrators-page .status.active {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+#admin-administrators-page .status.active:before {
+    content: "Ativo";
+}
+
+#admin-administrators-page .status.inactive {
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+#admin-administrators-page .status.inactive:before {
+    content: "Inativo";
+}
+
+#admin-administrators-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}

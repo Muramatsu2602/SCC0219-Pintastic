@@ -1,0 +1,10 @@
+.star-rating {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #ffd700;
+  }
+  
+  .star-icon {
+    margin-right: 2px;
+  }
+  
