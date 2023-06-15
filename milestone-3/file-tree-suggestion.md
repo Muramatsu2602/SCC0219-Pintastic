@@ -1,45 +1,19 @@
-- api
-  - routes
-    - products.js
-    - cart.js
-    - wishlist.js
-    - ...
+
+- server
   - controllers
     - productsController.js
-    - cartController.js
-    - wishlistController.js
-    - ...
   - models
     - productModel.js
-    - cartModel.js
-    - wishlistModel.js
-    - ...
-  - middleware
-    - authentication.js
-    - authorization.js
-    - ...
-  - utils
-    - helperFunctions.js
-    - ...
-  - server.js
+  - routes
+    - products.js
 - web
-  - public
-    - index.html
-    - ...
   - src
     - components
       - ...
-    - contexts
-      - ...
     - pages
-      - ...
-    - styles
-      - ...
-    - utils
       - ...
     - App.js
     - index.js
-- database
-  - db.js
-  - schema.sql
-- config.js
+    - ...
+- server.js
+- package.json
