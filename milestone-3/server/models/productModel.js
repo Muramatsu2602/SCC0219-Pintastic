@@ -1,63 +1,63 @@
-import mongoose from "mongoose"
+const mongoose = require('mongoose');
 
-export const productSchema = new mongoose.Schema({
+module.exports.productSchema = new mongoose.Schema({
   productId: {
     type: Number,
     required: true,
   },
 
-  productCreatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
+  // productCreatedAt: {
+  //   type: Date,
+  //   default: Date.now(),
+  // },
 
-  productUpdatedAt: {
-    type: Date,
-    default: Date.now(),
-  },
+  // productUpdatedAt: {
+  //   type: Date,
+  //   default: Date.now(),
+  // },
 
-  productDeletedAt: {
-    type: Date,
-    default: Date.now(),
-  },
+  // productDeletedAt: {
+  //   type: Date,
+  //   default: Date.now(),
+  // },
 
-  productStatus: {
-    type: String,
-    required: true,
-  },
+  // productStatus: {
+  //   type: String,
+  //   required: true,
+  // },
 
   title: {
     type: String,
     required: true,
   },
 
-  description: {
-    type: String,
-    required: true,
-  },
+  // description: {
+  //   type: String,
+  //   required: true,
+  // },
 
-  price: {
-    type: Number,
-    required: true,
-  },
+  // price: {
+  //   type: Number,
+  //   required: true,
+  // },
 
-  productDiscountPercentage: {
-    type: Number,
-    required: true,
-  },
+  // productDiscountPercentage: {
+  //   type: Number,
+  //   required: true,
+  // },
 
-  productImage: {
-    type: String,
-    required: true,
-  },
+  // productImage: {
+  //   type: String,
+  //   required: true,
+  // },
 
-  productCategory: {
-    type: String,
-    required: true,
-  },
+  // productCategory: {
+  //   type: String,
+  //   required: true,
+  // },
 
-  productStock: {
-    type: Number,
-    required: true,
-  },
+  // productStock: {
+  //   type: Number,
+  //   required: true,
+  // },
 });

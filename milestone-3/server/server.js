@@ -1,17 +1,16 @@
-
-import express from 'express'
-import * as productsController from "./controllers/productsController"
-import mongoose from "mongoose"
-import bodyParser from "body-parser"
+const express = require('express');
+const productsController = require("./controllers/productsController");
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
 
 // Import routes
-const productsRoutes = require('./server/routes/products');
+// const productsRoutes = require('./server/routes/products');
 
 // Create Express app
 const app = express();
 
 // Start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 mongoose.Promise = global.Promise
 mongoose.connect("mongodb://localhost/ExpressDB",{
@@ -22,11 +21,12 @@ mongoose.connect("mongodb://localhost/ExpressDB",{
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
-app.route("/student").get((req,res,next) => {
+app.route("/product").get((req,res,next) => {
   console.log(`Request from : ${req.originalUrl}`)
   console.log(`Request type : ${req.method}`)
   next();
-},productsController.getAllProducts).post(productsController.addProduct)
+},productsController.getAllProducts)
+.post(productsController.addProduct)
 
 app.route("/product/:productId")
 .get(productsController.getProductById)

@@ -1,9 +1,9 @@
-import mongoose, { mongo } from "mongoose";
-import { productSchema } from "../models/productModel";
+const mongoose = require('mongoose');
+const { productSchema } = require('../models/productModel');
 
 const Product = mongoose.model("Product", productSchema);
 
-export const addProduct = (req, res) => {
+module.exports.addProduct = (req, res) => {
   let newProduct = new Product(req.body);
   newProduct.save((err, response) => {
     if (err) {
@@ -13,7 +13,7 @@ export const addProduct = (req, res) => {
   });
 };
 
-export const getAllProducts = (res) => {
+module.exports.getAllProducts = (res) => {
   Product.find({}, (err, response) => {
     if (err) {
       res.json({ message: "Error getting list of all products" });
@@ -22,7 +22,7 @@ export const getAllProducts = (res) => {
   });
 };
 
-export const getProductById = (req, res) => {
+module.exports.getProductById = (req, res) => {
   Product.find({ _id: req.params.productId }, (err, answer) => {
     if (err) {
       res.json({ message: "Error getting product by id" });
@@ -32,7 +32,7 @@ export const getProductById = (req, res) => {
   });
 };
 
-export const updateProductById = (req, res) => {
+module.exports.updateProductById = (req, res) => {
   Product.findOneAndUpdate(
     { _id: req.params.productId },
     req.body,
@@ -47,7 +47,7 @@ export const updateProductById = (req, res) => {
   );
 };
 
-export const deleteProductById = (req, res) => {
+module.exports.deleteProductById = (req, res) => {
   Product.remove({ _id: req.params.productId }, (err, contact) => {
     if (err) {
       res.json({ message: "Error deleting product by id" });
