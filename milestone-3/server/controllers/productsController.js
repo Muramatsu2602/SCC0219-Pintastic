@@ -1,60 +1,59 @@
-const Product = require('../models/productModel');
+const mongoose = require('mongoose');
+const { productSchema } = require('../models/productModel');
 
-// Get all products
-exports.getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
-};
+const Product = mongoose.model("Product", productSchema);
 
-// Get a product by ID
-exports.getProductById = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+module.exports.addProduct = (req, res) => {
+  let newProduct = new Product(req.body);
+  newProduct.save((err, response) => {
+    if (err) {
+      res.json({ message: "Error adding product" });
     }
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+    res.send(response);
+  });
 };
 
-// Create a new product
-exports.createProduct = async (req, res) => {
-  try {
-    const product = await Product.create(req.body);
-    res.status(201).json(product);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
-};
-
-// Update a product
-exports.updateProduct = async (req, res) => {
-  try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+module.exports.getAllProducts = (res) => {
+  Product.find({}, (err, response) => {
+    if (err) {
+      res.json({ message: "Error getting list of all products" });
     }
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+    res.send(response);
+  });
 };
 
-// Delete a product
-exports.deleteProduct = async (req, res) => {
-  try {
-    const product = await Product.findByIdAndDelete(req.params.id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+module.exports.getProductById = (req, res) => {
+  Product.find({ _id: req.params.productId }, (err, answer) => {
+    if (err) {
+      res.json({ message: "Error getting product by id" });
+    } else {
+      res.send(answer);
     }
-    res.json({ message: 'Product deleted' });
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+  });
+};
+
+module.exports.updateProductById = (req, res) => {
+  Product.findOneAndUpdate(
+    { _id: req.params.productId },
+    req.body,
+    { new: true, useFindAndModify: false },
+    (err, contact) => {
+      if (err) {
+        res.json({ message: "Error updating product by id" });
+      } else {
+        res.send(contact);
+      }
+    }
+  );
+};
+
+module.exports.deleteProductById = (req, res) => {
+  Product.remove({ _id: req.params.productId }, (err, contact) => {
+    if (err) {
+      res.json({ message: "Error deleting product by id" });
+    } else {
+      res.send(contact);
+      res.json({ message: "Successfully deleted product from records" });
+    }
+  });
 };
