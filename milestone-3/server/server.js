@@ -5,6 +5,7 @@ const cors = require('cors');
 // Import routes
 const productsRoutes = require('./server/routes/products');
 
+
 // Create Express app
 const app = express();
 
