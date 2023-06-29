@@ -58,7 +58,7 @@ const PinOfTheDay = () => {
       pinOfTheDay.productPrice,
       totalDiscountPercentage,
   );
-
+  pinOfTheDay;
   const handleAddToCart = (productId) => {
     const item = wishlistItems.find((item) => item.productId === productId);
 

@@ -52,6 +52,12 @@ aside {
 	margin-bottom: 0.5rem;
 }
 
+.filters-title {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
 .rating-filter label {
 	display: block;
 	margin-bottom: 5px;

@@ -133,6 +133,11 @@ export default function Catalog({type}) {
       <main id='catalog-main'>
         <aside>
           <div className='filter-container'>
+            <div className='filters-title'>
+              <h3>Filters</h3>
+            </div>
+          </div>
+          <div className='filter-container'>
             <h3 className='filter-title'>Ratings</h3>
             <div className='rating-filter'>
               {[1, 2, 3, 4, 5].map((rating) => (

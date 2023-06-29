@@ -13,6 +13,8 @@ import {CartContext} from '../contexts/Cart';
 import {WishlistContext} from '../contexts/Wishlist';
 import Swal from 'sweetalert2';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
+import {useAuth} from '../contexts/Auth';
+
 
 const Card = ({
   productId,
@@ -29,6 +31,8 @@ const Card = ({
   const {wishlistItems, addToWishlist, removeFromWishlist} = useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
+  const {signed} = useAuth();
+
 
   useEffect(() => {
     const isProductWishlisted = wishlistItems.some((item) => item.productId === productId);
@@ -111,7 +115,7 @@ const Card = ({
         <div id='card-upper-section'>
           <h4 id='item-title'>
             <div className='item-category-and-icon'>
-              {productStock > 0 && (
+              {signed && productStock > 0 && (
 
                 <div
                   className='item-card-wishlist-icon'
