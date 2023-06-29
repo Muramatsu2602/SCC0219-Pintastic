@@ -1,58 +1,40 @@
+const dotenv = require('dotenv');
 const express = require('express');
-const productsController = require("./controllers/productsController");
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser');
 
-// Import routes
-// const productsRoutes = require('./server/routes/products');
+dotenv.config();
 
+const routes = require('./routes/Routes');
+const PintasticException = require('./models/exceptions/PinstaticException');
+
+const PORT = process.env.PORT || 8080;
 
 // Create Express app
 const app = express();
 
-// Start the server
-const port = process.env.PORT || 8080;
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost/ExpressDB",{
+app.use(routes);
+
+app.use((error, request, response, next) => {
+  if (error instanceof PintasticException) {
+    return response.status(error.getHttpStatusCode()).json({
+      'error': error.getBusinessError(),
+    });
+  }
+
+  console.error(error);
+  return response.status(500).end();
+});
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser : true,
   useUnifiedTopology : true,
 })
 
-app.use(bodyParser.urlencoded({extended : true}))
-app.use(bodyParser.json())
-
-app.route("/product").get((req,res,next) => {
-  console.log(`Request from : ${req.originalUrl}`)
-  console.log(`Request type : ${req.method}`)
-  next();
-},productsController.getAllProducts)
-.post(productsController.addProduct)
-
-app.route("/product/:productId")
-.get(productsController.getProductById)
-.put(productsController.updateProductById)
-.delete(productsController.deleteProductById)
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-
-// // Connect to MongoDB
-// const dbURI = 'mongodb://localhost:27017/mydatabase'; // Replace with your MongoDB connection string
-// mongoose
-//   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => {
-//     console.log('Connected to MongoDB');
-//   })
-//   .catch((err) => {
-//     console.error('Failed to connect to MongoDB', err);
-//     process.exit(1);
-//   });
-
-// Routes
-// app.use('/api/products', productsRoutes);
-
