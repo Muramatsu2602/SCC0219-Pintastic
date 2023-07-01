@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose')
 
-dotenv.config();
+require('dotenv').config()
 
 const routes = require('./routes/Routes');
 const PintasticException = require('./models/exceptions/PinstaticException');
