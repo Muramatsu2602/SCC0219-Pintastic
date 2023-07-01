@@ -3,7 +3,7 @@ const router = express.Router();
 
 const ProductController = require('../controllers/ProductController');
 
-router.get('/product', async function(request, response, next) {
+router.get('/', async function(request, response, next) {
   try {
     const products = await ProductController.getAllProducts();
 
@@ -13,7 +13,7 @@ router.get('/product', async function(request, response, next) {
   }
 });
 
-router.get('/product/:id', async function(request, response, next) {
+router.get('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
 
@@ -25,7 +25,7 @@ router.get('/product/:id', async function(request, response, next) {
   }
 });
 
-router.post('/product', async function(request, response, next) {
+router.post('/', async function(request, response, next) {
   try {
     const { id, title } = request.body;
 
@@ -37,7 +37,7 @@ router.post('/product', async function(request, response, next) {
   }
 });
 
-router.put('/product/:id', async function(request, response, next) {
+router.put('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
     const { title } = request.body;
@@ -50,7 +50,7 @@ router.put('/product/:id', async function(request, response, next) {
   }
 });
 
-router.delete('/product/:id', async function(request, response, next) {
+router.delete('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
 
