@@ -3,7 +3,7 @@ const router = express.Router();
 
 const UserController = require('../controllers/UserController');
 
-router.get('/user', async function(request, response, next) {
+router.get('/', async function(request, response, next) {
   try {
     const users = await UserController.getAllUsers();
 
@@ -13,7 +13,7 @@ router.get('/user', async function(request, response, next) {
   }
 });
 
-router.get('/user/:id', async function(request, response, next) {
+router.get('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
 
@@ -25,7 +25,7 @@ router.get('/user/:id', async function(request, response, next) {
   }
 });
 
-router.post('/user', async function(request, response, next) {
+router.post('/', async function(request, response, next) {
   try {
     const { id, email } = request.body;
 
@@ -37,7 +37,7 @@ router.post('/user', async function(request, response, next) {
   }
 });
 
-router.put('/user/:id', async function(request, response, next) {
+router.put('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
     const { email } = request.body;
