@@ -27,9 +27,9 @@ router.get('/:id', async function(request, response, next) {
 
 router.post('/', async function(request, response, next) {
   try {
-    const { id, email } = request.body;
+    const { id, email, name } = request.body;
 
-    const user = await UserController.create(id, email);
+    const user = await UserController.create(id, email, name);
 
     return response.status(200).json(user);
   } catch (error) {
@@ -40,9 +40,9 @@ router.post('/', async function(request, response, next) {
 router.put('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
-    const { email } = request.body;
+    const { email, name } = request.body;
 
-    const user = await UserController.updateById(id, email);
+    const user = await UserController.updateById(id, email, name);
 
     return response.status(200).json(user);
   } catch (error) {

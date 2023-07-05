@@ -13,6 +13,18 @@ router.get('/', async function(request, response, next) {
   }
 });
 
+router.post('/login', async function(request, response, next) {
+  try {
+    const {email, password} = request.body;
+
+    const admin = await AdminController.login(email, password);
+
+    return response.status(200).json(admin);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post('/', async function(request, response, next) {
   try {
     const {name, email} = request.body;

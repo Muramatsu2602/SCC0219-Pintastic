@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const adminSchema = new mongoose.Schema({
+const TABLE_NAME = 'User';
+
+const schema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -32,4 +34,4 @@ const adminSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Admin', adminSchema);
+module.exports = mongoose.model(TABLE_NAME, schema);
