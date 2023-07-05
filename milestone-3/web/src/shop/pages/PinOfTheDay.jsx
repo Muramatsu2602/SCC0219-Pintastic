@@ -24,26 +24,32 @@ const PinOfTheDay = () => {
       return;
     }
 
+    // choosing a ramdom product from wishlist to be the pin of the day
     const randomIndex = Math.floor(Math.random() * wishlistItems.length);
     const randomProduct = wishlistItems[randomIndex];
+
+    // set new price given it is the pin of the day
+    randomProduct.productDiscountPercentage+=5;
+
     setPinOfTheDay(randomProduct);
   }, [wishlistItems]);
 
+  // what will be shown on screen if number of items on wishlist < 5
   if (!pinOfTheDay) {
     return (
       <>
         <Header quantity={7} />
         <Menu />
-        <main id="pinoftheday-main">
-          <div className="pinoftheday-container">
-            <h2 className="pinoftheday-title">Pin of The Day 😎</h2>
+        <main id='pinoftheday-main'>
+          <div className='pinoftheday-container'>
+            <h2 className='pinoftheday-title'>Pin of The Day 😎</h2>
             {wishlistItems.length < 5 ? (
-              <p className="pinoftheday-message">
+              <p className='pinoftheday-message'>
                 Add at least 5 items to your wishlist to unlock the Pin of The
                 Day functionality!
               </p>
             ) : (
-              <p className="pinoftheday-message">Loading...</p>
+              <p className='pinoftheday-message'>Loading...</p>
             )}
           </div>
         </main>
@@ -59,14 +65,21 @@ const PinOfTheDay = () => {
       totalDiscountPercentage,
   );
 
-  const handleAddToCart = (productId) => {
-    const item = wishlistItems.find((item) => item.productId === productId);
+  const handleAddToCart = () => {
+    const isProductInCart = cartItems.some((item) => item.productId === pinOfTheDay.productId);
 
-    if (!item) {
-      return;
-    }
+    const product = {
+      productId: pinOfTheDay.productId,
+      productPrice: pinOfTheDay.productPrice,
+      productTitle: pinOfTheDay.productTitle,
+      productDescription: pinOfTheDay.productDescription,
+      productDiscountPercentage: pinOfTheDay.productDiscountPercentage,
+      productImage: pinOfTheDay.productImage,
+      productCategory: pinOfTheDay.productCategory,
+      quantity: 1,
+      productStock: pinOfTheDay.productStock,
+    };
 
-    const isProductInCart = cartItems.some((item) => item.productId === productId);
 
     if (isProductInCart) {
       Swal.fire({
@@ -76,7 +89,7 @@ const PinOfTheDay = () => {
         confirmButtonText: 'OK',
       });
     } else {
-      addToCart(item);
+      addToCart(product);
       showAddToCartConfirmation();
     }
   };
@@ -99,8 +112,8 @@ const PinOfTheDay = () => {
     <>
       <Header />
       <Menu />
-      <main id="pinoftheday-main">
-        <div className="pinoftheday-container">
+      <main id='pinoftheday-main'>
+        <div className='pinoftheday-container'>
           <Confetti
             width={window.innerWidth}
             height={window.innerHeight}
@@ -108,36 +121,36 @@ const PinOfTheDay = () => {
             run={2}
           />
 
-          <h2 className="pinoftheday-title">Pin of The Day 😎</h2>
+          <h2 className='pinoftheday-title'>Pin of The Day 😎</h2>
           <h3>An additional 5% discount to a pin on your wishlist</h3>
-          <div className="pinoftheday-details">
-            <div className="pinoftheday-image">
-              <img src={pinOfTheDay.productImage} alt="Pin of The Day" />
+          <div className='pinoftheday-details'>
+            <div className='pinoftheday-image'>
+              <img src={pinOfTheDay.productImage} alt='Pin of The Day' />
             </div>
-            <div className="pinoftheday-info">
-              <h3 className="pinoftheday-product-title">
+            <div className='pinoftheday-info'>
+              <h3 className='pinoftheday-product-title'>
                 {pinOfTheDay.productTitle}
               </h3>
-              <div className="pinoftheday-rating">
+              <div className='pinoftheday-rating'>
                 <StarRating rating={pinOfTheDay.productRating} />
               </div>
-              <div className="pinoftheday-description">
+              <div className='pinoftheday-description'>
                 {pinOfTheDay.productDescription}
               </div>
-              <div className="pinoftheday-price">
-                <span className="pinoftheday-discount">
+              <div className='pinoftheday-price'>
+                <span className='pinoftheday-discount'>
                   Special Discount of {totalDiscountPercentage}% !
                 </span>
-                <span className="pinoftheday-original-price">
-                  ${pinOfTheDay.productPrice}
+                <span className='pinoftheday-original-price'>
+                  ${pinOfTheDay.productPrice.toFixed(2)}
                 </span>
-                <span className="pinoftheday-sale-price">
+                <span className='pinoftheday-sale-price'>
                   ${totalDiscountPrice}
                 </span>
-                <div className="pinoftheday-addcart-button">
+                <div className='pinoftheday-addcart-button'>
                   <Button
-                    buttonText="Add to Cart"
-                    onClick={() => handleAddToCart(pinOfTheDay.productId)}
+                    buttonText='Add to Cart'
+                    onClick={() => handleAddToCart()}
                   />
                 </div>
               </div>

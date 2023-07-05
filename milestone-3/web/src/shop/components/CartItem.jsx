@@ -9,9 +9,7 @@ import {CartContext} from '../contexts/Cart';
 const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const {cartItems} = useContext(CartContext);
-
   const productStock = cartItems.find((cartItem) => cartItem.productId === item.productId)?.productStock;
-  // const productStock = 10;
 
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);
@@ -53,24 +51,30 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
         <h3>{item.productTitle}</h3>
         <p>{item.productDescription}</p>
         <div className='cart-actions'>
-          <div>
-            <label htmlFor='quantity'>Quantity:</label>
-            <input
-              type='number'
-              name='quantity'
-              id='quantity'
-              min='1'
-              max={productStock+1}
-              value={quantity}
-              onChange={handleChange}
-            />
-            {quantity > productStock && <span className='stock-info'>Out of Stock</span>}
-
-            <span className='stock-info'>Available Stock: {productStock}</span>
+          <div className="quantity-container">
+            <label htmlFor="quantity">Quantity:</label>
+            <div className="quantity-input">
+              <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                min="1"
+                max={productStock + 1}
+                value={quantity}
+                onChange={handleChange}
+                onKeyDown={(event) => {
+                  if (event.key === '-' || event.key === 'e') {
+                    event.preventDefault();
+                  }
+                }}
+              />
+              {quantity > productStock && <span className="stock-info">Out of Stock</span>}
+            </div>
+            <span className="stock-info">Available Stock: {productStock}</span>
           </div>
           <div className='cart-remove'>
             <div className='cart-price'>
-              <h3>${(item.productPrice * quantity).toFixed(2)}</h3>
+              <h3>${(item.productPrice * quantity)}</h3>
             </div>
             <button type='button' onClick={confirmRemoveItem}>
               <FontAwesomeIcon icon={faTrashAlt} />
