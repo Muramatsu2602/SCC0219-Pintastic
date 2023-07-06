@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schema({
+const TABLE_NAME = 'Product';
+
+const schema = new mongoose.Schema({
   productCreatedAt: {
     type: Date,
     default: Date.now(),
@@ -57,4 +59,4 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model(TABLE_NAME, schema);

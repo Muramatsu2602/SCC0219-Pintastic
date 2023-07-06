@@ -2,36 +2,36 @@ const User = require('../models/schemas/User');
 
 class UserDao {
   static async getAll() {
-    const users = await User.find();
-    return users.map(user => user.toObject());
+    return await User.find();
   }
 
   static async getById(id) {
-    const user = await User.findOne({ _id: id });
-    return user.toObject();
+    return await User.findOne({ _id: id });
   }
 
-  static async create(id, email) {
+  static async getByEmail(email) {
+    return await User.findOne({ email });
+  }
+
+  static async create(id, email, name) {
     const newUser = new User({
       id, 
-      email
+      email,
+      name
     });
 
-    const user = await newUser.save();
-
-    return user.toObject();
+    return await newUser.save();
   }
 
-  static async updateById(id, email) {
-    const updatedUser = await User.findOneAndUpdate(
+  static async updateById(id, email, name) {
+    return await User.findOneAndUpdate(
       { _id: id },
       {
-        email
+        email,
+        name
       },
       { new: true },
     );
-
-    return updatedUser.toObject();
   }
 
   static async delete(id) {

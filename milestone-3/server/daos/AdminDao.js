@@ -3,8 +3,11 @@ const PintasticException = require('../models/exceptions/PinstaticException');
 
 class AdminDao {
   static async getAll() {
-    const admins = await Admin.find();
-    return admins.map(admin => admin.toObject());
+    return await Admin.find();
+  }
+
+  static async getByEmail(email) {
+    return await Admin.findOne({ email });
   }
 
   static async create(name, email) {
@@ -16,7 +19,7 @@ class AdminDao {
 
       const admin = await newAdmin.save();
 
-      return admin.toObject();
+      return admin;
     } catch (error) {
       if(error.name == 'MongoServerError' && error.code == '11000') {
         throw new PintasticException('User create failed due to duplicated email', 409, 'This email is already in use');
@@ -35,7 +38,7 @@ class AdminDao {
       { new: true }
     );
 
-    return updatedAdmin.toObject();
+    return updatedAdmin;
   }
 }
 
