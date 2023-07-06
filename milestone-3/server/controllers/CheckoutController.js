@@ -1,7 +1,7 @@
 const ProductDao = require('../daos/ProductDao');
 const PintasticException = require('../models/exceptions/PintasticException');
 
-class AdminController {
+class CheckoutController {
   static async checkout(products) {
     for(const checkoutProduct of products) {
       const product = await ProductDao.getById(checkoutProduct.id);
@@ -17,4 +17,4 @@ class AdminController {
   }
 }
 
-module.exports = AdminController;
+module.exports = CheckoutController;
