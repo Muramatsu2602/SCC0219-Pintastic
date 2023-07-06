@@ -34,7 +34,7 @@ class AdminController {
     return await AdminDao.create(name, email);
   }
 
-  static async toggleActive(clientId, adminId) {
+  static async toggleActive(adminId) {
     const updatedAdmin = await AdminDao.toggleActive(adminId);
 
     return this.#removeSensitiveData(updatedAdmin);

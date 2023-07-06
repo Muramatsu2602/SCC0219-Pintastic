@@ -52,9 +52,8 @@ router.put('/toggleActive/:id',
   async function(request, response, next) {
     try {
       const {id} = request.params;
-      const {clientId} = request.headers;
 
-      const updatedAdmin = await AdminController.toggleActive(clientId, id);
+      const updatedAdmin = await AdminController.toggleActive(id);
 
       return response.status(200).json(updatedAdmin);
     } catch (error) {

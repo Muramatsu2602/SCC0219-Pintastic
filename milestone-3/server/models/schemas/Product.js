@@ -3,22 +3,22 @@ const mongoose = require('mongoose');
 const TABLE_NAME = 'Product';
 
 const schema = new mongoose.Schema({
-  productCreatedAt: {
+  createdAt: {
     type: Date,
     default: Date.now(),
   },
 
-  productUpdatedAt: {
+  updatedAt: {
     type: Date,
     default: Date.now(),
   },
 
-  productDeletedAt: {
+  deletedAt: {
     type: Date,
     default: null,
   },
 
-  productStatus: {
+  status: {
     type: Boolean,
     default: true,
   },
@@ -38,24 +38,27 @@ const schema = new mongoose.Schema({
     required: false,
   },
 
-  productDiscountPercentage: {
+  discountPercentage: {
     type: Number,
+    min: 0.00,
     default: 0.00,
   },
 
-  productImage: {
+  image: {
     type: String,
     required: false,
   },
 
-  productCategory: {
+  category: {
     type: String,
-    required: false,
+    required: true,
   },
 
-  productStock: {
+  stock: {
     type: Number,
-    required: false,
+    min: 0,
+    default: 0,
+    required: true,
   },
 });
 
