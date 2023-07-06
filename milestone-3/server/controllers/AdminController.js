@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const AdminDao = require('../daos/AdminDao');
-const PintasticException = require('../models/exceptions/PinstaticException');
+const PintasticException = require('../models/exceptions/PintasticException');
 
 class AdminController {
   static async getAll() {
@@ -35,10 +35,6 @@ class AdminController {
   }
 
   static async toggleActive(clientId, adminId) {
-    if(clientId == adminId) {
-      throw new PintasticException('An admin tried to toggle its own status', 401, 'You cannot toggle your own status');
-    }
-
     const updatedAdmin = await AdminDao.toggleActive(adminId);
 
     return this.#removeSensitiveData(updatedAdmin);

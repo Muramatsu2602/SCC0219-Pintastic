@@ -28,7 +28,7 @@ router.post('/login',
     } catch (error) {
       next(error);
     }
-}
+  }
 );
 
 router.post('/',
@@ -48,6 +48,7 @@ router.post('/',
 
 router.put('/toggleActive/:id', 
   AuthMiddleware.isAdmin,
+  AuthMiddleware.isParamIdDifferentThanClientId,
   async function(request, response, next) {
     try {
       const {id} = request.params;
