@@ -1,10 +1,15 @@
 import React, {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
+import {useAuth} from '../contexts/Auth';
 
 export const WishlistContext = createContext();
 
 export const WishlistProvider = ({children}) => {
   const [wishlistItems, setWishlistItems] = useState([]);
+  const {user} = useAuth();
+
+  console.log(user);
+  // const userId = user._id;
 
   useEffect(() => {
     fetchWishlistItems();

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const AuthMiddleware = require('../middleware/AuthMiddleware');
-const WishlistController = require('../controllers/wishlist.controller');
+const WishlistController = require('../controllers/WishlistController');
 
 router.get('/:userId', async function (request, response, next) {
   try {
@@ -15,19 +15,20 @@ router.get('/:userId', async function (request, response, next) {
   }
 });
 
-router.post('/', AuthMiddleware.isAuthenticated, async function (request, response, next) {
-  try {
-    const { userId, productId } = request.body;
+router.post('/', AuthMiddleware.isCustomer, async (request, response, next) => {
+    try {
+      const { userId, productId } = request.body;
+  
+      await WishlistController.addToWishlist(userId, productId);
+  
+      return response.status(200).end();
+    } catch (error) {
+      next(error);
+    }
+  });
 
-    await WishlistController.addToWishlist(userId, productId);
 
-    return response.status(200).end();
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete('/:userId/:productId', AuthMiddleware.isAuthenticated, async function (request, response, next) {
+router.delete('/:userId/:productId', AuthMiddleware.isCustomer, async function (request, response, next) {
   try {
     const { userId, productId } = request.params;
 
