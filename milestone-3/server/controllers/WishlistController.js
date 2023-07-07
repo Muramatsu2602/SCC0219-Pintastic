@@ -1,4 +1,4 @@
-const WishlistModel = require('../models/wishlist.model');
+const WishlistModel = require('../models/schemas/Wishlist');
 
 class WishlistController {
   static async getWishlistByUserId(userId) {
