@@ -11,16 +11,12 @@ class ProductDao {
     return product.toObject();
   }
 
-  static async create(id, title) {
-    const newProduct = new Product({
-      id, 
-      title
-    });
-
-    const product = await newProduct.save();
-
-    return product.toObject();
+  static async create(productsData) {
+    const newProduct = new Product(productsData);
+    const product = await newProduct.save();  
+    return product;
   }
+  
 
   static async updateById(id, title) {
     const updatedProduct = await Product.findOneAndUpdate(

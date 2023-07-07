@@ -26,20 +26,20 @@ router.get('/:id', async function(request, response, next) {
   }
 });
 
-router.post('/', 
-  AuthMiddleware.isAdmin,
-  async function(request, response, next) {
-    try {
-      const { id, title } = request.body;
+router.post('/', AuthMiddleware.isAdmin, async function(request, response, next) {
+  try {
+    const productsData = request.body; // Array de objetos contendo os dados dos produtos
+    const products = await Promise.all(productsData.map(async (productData) => {
+      const product = await ProductController.create(productData);
+      return product;
+    }));
 
-      const product = await ProductController.create(id, title);
-
-      return response.status(200).json(product);
-    } catch (error) {
-      next(error);
-    }
+    return response.status(200).json(products);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
 
 router.put('/:id', 
   AuthMiddleware.isAdmin,  
