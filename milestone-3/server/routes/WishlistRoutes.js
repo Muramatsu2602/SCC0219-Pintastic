@@ -1,45 +1,48 @@
-const express = require('express');
-const router = express.Router();
-const AuthMiddleware = require('../middleware/AuthMiddleware');
-const WishlistController = require('../controllers/WishlistController');
+const express = require('express')
+const router = express.Router()
+const AuthMiddleware = require('../middleware/AuthMiddleware')
+const WishlistController = require('../controllers/WishlistController')
 
 router.get('/:userId', async function (request, response, next) {
-  try {
-    const { userId } = request.params;
+	try {
+		const { userId } = request.params
 
-    const wishlistItems = await WishlistController.getWishlistByUserId(userId);
+		const wishlistItems = await WishlistController.getWishlistByUserId(
+			userId
+		)
 
-    return response.status(200).json(wishlistItems);
-  } catch (error) {
-    next(error);
-  }
-});
+		return response.status(200).json(wishlistItems)
+	} catch (error) {
+		next(error)
+	}
+})
 
 router.post('/', AuthMiddleware.isCustomer, async (request, response, next) => {
-    try {
-      const { userId, productId } = request.body;
-  
-      await WishlistController.addToWishlist(userId, productId);
-  
-      return response.status(200).end();
-    } catch (error) {
-      next(error);
-    }
-  });
+	try {
+		const { userId, productId } = request.body
 
+		await WishlistController.addToWishlist(userId, productId)
 
-router.delete('/:userId/:productId', AuthMiddleware.isCustomer, async function (request, response, next) {
-  try {
-    const { userId, productId } = request.params;
+		return response.status(200).end()
+	} catch (error) {
+		next(error)
+	}
+})
 
-    await WishlistController.removeFromWishlist(userId, productId);
+router.delete(
+	'/:userId/:productId',
+	AuthMiddleware.isCustomer,
+	async function (request, response, next) {
+		try {
+			const { userId, productId } = request.params
 
-    return response.status(200).end();
-  } catch (error) {
-    next(error);
-  }
-});
+			await WishlistController.removeFromWishlist(userId, productId)
 
-module.exports = router;
+			return response.status(200).end()
+		} catch (error) {
+			next(error)
+		}
+	}
+)
 
-
+module.exports = router
