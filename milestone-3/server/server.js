@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 const routes = require('./routes/Routes');
-const PintasticException = require('./models/exceptions/PinstaticException');
+const PintasticException = require('./models/exceptions/PintasticException');
 
 const PORT = process.env.PORT || 8080;
 

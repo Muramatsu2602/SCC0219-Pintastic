@@ -1,5 +1,5 @@
 const Admin = require('../models/schemas/Admin');
-const PintasticException = require('../models/exceptions/PinstaticException');
+const PintasticException = require('../models/exceptions/PintasticException');
 
 class AdminDao {
   static async getAll() {

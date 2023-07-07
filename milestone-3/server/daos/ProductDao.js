@@ -30,6 +30,15 @@ class ProductDao {
     return updatedProduct.toObject();
   }
 
+  static async addToStock(id, amount) {
+    const updatedProduct = await Product.findOneAndUpdate(
+      { _id: id },
+      { $inc: { stock: amount } },
+    );
+
+    return updatedProduct.toObject();
+  }
+
   static async delete(id) {
     return await Product.findOneAndDelete({ _id: id });
   }

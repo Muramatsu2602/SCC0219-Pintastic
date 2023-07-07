@@ -6,19 +6,35 @@ import Header from '../components/Header';
 import Nav from '../components/Nav';
 import Card from '../components/Card';
 import StarRating from '../components/StarRating';
-
-import cardData from '../../mock/products.json';
+import axios from 'axios'; // Import axios for making API requests
 
 export default function Catalog({type}) {
   const [ratingFilter, setRatingFilter] = useState([1, 2, 3, 4, 5]);
   const [priceFilter, setPriceFilter] = useState([0, 100]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(9);
-  const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
   const [productCategoryFilter, setProductCategoryFilter] = useState(
       type || 'all',
   );
+
+
+  // Add a new state for storing the fetched products
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('products/'); // Adjust the API endpoint if needed
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     setProductCategoryFilter(type || 'all');
@@ -26,7 +42,7 @@ export default function Catalog({type}) {
 
   useEffect(() => {
     // Apply filters and update filtered data
-    const filteredItems = cardData.filter((item) => {
+    const filteredItems = products.filter((item) => {
       // Apply rating filter
       if (
         ratingFilter.length > 0 &&
@@ -67,7 +83,7 @@ export default function Catalog({type}) {
 
     setFilteredData(filteredItems);
     setCurrentPage(1); // Reset to first page when changing filters
-  }, [ratingFilter, priceFilter, productCategoryFilter, searchQuery]);
+  }, [ratingFilter, priceFilter, productCategoryFilter, searchQuery, products]);
 
   // Get current cards
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -133,7 +149,9 @@ export default function Catalog({type}) {
       <main id='catalog-main'>
         <aside>
           <div className='filter-container'>
-            <div className='filters-title'><span> Filters</span></div>
+            <div className='filters-title'>
+              <span> Filters</span>
+            </div>
           </div>
           <div className='filter-container'>
             <h3 className='filter-title'>Ratings</h3>
@@ -237,16 +255,16 @@ export default function Catalog({type}) {
             <div className='card-grid'>
               {currentCards.map((item, index) => (
                 <Card
-                  key={index}
-                  productId={item.productId}
-                  productTitle={item.productTitle}
-                  productDescription={item.productDescription}
-                  productPrice={item.productPrice}
-                  productDiscountPercentage={item.productDiscountPercentage}
-                  productImage={item.productImage}
-                  productRating={item.productRating}
-                  productCategory={item.productCategory}
-                  productStock={item.productStock}
+                  key={item._id} // Use a unique identifier for the key, such as _id
+                  productId={item._id} // Use the appropriate property for the product ID
+                  productTitle={item.title} // Use the appropriate property for the product title
+                  productDescription={item.description} // Use the appropriate property for the product description
+                  productPrice={item.price} // Use the appropriate property for the product price
+                  productDiscountPercentage={item.discountPercentage} // Use the appropriate property for the product discount percentage
+                  productImage={item.image} // Use the appropriate property for the product image
+                  productRating={item.rating} // Use the appropriate property for the product rating
+                  productCategory={item.category} // Use the appropriate property for the product category
+                  productStock={item.stock} // Use the appropriate property for the product stock
                 />
               ))}
             </div>

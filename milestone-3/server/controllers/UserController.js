@@ -1,10 +1,13 @@
+const jwt = require('jsonwebtoken');
+
+const PintasticException = require('../models/exceptions/PintasticException');
 const UserDao = require('../daos/UserDao');
 
 class UserController {
   static async getAllUsers() {
     const users = await UserDao.getAll();
 
-    return users.map(this.#removeSensitiveData);
+    return users;
   };
 
   static async getUserById(id) {
@@ -16,11 +19,19 @@ class UserController {
   static async login(email, password) {
     const user = await UserDao.getByEmail(email);
 
-    if(user == null || user.password != password || user.active != true) {
+    if(user == null || user.password != password) {
       throw new PintasticException('Failed attempt to login as customer', 401, 'Incorrect user or password');
     }
 
-    return this.#removeSensitiveData(user);
+    const accessToken = jwt.sign({ 
+      clientType: 'Customer',
+      clientId: user._id,
+    }, process.env.ACCESS_TOKEN_SECRET);
+
+    return {
+      ...this.#removeSensitiveData(user),
+      accessToken
+    };
   }
 
   static async create(id, email, name) {
