@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import Menu from '../components/Nav';
 import Input from '../components/Input';
 
-import PintasticException from '../../models/PinstaticException';
+import PintasticException from '../../models/PintasticException';
 import {useAuth} from '../contexts/Auth';
 
 import Swal from 'sweetalert2';

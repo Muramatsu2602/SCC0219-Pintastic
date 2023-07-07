@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import Swal from 'sweetalert2';
 import {faPencil} from '@fortawesome/free-solid-svg-icons';
 
-import PintasticException from '../../../models/PinstaticException';
+import PintasticException from '../../../models/PintasticException';
 import Datatable from '../../components/Datatable';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';

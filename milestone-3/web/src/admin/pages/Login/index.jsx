@@ -5,7 +5,7 @@ import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 import {useAuth} from '../../contexts/Auth';
-import PintasticException from '../../../models/PinstaticException';
+import PintasticException from '../../../models/PintasticException';
 import Input from '../../components/Input';
 import SubmitButton from '../../components/SubmitButton';
 

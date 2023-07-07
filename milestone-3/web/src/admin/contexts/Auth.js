@@ -5,7 +5,7 @@ import React, {
   createContext,
 } from 'react';
 
-import PintasticException from '../../models/PinstaticException';
+import PintasticException from '../../models/PintasticException';
 
 const AuthContext = createContext({});
 

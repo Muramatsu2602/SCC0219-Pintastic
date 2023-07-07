@@ -7,7 +7,7 @@ import Menu from '../components/Nav';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-import PintasticException from '../../models/PinstaticException';
+import PintasticException from '../../models/PintasticException';
 import {useAuth} from '../contexts/Auth';
 
 import './Profile.style.css';

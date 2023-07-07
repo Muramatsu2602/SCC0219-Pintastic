@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPencil, faPlus} from '@fortawesome/free-solid-svg-icons';
 
-import PintasticException from '../../../models/PinstaticException';
+import PintasticException from '../../../models/PintasticException';
 import Datatable from '../../components/Datatable';
 import Input from '../../components/Input';
 import SubmitButton from '../../components/SubmitButton';
