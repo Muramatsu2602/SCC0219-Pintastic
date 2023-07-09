@@ -52,6 +52,10 @@ export function AuthProvider({children}) {
 
       const parsedUser = JSON.parse(storagedUser);
 
+      api.defaults.headers.Authorization = (
+        `Bearer ${parsedUser.accessToken}`
+      );
+
       setUser(parsedUser);
     } catch (error) {
       console.log('Error while trying to load storage data');
