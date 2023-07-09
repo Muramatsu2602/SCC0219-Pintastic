@@ -74,6 +74,21 @@ router.put('/:id',
   }
 );
 
+router.put('/toggleActive/:id', 
+  AuthMiddleware.isAdmin,
+  async function(request, response, next) {
+    try {
+      const { id } = request.params;
+
+      const user = await UserController.toggleActive(id);
+
+      return response.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 router.delete('/:id', 
   AuthMiddleware.isParamIdEqualToClientId,
   async function(request, response, next) {

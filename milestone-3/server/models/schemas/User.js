@@ -13,6 +13,11 @@ const schema = new mongoose.Schema({
     default: Date.now(),
   },
 
+  active: {
+    type: Boolean,
+    default: true,
+  },
+
   email: {
     type: String,
     required: true,

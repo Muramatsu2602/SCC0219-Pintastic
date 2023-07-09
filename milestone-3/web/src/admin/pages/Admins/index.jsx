@@ -14,7 +14,6 @@ import Modal from '../../components/Modal';
 import './styles.css';
 
 export default function Admins() {
-  const [admins, setAdmins] = useState([]);
   const [data, setData] = useState([]);
   const [modal, setModal] = useState(null);
 
@@ -43,7 +42,7 @@ export default function Admins() {
           <h1>Administradores</h1>
           <button onClick={() => {
             const createAdminModal = (
-              <CreateAdminModal admins={admins} setAdmins={setAdmins} hideModal={() => setModal(null)} />
+              <CreateAdminModal hideModal={() => setModal(null)} />
             );
 
             setModal(createAdminModal);
