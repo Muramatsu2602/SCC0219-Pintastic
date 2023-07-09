@@ -75,6 +75,7 @@ const Checkout = () => {
           return {
             'id': item._id,
             'amount': item.quantity,
+            'price': (item.price - (item.price * item.discountPercentage / 100)).toFixed(2),
           };
         });
 
@@ -206,7 +207,7 @@ const Checkout = () => {
   const cartTotal = cartItems.reduce(
       (total, item) => {
         console.log(item.price, item.quantity); // Print the values of ProductPrice and quantity for each item
-        return total + item.price * item.quantity;
+        return total + ((item.price - (item.price * item.discountPercentage / 100)) * item.quantity);
       },
       0,
   );
@@ -538,7 +539,7 @@ const Checkout = () => {
           />
           <div className='checkout-summary-product-details'>
             <span>{item.title}</span>
-            <span>${item.price}</span>
+            <span>${(item.price - (item.price * item.discountPercentage / 100)).toFixed(2)}</span>
             <span>Qty: {item.quantity}</span>
           </div>
         </div>

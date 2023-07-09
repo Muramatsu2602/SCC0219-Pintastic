@@ -17,10 +17,7 @@ class CheckoutController {
         throw new PintasticException('Insufficient stock on checkout', 400, 'Insufficient stock, try again later');
       }
 
-      products.push({
-        ...checkoutProduct,
-        'price': (storedProduct.price - (storedProduct.price * storedProduct.discountPercentage / 100)).toFixed(2),
-      });
+      products.push(checkoutProduct);
     }
 
     for(const checkoutProduct of checkoutProducts) {
