@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import './LandingPage.style.css';
-import cardData from '../../mock/products.json';
+import api from '../../services/api';
 
 import React, {useState, useEffect} from 'react';
 import Button from '../components/Button.jsx';
@@ -12,10 +12,24 @@ import Testimonial from '../components/Testimonial.jsx';
 import {useNavigate} from 'react-router-dom';
 
 export default function LandingPage() {
+  const [cardData, setCardData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(4);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const response = await api.get('/products?limit=10');
+        setCardData(response.data);
+      } catch (error) {
+        console.error('Error fetching card data:', error);
+      }
+    };
+
+    fetchCardData();
+  }, []);
 
   useEffect(() => {
     // Update the number of cards per page based on the window width
@@ -77,9 +91,12 @@ export default function LandingPage() {
                 </li>
               </ul>
 
-              <Button buttonText={'More Products'} onClick={() => {
-                navigate('/catalog/');
-              }}/>
+              <Button
+                buttonText={'More Products'}
+                onClick={() => {
+                  navigate('/catalog/');
+                }}
+              />
             </div>
             <div id='highlighted-items'>
               <section id='landing-cards-pagination'>
@@ -89,21 +106,18 @@ export default function LandingPage() {
 
                 <div className='cards-container'>
                   <div id='cards-content' className='horizontal-scroll'>
-                    {currentCards.map((card, index) => (
+                    {currentCards.map((item, index) => (
                       <Card
-                        key={index}
-                        productId={card.productId}
-                        productTitle={card.productTitle}
-                        productDescription={card.productDescription}
-                        productPrice={card.productPrice}
-                        productDiscountPercentage={
-                          card.productDiscountPercentage
-                        }
-                        productImage={card.productImage}
-                        productRating={card.productRating}
-                        productIsOnWishlist={card.productIsOnWishlist}
-                        productCategory={card.productCategory}
-                        productStock={card.productStock}
+                        key={item._id} // Use a unique identifier for the key, such as _id
+                        productId={item._id} // Use the appropriate property for the product ID
+                        productTitle={item.title} // Use the appropriate property for the product title
+                        productDescription={item.description} // Use the appropriate property for the product description
+                        productPrice={item.price} // Use the appropriate property for the product price
+                        productDiscountPercentage={item.discountPercentage} // Use the appropriate property for the product discount percentage
+                        productImage={item.image} // Use the appropriate property for the product image
+                        productRating={item.rating} // Use the appropriate property for the product rating ! not available
+                        productCategory={item.category} // Use the appropriate property for the product category
+                        productStock={item.stock} // Use the appropriate property for the product stock
                       />
                     ))}
                   </div>

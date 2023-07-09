@@ -1,8 +1,8 @@
 const ProductDao = require("../daos/ProductDao");
 
 class ProductController {
-  static async getAllProducts() {
-    const products = await ProductDao.getAll();
+  static async getAllProducts(limit) {
+    const products = await ProductDao.getAll(limit);
     return products.map(this.#removeSensitiveData);
   }
 

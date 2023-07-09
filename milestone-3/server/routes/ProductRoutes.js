@@ -6,7 +6,8 @@ const ProductController = require('../controllers/ProductController');
 
 router.get('/', async function(request, response, next) {
   try {
-    const products = await ProductController.getAllProducts();
+    const limit = parseInt(request.query.limit); // Parse the limit from the query string
+    const products = await ProductController.getAllProducts(limit);
 
     return response.status(200).json(products);
   } catch (error) {
