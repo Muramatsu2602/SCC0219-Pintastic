@@ -40,8 +40,8 @@ const Header = ({displaySearchBar = false, onSearch, onProductCategoryFilterChan
             <div className='search'>
               <select name='filter' onChange={handleProductCategoryFilterChange}>
                 <option value='all'>All</option>
-                <option value='pin'>Pins</option>
-                <option value='sticker'>Stickers</option>
+                <option value='Pin'>Pins</option>
+                <option value='Sticker'>Stickers</option>
               </select>
               <input type='text' placeholder='Search...' onChange={handleSearch} />
               <button>

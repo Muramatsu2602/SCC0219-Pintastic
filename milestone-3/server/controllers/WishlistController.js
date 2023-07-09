@@ -1,17 +1,29 @@
-const WishlistModel = require('../models/schemas/Wishlist');
+const WishlistDao = require('../daos/wishlistDao');
+const PintasticException = require('../models/exceptions/PintasticException');
 
 class WishlistController {
   static async getWishlistByUserId(userId) {
-    return await WishlistModel.find({ userId }).lean();
+    try {
+      return await WishlistDao.getWishlistByUserId(userId);
+    } catch (error) {
+      throw new PintasticException('Failed to get wishlist items', 500, error.message);
+    }
   }
 
   static async addToWishlist(userId, productId) {
-    const wishlistItem = new WishlistModel({ userId, productId });
-    await wishlistItem.save();
+    try {
+      await WishlistDao.addToWishlist(userId, productId);
+    } catch (error) {
+      throw new PintasticException('Failed to add product to wishlist', 500, error.message);
+    }
   }
 
   static async removeFromWishlist(userId, productId) {
-    await WishlistModel.deleteOne({ userId, productId });
+    try {
+      await WishlistDao.removeFromWishlist(userId, productId);
+    } catch (error) {
+      throw new PintasticException('Failed to remove product from wishlist', 500, error.message);
+    }
   }
 }
 
