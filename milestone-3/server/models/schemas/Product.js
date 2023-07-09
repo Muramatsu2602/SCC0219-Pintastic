@@ -33,6 +33,12 @@ const schema = new mongoose.Schema({
     required: false,
   },
 
+  rating: {
+    type: Number,
+    required: true,
+    default: 3
+  },
+
   price: {
     type: Number,
     required: false,

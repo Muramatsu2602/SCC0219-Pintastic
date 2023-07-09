@@ -1,5 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import {useAuth} from '../contexts/Auth';
 
 export const WishlistContext = createContext();
@@ -17,7 +17,7 @@ export const WishlistProvider = ({children}) => {
 
   const fetchWishlistItems = async () => {
     try {
-      const response = await axios.get(`/wishlist/${userId}`);
+      const response = await api.get(`/wishlist/${userId}`);
       setWishlistItems(response.data);
     } catch (error) {
       console.error('Error fetching wishlist items:', error);

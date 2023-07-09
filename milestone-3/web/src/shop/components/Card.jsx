@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 import {useAuth} from '../contexts/Auth';
 
+import placeholderImage from '../../shop/components/assets/placeholder.jpg'; // Import the placeholder image
 
 const Card = ({
   productId,
@@ -28,14 +29,17 @@ const Card = ({
   productStock,
 }) => {
   const {cartItems, addToCart} = useContext(CartContext);
-  const {wishlistItems, addToWishlist, removeFromWishlist} = useContext(WishlistContext);
+  const {wishlistItems, addToWishlist, removeFromWishlist} = useContext(
+      WishlistContext,
+  );
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const navigate = useNavigate();
   const {signed} = useAuth();
 
-
   useEffect(() => {
-    const isProductWishlisted = wishlistItems.some((item) => item.productId === productId);
+    const isProductWishlisted = wishlistItems.some(
+        (item) => item.productId === productId,
+    );
     setIsOnWishlist(isProductWishlisted);
   }, [wishlistItems, productId]);
 
@@ -70,7 +74,9 @@ const Card = ({
       productStock,
     };
 
-    const isProductInCart = cartItems.some((item) => item.productId === productId);
+    const isProductInCart = cartItems.some(
+        (item) => item.productId === productId,
+    );
 
     if (isProductInCart) {
       Swal.fire({
@@ -99,6 +105,9 @@ const Card = ({
     });
   };
 
+  // Use the placeholder image if productImage is empty or undefined
+  const imageSource = productImage || placeholderImage;
+
   return (
     <div className='item-card-container'>
       <div className='item-card-top-section'>
@@ -108,7 +117,7 @@ const Card = ({
       </div>
       <Link to={`/product/${productId}`}>
         <div className='item-card-img'>
-          <img src={productImage} alt='card_image' />
+          <img src={imageSource} alt='card_image' />
         </div>
       </Link>
       <div className='item-card-details'>
@@ -116,7 +125,6 @@ const Card = ({
           <h4 id='item-title'>
             <div className='item-category-and-icon'>
               {signed && productStock > 0 && (
-
                 <div
                   className='item-card-wishlist-icon'
                   onClick={handleWishlistToggle}
@@ -145,8 +153,11 @@ const Card = ({
             </>
           ) : (
             <div className='out-of-stock-message'>
-              <FontAwesomeIcon icon={faExclamationTriangle} className='out-of-stock-icon' />
-            Out of Stock
+              <FontAwesomeIcon
+                icon={faExclamationTriangle}
+                className='out-of-stock-icon'
+              />
+              Out of Stock
             </div>
           )}
         </div>

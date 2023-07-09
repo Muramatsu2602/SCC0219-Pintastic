@@ -4,6 +4,11 @@
 	display: flex;
 }
 
+#loading-section {
+	margin-top: 20rem;
+	margin-bottom: 20rem;
+}
+
 aside {
 	width: 200px;
 	padding: 1rem;

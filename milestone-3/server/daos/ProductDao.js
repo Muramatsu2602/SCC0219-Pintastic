@@ -1,6 +1,7 @@
 const Product = require('../models/schemas/Product');
 
 class ProductDao {
+  
   static async getAll() {
     const products = await Product.find();
     return products.map(product => product.toObject());

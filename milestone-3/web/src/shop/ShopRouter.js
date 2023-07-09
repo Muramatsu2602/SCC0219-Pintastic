@@ -24,8 +24,8 @@ function ShopRouter(props) {
       <Route path='/product/:productId' element={<ProductDetails />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/catalog/' element={<Catalog type={'all'} />} />
-      <Route path='/catalog/pins' element={<Catalog type={'pin'} />} />
-      <Route path='/catalog/stickers' element={<Catalog type={'sticker'} />} />
+      <Route path='/catalog/pins' element={<Catalog type={'Pin'} />} />
+      <Route path='/catalog/stickers' element={<Catalog type={'Sticker'} />} />
       <Route path='/checkout' element={<Checkout />} />
 
       {
