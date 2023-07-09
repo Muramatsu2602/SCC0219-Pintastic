@@ -14,13 +14,9 @@ class UserDao {
     return await User.findOne({ email });
   }
 
-  static async create(id, email, name) {
+  static async create(data) {
     try {
-      const newUser = new User({
-        id, 
-        email,
-        name
-      });
+      const newUser = new User(data);
 
       return await newUser.save();
     } catch (error) {
