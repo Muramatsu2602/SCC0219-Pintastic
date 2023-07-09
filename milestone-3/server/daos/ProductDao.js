@@ -9,13 +9,11 @@ class ProductDao {
       query = query.limit(limit);
     }
   
-    const products = await query.exec();
-    return products.map(product => product.toObject());
+    return await query.exec();
   }
   
   static async getById(id) {
-    const product = await Product.findOne({ _id: id });
-    return product.toObject();
+    return await Product.findById(id);
   }
 
   static async create(productsData) {
@@ -23,7 +21,6 @@ class ProductDao {
     const product = await newProduct.save();  
     return product;
   }
-  
 
   static async updateById(id, title) {
     const updatedProduct = await Product.findOneAndUpdate(

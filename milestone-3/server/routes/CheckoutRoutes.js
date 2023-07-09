@@ -8,11 +8,12 @@ router.post('/',
   AuthMiddleware.isCustomer,
   async function(request, response, next) {
     try {
+      const { clientId } = request.headers;
       const { products } = request.body;
 
-      await CheckoutController.checkout(products);
+      const transaction = await CheckoutController.checkout(clientId, products);
 
-      return response.status(200).end();
+      return response.status(200).json(transaction);
     } catch (error) {
       next(error);
     }
