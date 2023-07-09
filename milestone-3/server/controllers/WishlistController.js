@@ -1,4 +1,4 @@
-const WishlistDao = require('../daos/wishlistDao');
+const WishlistDao = require('../daos/WishlistDao');
 const PintasticException = require('../models/exceptions/PintasticException');
 
 class WishlistController {

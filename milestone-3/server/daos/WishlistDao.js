@@ -1,4 +1,4 @@
-const Wishlist = require('../models/Wishlist');
+const Wishlist = require('../models/schemas/Wishlist');
 
 // Get wishlist items by user ID
 async function getWishlistByUserId(userId) {

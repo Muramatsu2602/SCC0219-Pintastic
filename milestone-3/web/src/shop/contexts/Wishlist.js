@@ -7,16 +7,16 @@ export const WishlistContext = createContext();
 export const WishlistProvider = ({children}) => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const {user} = useAuth();
-
-  const userId = user._id;
+  const [curUserId, setCurUserId] = useState(null);
 
   useEffect(() => {
     fetchWishlistItems();
-  }, []);
+    setCurUserId(user?._id);
+  }, [user]);
 
   const fetchWishlistItems = async () => {
     try {
-      const response = await api.get(`/wishlist/${userId}`);
+      const response = await api.get(`/wishlist/${curUserId}`);
       setWishlistItems(response.data);
     } catch (error) {
       console.error('Error fetching wishlist items:', error);
@@ -25,7 +25,7 @@ export const WishlistProvider = ({children}) => {
 
   const addToWishlist = async (productId) => {
     try {
-      await api.post('/wishlist', {userId, productId});
+      await api.post('/wishlist', {curUserId, productId});
       fetchWishlistItems();
     } catch (error) {
       console.error('Error adding to wishlist:', error);
@@ -34,7 +34,7 @@ export const WishlistProvider = ({children}) => {
 
   const removeFromWishlist = async (productId) => {
     try {
-      await api.delete(`/wishlist/${userId}/${productId}`);
+      await api.delete(`/wishlist/${curUserId}/${productId}`);
       fetchWishlistItems();
     } catch (error) {
       console.error('Error removing from wishlist:', error);
@@ -43,7 +43,7 @@ export const WishlistProvider = ({children}) => {
 
   const clearWishlist = async () => {
     try {
-      await api.delete(`/wishlist/${userId}`);
+      await api.delete(`/wishlist/${curUserId}`);
       fetchWishlistItems();
     } catch (error) {
       console.error('Error clearing wishlist:', error);
