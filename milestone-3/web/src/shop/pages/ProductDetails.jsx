@@ -25,12 +25,12 @@ const ProductDetails = () => {
   const {cartItems, addToCart} = useContext(CartContext);
   const {signed} = useAuth();
   const {productId} = useParams();
-  const {addToWishlist, removeFromWishlist, wishlistItems} = useContext(WishlistContext);
+  const {addToWishlist, removeFromWishlist, wishlistItems} =
+    useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const navigate = useNavigate();
-  const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
   const [quantity, setQuantity] = useState(1);
   // Use placeholder image if the product image is not available
   const placeholderImage =
@@ -38,16 +38,23 @@ const ProductDetails = () => {
   const productImageUrl = selectedProduct?.image || placeholderImage;
 
   useEffect(() => {
-    const productInWishlist = wishlistItems.some((item) => item._id === parseInt(productId));
-    setIsOnWishlist(productInWishlist);
-  }, [wishlistItems, productId]);
+    const productInWishlist = wishlistItems.some(
+        (item) => item.productId === productId,
+    );
+
+    if (productInWishlist) {
+      setIsOnWishlist(true);
+    } else {
+      setIsOnWishlist(false);
+    }
+  }, []);
 
   const handleWishlistToggle = () => {
     if (isOnWishlist) {
-      removeFromWishlist(productId);
+      removeFromWishlist(selectedProduct._id);
       setIsOnWishlist(false);
     } else {
-      addToWishlist(productId);
+      addToWishlist(selectedProduct);
       setIsOnWishlist(true);
     }
   };
@@ -55,6 +62,7 @@ const ProductDetails = () => {
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
+
   const handleAddToCart = () => {
     if (selectedProduct.stock === 0) {
       Swal.fire({
@@ -71,8 +79,9 @@ const ProductDetails = () => {
         confirmButtonText: 'OK',
       });
     } else {
-      // Check if the product already exists in the cart
-      const isProductInCart = cartItems.some((item) => item._id === selectedProduct._id);
+      const isProductInCart = cartItems.some(
+          (item) => item._id === selectedProduct._id,
+      );
 
       if (isProductInCart) {
         Swal.fire({
@@ -105,17 +114,18 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchRelatedProducts = async () => {
       try {
-        const response = await api.get('/products?limit=10');
+        const response = await api.get('/products/active?limit=10');
         const products = response.data;
         setRelatedProducts(products);
       } catch (error) {
         console.error('Error fetching related products:', error);
       }
     };
+
     fetchRelatedProducts();
   }, []);
 
-  // Here we extract the info from the API
+  // Fetching other fields from product as in wishlist item there is only productId and _id of the user
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -128,10 +138,9 @@ const ProductDetails = () => {
     };
 
     fetchProductDetails();
-  }, [productId]);
+  }, [productId, wishlistItems]);
 
   if (!selectedProduct) {
-    // Handle the case when the product with the specified ID is not found
     return (
       <>
         <Header quantity={quantity} />
@@ -144,9 +153,9 @@ const ProductDetails = () => {
     );
   }
 
-  // Get related products
-  const relatedProductsWithoutSelectProduct = relatedProducts.filter((product) => product._id !== selectedProduct._id).slice(0, 3);
-
+  const relatedProductsWithoutSelectProduct = relatedProducts
+      .filter((product) => product._id !== selectedProduct._id)
+      .slice(0, 3);
   return (
     <>
       <Header quantity={quantity} />
@@ -171,9 +180,15 @@ const ProductDetails = () => {
                 </p>
                 {signed && (
                   <div className='product-details-wishlist-icon-container'>
-                    <div className='product-details-wishlist-icon' onClick={handleWishlistToggle}>
-                      <FontAwesomeIcon icon={heartIcon} />
-                      <span>Add to Wishlist</span>
+                    <div
+                      className='product-details-wishlist-icon'
+                      onClick={handleWishlistToggle}
+                    >
+                      {isOnWishlist ? (
+                        <><FontAwesomeIcon icon={faHeartSolid} /><span>Remove From Wishlist</span></>
+                      ) : (
+                        <><FontAwesomeIcon icon={faHeartRegular} /><span>Add to Wishlist</span></>
+                      )}
                     </div>
                   </div>
                 )}
@@ -191,7 +206,8 @@ const ProductDetails = () => {
                     {selectedProduct.discountPercentage > 0 && (
                       <div className='product-details-discount'>
                         <span className='product-details-discounted-price'>
-                          ${calculateDiscountedPrice(
+                          $
+                          {calculateDiscountedPrice(
                               selectedProduct.price,
                               selectedProduct.discountPercentage,
                           )}
@@ -201,7 +217,9 @@ const ProductDetails = () => {
                   </div>
                   {selectedProduct.stock > 0 && (
                     <div className='product-details-quantity'>
-                      <span className='product-details-quantity-label'>Quantity:</span>
+                      <span className='product-details-quantity-label'>
+                        Quantity:
+                      </span>
                       <input
                         className='product-details-input'
                         type='number'
@@ -209,7 +227,9 @@ const ProductDetails = () => {
                         value={quantity}
                         onChange={handleQuantityChange}
                       />
-                      <span className='product-details-stock'>Stock: {selectedProduct.stock}</span>
+                      <span className='product-details-stock'>
+                        Stock: {selectedProduct.stock}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -226,7 +246,10 @@ const ProductDetails = () => {
 
                 {selectedProduct.stock === 0 && (
                   <div className='out-of-stock-message'>
-                    <FontAwesomeIcon icon={faExclamationTriangle} className='out-of-stock-icon' />
+                    <FontAwesomeIcon
+                      icon={faExclamationTriangle}
+                      className='out-of-stock-icon'
+                    />
                     <span className='out-of-stock-text'>Out of Stock</span>
                   </div>
                 )}
@@ -260,7 +283,9 @@ const ProductDetails = () => {
                 productRating={product.rating}
                 productCategory={product.category}
                 productStock={product.stock}
-                isOnWishlist={wishlistItems.some((item) => item._id === product._id)}
+                isOnWishlist={wishlistItems.some(
+                    (item) => item._id === product._id,
+                )}
               />
             ))}
           </div>
