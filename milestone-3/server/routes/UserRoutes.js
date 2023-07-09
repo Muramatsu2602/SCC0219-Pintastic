@@ -48,9 +48,20 @@ router.post('/login',
 
 router.post('/', async function(request, response, next) {
   try {
-    const { id, email, name } = request.body;
+    const {email, password, name, country, cep, state, address, complement} = request.body;
 
-    const user = await UserController.create(id, email, name);
+    const data = {
+      email,
+      password,
+      name,
+      country,
+      cep,
+      state,
+      address,
+      complement
+    };
+
+    const user = await UserController.create(data);
 
     return response.status(200).json(user);
   } catch (error) {
@@ -63,9 +74,20 @@ router.put('/:id',
   async function(request, response, next) {
     try {
       const { id } = request.params;
-      const { email, name } = request.body;
+      const {email, password, name, country, cep, state, address, complement} = request.body;
 
-      const user = await UserController.updateById(id, email, name);
+      const data = {
+        email,
+        password,
+        name,
+        country,
+        cep,
+        state,
+        address,
+        complement
+      };
+
+      const user = await UserController.updateById(id, data);
 
       return response.status(200).json(user);
     } catch (error) {
@@ -90,7 +112,7 @@ router.put('/toggleActive/:id',
 );
 
 router.delete('/:id', 
-  AuthMiddleware.isParamIdEqualToClientId,
+  AuthMiddleware.isAdmin,
   async function(request, response, next) {
     try {
       const { id } = request.params;

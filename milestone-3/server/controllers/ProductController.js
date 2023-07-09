@@ -7,6 +7,11 @@ class ProductController {
     return products.map(this.#removeSensitiveData);
   }
 
+  static async getActiveProducts(limit) {
+    const products = await ProductDao.getActive(limit);
+    return products.map(this.#removeSensitiveData);
+  }
+
   static async getProductById(id) {
     const product = await ProductDao.getById(id);
 
@@ -21,8 +26,12 @@ class ProductController {
     return await ProductDao.create(productData);
   }
 
-  static async updateById(id, title) {
-    return await ProductDao.updateById(id, title);
+  static async updateById(id, data) {
+    return await ProductDao.updateById(id, data);
+  }
+
+  static async toggleActive(id) {
+    return await ProductDao.toggleActive(id);
   }
 
   static async addToStock(id, amount) {

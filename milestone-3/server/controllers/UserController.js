@@ -46,12 +46,12 @@ class UserController {
     };
   }
 
-  static async create(id, email, name) {
-    return await UserDao.create(id, email, name);
+  static async create(data) {
+    return await UserDao.create(data);
   };
 
-  static async updateById(id, email, name) {
-    return await UserDao.updateById(id, email, name);
+  static async updateById(id, data) {
+    return await UserDao.updateById(id, data);
   };
 
   static async toggleActive(id) {

@@ -9,6 +9,10 @@ class CheckoutController {
     for(const checkoutProduct of checkoutProducts) {
       const storedProduct = await ProductController.getProductById(checkoutProduct.id);
 
+      if(storedProduct.status != true) {
+        throw new PintasticException('Inactive product', 400, 'Inactive product, try again later');
+      }
+
       if(storedProduct.stock < checkoutProduct.amount) {
         throw new PintasticException('Insufficient stock on checkout', 400, 'Insufficient stock, try again later');
       }

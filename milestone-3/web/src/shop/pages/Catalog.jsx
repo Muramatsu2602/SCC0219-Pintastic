@@ -37,7 +37,7 @@ export default function Catalog({type}) {
             Swal.showLoading();
           },
         });
-        const response = await api.get('/products'); // Update the API endpoint path
+        const response = await api.get('/products/active'); // Update the API endpoint path
         setProducts(response.data);
         // Hide loading popup
         Swal.close();

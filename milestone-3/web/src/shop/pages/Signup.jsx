@@ -6,6 +6,7 @@ import Menu from '../components/Nav';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
+import api from '../../services/api';
 import PintasticException from '../../models/PintasticException';
 import {useAuth} from '../contexts/Auth';
 
@@ -24,6 +25,18 @@ export default function Login() {
   const [address, setAddress] = useState('');
   const [complement, setComplement] = useState('');
 
+  async function signup(user) {
+    try {
+      await api.post('/users', user);
+    } catch (error) {
+      if (error.response.status == 409) {
+        throw new PintasticException('Duplicated email', 'Esse email já está sendo utilizado');
+      }
+
+      throw error;
+    }
+  }
+
   async function handleSignup(e) {
     try {
       e.preventDefault();
@@ -32,7 +45,7 @@ export default function Login() {
         throw new PintasticException('Passwords do not match', 'As senhas não estão iguais!');
       }
 
-      const newUser = {
+      const user = {
         email,
         password,
         name,
@@ -42,9 +55,9 @@ export default function Login() {
         complement,
       };
 
-      console.log(newUser);
+      await signup(user);
 
-      await auth.login('client@pintastic.com', '123');
+      await auth.login(email, password);
     } catch (error) {
       if (error instanceof PintasticException) {
         Swal.fire('Ocorreu um erro', error.getBusinessMessage(), 'error');

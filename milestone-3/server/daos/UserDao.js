@@ -14,13 +14,9 @@ class UserDao {
     return await User.findOne({ email });
   }
 
-  static async create(id, email, name) {
+  static async create(data) {
     try {
-      const newUser = new User({
-        id, 
-        email,
-        name
-      });
+      const newUser = new User(data);
 
       return await newUser.save();
     } catch (error) {
@@ -32,13 +28,10 @@ class UserDao {
     }
   }
 
-  static async updateById(id, email, name) {
+  static async updateById(id, data) {
     return await User.findOneAndUpdate(
       { _id: id },
-      {
-        email,
-        name
-      },
+      data,
       { new: true },
     );
   }

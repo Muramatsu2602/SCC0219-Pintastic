@@ -41,6 +41,10 @@
     font-size: 36px;
 }
 
+#admin-home-page .cards .card h4 {
+    font-size: 24px;
+}
+
 #admin-home-page .cards .card p {
     font-size: var(--font-sm);
 }

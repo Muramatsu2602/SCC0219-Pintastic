@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -7,6 +7,7 @@ import Menu from '../components/Nav';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
+import api from '../../services/api';
 import PintasticException from '../../models/PintasticException';
 import {useAuth} from '../contexts/Auth';
 
@@ -16,37 +17,55 @@ import Swal from 'sweetalert2';
 export default function Profile() {
   const auth = useAuth();
 
-  const mockUser = {
-    'name': 'Cliente',
-    'cep': '12900-000',
-    'state': 'São Paulo',
-    'address': 'Rua 1, Jardim B, São Paulo',
-    'complement': 'Número 15',
-  };
-
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState(mockUser.name);
-  const [cep, setCep] = useState(mockUser.cep);
-  const [state, setState] = useState(mockUser.state);
-  const [address, setAddress] = useState(mockUser.address);
-  const [complement, setComplement] = useState(mockUser.complement);
+  const [name, setName] = useState('');
+  const [cep, setCep] = useState('');
+  const [state, setState] = useState('');
+  const [address, setAddress] = useState('');
+  const [complement, setComplement] = useState('');
+
+  async function loadUserData() {
+    try {
+      const {data} = await api.get(`/users/${auth.user._id}`);
+
+      setName(data.name);
+      setCep(data.cep);
+      setState(data.state);
+      setAddress(data.address);
+      setComplement(data.complement);
+    } catch (error) {
+      console.error(error);
+      Swal.fire('Ocorreu um erro', 'Não foi possível carregar os dados, tente novamente mais tarde', 'error');
+    }
+  }
+
+  useEffect(() => {
+    loadUserData();
+  }, []);
+
+  async function updateProfile(userId, data) {
+    try {
+      await api.put(`/users/${userId}`, data);
+    } catch (error) {
+      if (error.response.status == 409) {
+        throw new PintasticException('Duplicated email', 'Esse email já está sendo utilizado');
+      }
+
+      throw error;
+    }
+  }
 
   async function handleUpdateProfile(e) {
     try {
       e.preventDefault();
 
-      if (currentPassword != '123') {
-        throw new PintasticException('Current password is invalid', 'A senha atual está incorreta!');
-      }
-
       if (password != confirmPassword) {
         throw new PintasticException('Passwords do not match', 'As senhas não estão iguais!');
       }
 
-      const updatedUser = {
-        currentPassword,
+      const data = {
         password,
         name,
         cep,
@@ -55,7 +74,7 @@ export default function Profile() {
         complement,
       };
 
-      console.log(updatedUser);
+      await updateProfile(auth.user._id, data);
 
       Swal.fire('Dados atualizados!', 'Seus dados foram atualizados com sucesso', 'success');
     } catch (error) {
