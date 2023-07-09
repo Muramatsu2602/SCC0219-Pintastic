@@ -8,7 +8,7 @@ const CartSection = () => {
   const {cartItems, updateCartQuantity, removeFromCart} = useContext(CartContext);
 
   const calculateTotalPrice = useCallback(() => {
-    return cartItems.reduce((acc, item) => acc + item.productPrice * item.quantity, 0);
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }, [cartItems]);
 
   const totalPrice = calculateTotalPrice();
@@ -31,7 +31,7 @@ const CartSection = () => {
       <h2>Shopping Cart</h2>
       {cartItems.map((item) => (
         <CartItem
-          key={item.productId}
+          key={item._id}
           item={item}
           handleQuantityChange={handleQuantityChange}
           handleRemoveItem={handleRemoveItem}

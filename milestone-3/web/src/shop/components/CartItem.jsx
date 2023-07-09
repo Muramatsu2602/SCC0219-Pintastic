@@ -7,25 +7,24 @@ import './CartItem.style.css';
 import {CartContext} from '../contexts/Cart';
 
 const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
-  const [quantity, setQuantity] = useState(item.quantity);
+  const [curQuantity, setCurQuantity] = useState(item.quantity);
   const {cartItems} = useContext(CartContext);
-  const productStock = cartItems.find((cartItem) => cartItem.productId === item.productId)?.productStock;
 
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     if (isNaN(newQuantity)) {
-      setQuantity(1);
-    } else if (newQuantity > productStock) {
+      setCurQuantity(1);
+    } else if (newQuantity > item.stock) {
       Swal.fire({
         title: 'Error',
         text: 'You cannot choose a quantity above the available stock.',
         icon: 'error',
         confirmButtonText: 'OK',
       });
-      setQuantity(productStock);
+      setCurQuantity(item.stock);
     } else {
-      setQuantity(newQuantity);
-      handleQuantityChange(item.productId, newQuantity);
+      setCurQuantity(newQuantity);
+      handleQuantityChange(item._id, newQuantity);
     }
   };
 
@@ -39,17 +38,17 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
       cancelButtonText: 'No',
     }).then((result) => {
       if (result.isConfirmed) {
-        handleRemoveItem(item.productId);
+        handleRemoveItem(item._id);
       }
     });
   };
 
   return (
     <div className='cart-item'>
-      <img src={item.productImage} alt='cart item product' className='cart-image' />
+      <img src={item.image} alt='cart item product' className='cart-image' />
       <div className='cart-details'>
-        <h3>{item.productTitle}</h3>
-        <p>{item.productDescription}</p>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
         <div className='cart-actions'>
           <div className="quantity-container">
             <label htmlFor="quantity">Quantity:</label>
@@ -59,8 +58,8 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
                 name="quantity"
                 id="quantity"
                 min="1"
-                max={productStock + 1}
-                value={quantity}
+                max={item.stock}
+                value={curQuantity}
                 onChange={handleChange}
                 onKeyDown={(event) => {
                   if (event.key === '-' || event.key === 'e') {
@@ -68,13 +67,13 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
                   }
                 }}
               />
-              {quantity > productStock && <span className="stock-info">Out of Stock</span>}
+              {curQuantity > item.stock && <span className="stock-info">Out of Stock</span>}
             </div>
-            <span className="stock-info">Available Stock: {productStock}</span>
+            <span className="stock-info">Available Stock: {item.stock}</span>
           </div>
           <div className='cart-remove'>
             <div className='cart-price'>
-              <h3>${(item.productPrice * quantity)}</h3>
+              <h3>${(item.price * curQuantity)}</h3>
             </div>
             <button type='button' onClick={confirmRemoveItem}>
               <FontAwesomeIcon icon={faTrashAlt} />

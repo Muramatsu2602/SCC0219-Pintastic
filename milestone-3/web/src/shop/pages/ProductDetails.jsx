@@ -58,28 +58,24 @@ const ProductDetails = () => {
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
-
   const handleAddToCart = () => {
-    const product = {
-      productId: selectedProduct?._id,
-      productPrice: selectedProduct?.price,
-      productTitle: selectedProduct?.title,
-      productDescription: selectedProduct?.description,
-      productImage: selectedProduct?.image,
-      quantity: quantity, // Use the value from the `quantity` state
-      productStock: selectedProduct?.stock,
-    };
-
-    if (selectedProduct?.stock === 0) {
+    if (selectedProduct.stock === 0) {
       Swal.fire({
         title: 'Out of Stock',
         text: 'This product is currently out of stock.',
         icon: 'error',
         confirmButtonText: 'OK',
       });
+    } else if (quantity > selectedProduct.stock) {
+      Swal.fire({
+        title: 'Invalid Quantity',
+        text: 'Please select a quantity within the available stock.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     } else {
       // Check if the product already exists in the cart
-      const isProductInCart = cartItems.some((item) => item._id === product?._id);
+      const isProductInCart = cartItems.some((item) => item._id === selectedProduct._id);
 
       if (isProductInCart) {
         Swal.fire({
@@ -89,7 +85,7 @@ const ProductDetails = () => {
           confirmButtonText: 'OK',
         });
       } else {
-        addToCart(product);
+        addToCart(selectedProduct, quantity);
         showAddToCartConfirmation();
       }
     }
@@ -216,6 +212,7 @@ const ProductDetails = () => {
                         value={quantity}
                         onChange={handleQuantityChange}
                       />
+                      <span className='product-details-stock'>Stock: {selectedProduct.stock}</span>
                     </div>
                   )}
                 </div>
