@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
 import Card from '../components/Card';
-// import StarRating from '../components/StarRating';
+import StarRating from '../components/StarRating';
 import api from '../../services/api';
 import Swal from 'sweetalert2';
 
@@ -64,15 +64,15 @@ export default function Catalog({type}) {
     // Apply filters and update filtered data
     const filteredItems = products.filter((item) => {
       // Apply rating filter
-      // if (
-      //   ratingFilter.length > 0 &&
-      //   !ratingFilter.some(
-      //       (rating) =>
-      //         item.rating >= rating && item.rating < rating + 1,
-      //   )
-      // ) {
-      //   return false;
-      // }
+      if (
+        ratingFilter.length > 0 &&
+        !ratingFilter.some(
+            (rating) =>
+              item.rating >= rating && item.rating < rating + 1,
+        )
+      ) {
+        return false;
+      }
 
       // Apply price filter
       if (
@@ -116,16 +116,16 @@ export default function Catalog({type}) {
     setCurrentPage(pageNumber);
   };
 
-  // const handleRatingFilterChange = (value) => {
-  //   const updatedFilter = [...ratingFilter];
-  //   if (updatedFilter.includes(value)) {
-  //     const index = updatedFilter.indexOf(value);
-  //     updatedFilter.splice(index, 1);
-  //   } else {
-  //     updatedFilter.push(value);
-  //   }
-  //   setRatingFilter(updatedFilter);
-  // };
+  const handleRatingFilterChange = (value) => {
+    const updatedFilter = [...ratingFilter];
+    if (updatedFilter.includes(value)) {
+      const index = updatedFilter.indexOf(value);
+      updatedFilter.splice(index, 1);
+    } else {
+      updatedFilter.push(value);
+    }
+    setRatingFilter(updatedFilter);
+  };
 
   const handlePriceFilterChange = (event) => {
     const {value} = event.target;
@@ -183,26 +183,26 @@ export default function Catalog({type}) {
               </div>
 
               {/* Star Rating Filter  */}
-              {/* <div className='filter-container'>
-              <h3 className='filter-title'>Ratings</h3>
-              <div className='rating-filter'>
-                {[1, 2, 3, 4, 5].map((rating) => (
-                  <label key={rating} htmlFor={`rating-${rating}`}>
-                    <input
-                      type='checkbox'
-                      id={`rating-${rating}`}
-                      name='rating'
-                      value={rating}
-                      checked={ratingFilter.includes(rating)}
-                      onChange={(event) =>
-                        handleRatingFilterChange(parseInt(event.target.value))
-                      }
-                    />
-                    <StarRating rating={rating} />
-                  </label>
-                ))}
+              <div className='filter-container'>
+                <h3 className='filter-title'>Ratings</h3>
+                <div className='rating-filter'>
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <label key={rating} htmlFor={`rating-${rating}`}>
+                      <input
+                        type='checkbox'
+                        id={`rating-${rating}`}
+                        name='rating'
+                        value={rating}
+                        checked={ratingFilter.includes(rating)}
+                        onChange={(event) =>
+                          handleRatingFilterChange(parseInt(event.target.value))
+                        }
+                      />
+                      <StarRating rating={rating} />
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div> */}
               {/* Price Range Filter */}
               <div className='filter-container'>
                 <h3 className='filter-title'>Price Range</h3>

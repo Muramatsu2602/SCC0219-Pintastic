@@ -8,16 +8,18 @@ import Button from '../components/Button';
 import StarRating from '../components/StarRating';
 import Menu from '../components/Nav';
 import Card from '../components/Card';
-import {useNavigate} from 'react-router-dom';
-import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
-import productsData from '../../mock/products.json';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {calculateDiscountedPrice} from './utils/calculateDiscountedPrice';
+import {useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
-import {WishlistContext} from '../contexts/Wishlist';
-import Swal from 'sweetalert2';
-import {CartContext} from '../contexts/Cart';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
+
+import {WishlistContext} from '../contexts/Wishlist';
+import {CartContext} from '../contexts/Cart';
+import api from '../../services/api';
 
 const ProductDetails = () => {
   const {cartItems, addToCart} = useContext(CartContext);
@@ -25,15 +27,24 @@ const ProductDetails = () => {
   const {productId} = useParams();
   const {addToWishlist, removeFromWishlist, wishlistItems} = useContext(WishlistContext);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const navigate = useNavigate();
+  const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
+  const [quantity, setQuantity] = useState(1);
+  // Use placeholder image if the product image is not available
+  const placeholderImage =
+    'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
+  const productImageUrl = selectedProduct?.image || placeholderImage;
 
   useEffect(() => {
-    const productInWishlist = wishlistItems.some((item) => item.productId === parseInt(productId));
+    const productInWishlist = wishlistItems.some((item) => item._id === parseInt(productId));
     setIsOnWishlist(productInWishlist);
   }, [wishlistItems, productId]);
 
   const handleWishlistToggle = () => {
-    const product = productsData.find((product) => product.productId === parseInt(productId));
+    // !ONLY WORRY ABOUT ADDING THE PRODUCT ID TO WISHLIST NOT THE ENTIRE THING AS WE HAVE AN API NOW
+    const product = productsData.find((product) => product._id === parseInt(productId));
 
     if (isOnWishlist) {
       removeFromWishlist(productId);
@@ -44,25 +55,22 @@ const ProductDetails = () => {
     }
   };
 
-  const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
-  const [quantity, setQuantity] = useState(1);
-
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
 
   const handleAddToCart = () => {
     const product = {
-      productId: selectedProduct.productId,
-      productPrice: selectedProduct.productPrice,
-      productTitle: selectedProduct.productTitle,
-      productDescription: selectedProduct.productDescription,
-      productImage: selectedProduct.productImage,
+      productId: selectedProduct?._id,
+      productPrice: selectedProduct?.price,
+      productTitle: selectedProduct?.title,
+      productDescription: selectedProduct?.description,
+      productImage: selectedProduct?.image,
       quantity: quantity, // Use the value from the `quantity` state
-      productStock: selectedProduct.productStock,
+      productStock: selectedProduct?.stock,
     };
 
-    if (selectedProduct.productStock === 0) {
+    if (selectedProduct?.stock === 0) {
       Swal.fire({
         title: 'Out of Stock',
         text: 'This product is currently out of stock.',
@@ -71,7 +79,7 @@ const ProductDetails = () => {
       });
     } else {
       // Check if the product already exists in the cart
-      const isProductInCart = cartItems.some((item) => item.productId === product.productId);
+      const isProductInCart = cartItems.some((item) => item._id === product?._id);
 
       if (isProductInCart) {
         Swal.fire({
@@ -101,14 +109,33 @@ const ProductDetails = () => {
     });
   };
 
-  // Get the selected product
-  const selectedProduct = productsData.find((product) => product.productId === parseInt(productId));
+  useEffect(() => {
+    const fetchRelatedProducts = async () => {
+      try {
+        const response = await api.get('/products?limit=10');
+        const products = response.data;
+        setRelatedProducts(products);
+      } catch (error) {
+        console.error('Error fetching related products:', error);
+      }
+    };
+    fetchRelatedProducts();
+  }, []);
 
-  // Use placeholder image if the product image is not available
-  const placeholderImage =
-    'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081';
+  // Here we extract the info from the API
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await api.get(`/products/${productId}`);
+        const product = response.data;
+        setSelectedProduct(product);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
 
-  const productImageUrl = selectedProduct.productImage || placeholderImage;
+    fetchProductDetails();
+  }, [productId]);
 
   if (!selectedProduct) {
     // Handle the case when the product with the specified ID is not found
@@ -125,7 +152,7 @@ const ProductDetails = () => {
   }
 
   // Get related products
-  const relatedProducts = productsData.filter((product) => product.productId !== productId).slice(0, 3);
+  const relatedProductsWithoutSelectProduct = relatedProducts.filter((product) => product._id !== selectedProduct._id).slice(0, 3);
 
   return (
     <>
@@ -133,81 +160,85 @@ const ProductDetails = () => {
       <Menu />
       <main id='product-details-main'>
         <section className='product-details-container'>
-          <div className='product-details-image'>
-            <img src={productImageUrl} alt='Product Image' />
-          </div>
-          <div className='product-details-info'>
-            <h2 className='product-details-title'>
-              {selectedProduct.productTitle}
-            </h2>
-            <div className='product-details-rating'>
-              <StarRating rating={selectedProduct.productRating} />
-            </div>
-            <p className='product-details-description'>
-              {selectedProduct.productDescription}
-            </p>
-            {signed && (
-              <div className='product-details-wishlist-icon-container'>
-                <div className='product-details-wishlist-icon' onClick={handleWishlistToggle}>
-                  <FontAwesomeIcon icon={heartIcon} />
-                  <span>Add to Wishlist</span>
-                </div>
+          {/* Render the product details when selectedProduct is not null */}
+          {selectedProduct && (
+            <>
+              <div className='product-details-image'>
+                <img src={productImageUrl} alt='Product Image' />
               </div>
-            )}
-            <div className='product-details-price'>
-              <div className='product-details-prices-container'>
-                {selectedProduct.productDiscountPercentage === 0 ? (
-                  <span className='product-details-no-discount'>
-                    ${selectedProduct.productPrice}
-                  </span>
-                ) : (
-                  <span className='product-details-original-price'>
-                    ${selectedProduct.productPrice}
-                  </span>
+              <div className='product-details-info'>
+                <h2 className='product-details-title'>
+                  {selectedProduct.title}
+                </h2>
+                <div className='product-details-rating'>
+                  <StarRating rating={selectedProduct.rating} />
+                </div>
+                <p className='product-details-description'>
+                  {selectedProduct.description}
+                </p>
+                {signed && (
+                  <div className='product-details-wishlist-icon-container'>
+                    <div className='product-details-wishlist-icon' onClick={handleWishlistToggle}>
+                      <FontAwesomeIcon icon={heartIcon} />
+                      <span>Add to Wishlist</span>
+                    </div>
+                  </div>
                 )}
-                {selectedProduct.productDiscountPercentage > 0 && (
-                  <div className='product-details-discount'>
-                    <span className='product-details-discounted-price'>
-                      $
-                      {calculateDiscountedPrice(
-                          selectedProduct.productPrice,
-                          selectedProduct.productDiscountPercentage,
-                      )}
-                    </span>
+                <div className='product-details-price'>
+                  <div className='product-details-prices-container'>
+                    {selectedProduct.discountPercentage === 0 ? (
+                      <span className='product-details-no-discount'>
+                        ${selectedProduct.price}
+                      </span>
+                    ) : (
+                      <span className='product-details-original-price'>
+                        ${selectedProduct.price}
+                      </span>
+                    )}
+                    {selectedProduct.discountPercentage > 0 && (
+                      <div className='product-details-discount'>
+                        <span className='product-details-discounted-price'>
+                          ${calculateDiscountedPrice(
+                              selectedProduct.price,
+                              selectedProduct.discountPercentage,
+                          )}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  {selectedProduct.stock > 0 && (
+                    <div className='product-details-quantity'>
+                      <span className='product-details-quantity-label'>Quantity:</span>
+                      <input
+                        className='product-details-input'
+                        type='number'
+                        min='1'
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {selectedProduct.stock > 0 && (
+                  <div className='product-details-button-container'>
+                    <Button
+                      className='product-details-add-to-cart-button'
+                      onClick={handleAddToCart}
+                      buttonText='Add to Cart'
+                    />
+                  </div>
+                )}
+
+                {selectedProduct.stock === 0 && (
+                  <div className='out-of-stock-message'>
+                    <FontAwesomeIcon icon={faExclamationTriangle} className='out-of-stock-icon' />
+                    <span className='out-of-stock-text'>Out of Stock</span>
                   </div>
                 )}
               </div>
-              {selectedProduct.productStock > 0 && (
-                <div className='product-details-quantity'>
-                  <span className='product-details-quantity-label'>Quantity:</span>
-                  <input
-                    className='product-details-input'
-                    type='number'
-                    min='1'
-                    value={quantity}
-                    onChange={handleQuantityChange}
-                  />
-                </div>
-              )}
-            </div>
-
-            {selectedProduct.productStock > 0 && (
-              <div className='product-details-button-container'>
-                <Button
-                  className='product-details-add-to-cart-button'
-                  onClick={handleAddToCart}
-                  buttonText='Add to Cart'
-                />
-              </div>
-            )}
-
-            {selectedProduct.productStock === 0 && (
-              <div className='out-of-stock-message'>
-                <FontAwesomeIcon icon={faExclamationTriangle} className='out-of-stock-icon' />
-                <span className='out-of-stock-text'>Out of Stock</span>
-              </div>
-            )}
-          </div>
+            </>
+          )}
         </section>
 
         <section className='related-products-container'>
@@ -223,19 +254,19 @@ const ProductDetails = () => {
           </div>
 
           <div className='related-products-carousel'>
-            {relatedProducts.map((product, index) => (
+            {relatedProductsWithoutSelectProduct.map((product, index) => (
               <Card
                 key={index}
-                productId={product.productId}
-                productPrice={product.productPrice}
-                productTitle={product.productTitle}
-                productDescription={product.productDescription}
-                productDiscountPercentage={product.productDiscountPercentage}
-                productImage={product.productImage}
-                productRating={product.productRating}
-                productCategory={product.productCategory}
-                productStock={product.productStock}
-                isOnWishlist={wishlistItems.some((item) => item.productId === product.productId)}
+                productId={product._id}
+                productPrice={product.price}
+                productTitle={product.title}
+                productDescription={product.description}
+                productDiscountPercentage={product.discountPercentage}
+                productImage={product.image}
+                productRating={product.rating}
+                productCategory={product.category}
+                productStock={product.stock}
+                isOnWishlist={wishlistItems.some((item) => item._id === product._id)}
               />
             ))}
           </div>

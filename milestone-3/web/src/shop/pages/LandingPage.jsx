@@ -76,20 +76,6 @@ export default function LandingPage() {
           </div>
           <div id='highlighted-content'>
             <div id='highlighted-options'>
-              <ul>
-                <li>
-                  <a href='#'>New Arrivals</a>
-                </li>
-                <li>
-                  <a href='#'>Best Sellers</a>
-                </li>
-                <li>
-                  <a href='#'>Sale Items</a>
-                </li>
-                <li>
-                  <a href='#'>Clearance</a>
-                </li>
-              </ul>
 
               <Button
                 buttonText={'More Products'}
