@@ -9,6 +9,8 @@ import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {CartContext} from '../contexts/Cart';
 
+import api from '../../services/api';
+
 const Checkout = () => {
   const navigate = useNavigate();
   const {cartItems, clearCart} = useContext(CartContext);
@@ -67,8 +69,20 @@ const Checkout = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'Cancel',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        const products = cartItems.map((item) => {
+          return {
+            'id': item._id,
+            'amount': item.quantity,
+            'price': (item.price - (item.price * item.discountPercentage / 100)).toFixed(2),
+          };
+        });
+
+        await api.post('/checkout', {
+          products,
+        });
+
         Swal.fire(
             'Checkout Confirmed',
             'Your order has been placed successfully!',
@@ -193,7 +207,7 @@ const Checkout = () => {
   const cartTotal = cartItems.reduce(
       (total, item) => {
         console.log(item.price, item.quantity); // Print the values of ProductPrice and quantity for each item
-        return total + item.price * item.quantity;
+        return total + ((item.price - (item.price * item.discountPercentage / 100)) * item.quantity);
       },
       0,
   );
@@ -525,7 +539,7 @@ const Checkout = () => {
           />
           <div className='checkout-summary-product-details'>
             <span>{item.title}</span>
-            <span>${item.price}</span>
+            <span>${(item.price - (item.price * item.discountPercentage / 100)).toFixed(2)}</span>
             <span>Qty: {item.quantity}</span>
           </div>
         </div>

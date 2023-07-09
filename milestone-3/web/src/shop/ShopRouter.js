@@ -26,7 +26,6 @@ function ShopRouter(props) {
       <Route path='/catalog/' element={<Catalog type={'all'} />} />
       <Route path='/catalog/pins' element={<Catalog type={'Pin'} />} />
       <Route path='/catalog/stickers' element={<Catalog type={'Sticker'} />} />
-      <Route path='/checkout' element={<Checkout />} />
 
       {
         signed ? (
@@ -34,12 +33,14 @@ function ShopRouter(props) {
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/day' element={<PinOfTheDay />} />
+            <Route path='/checkout' element={<Checkout />} />
           </>
         ) : (
           <>
             <Route path='/login' element={<Login />} />
             <Route path='/sign-up' element={<Signup />} />
             <Route path='/profile' element={<Login />} />
+            <Route path='/checkout' element={<Login />} />
           </>
         )
       }

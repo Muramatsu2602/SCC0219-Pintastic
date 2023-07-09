@@ -13,13 +13,15 @@ import {WishlistContext} from '../contexts/Wishlist';
 import {CartContext} from '../contexts/Cart';
 import Swal from 'sweetalert2';
 
+import api from '../../services/api';
+
 const PinOfTheDay = () => {
   const {wishlistItems} = useContext(WishlistContext);
   const {cartItems, addToCart} = useContext(CartContext);
   const [pinOfTheDay, setPinOfTheDay] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  async function loadPinOfTheDay() {
     if (wishlistItems.length < 5) {
       return;
     }
@@ -28,10 +30,14 @@ const PinOfTheDay = () => {
     const randomIndex = Math.floor(Math.random() * wishlistItems.length);
     const randomProduct = wishlistItems[randomIndex];
 
-    // set new price given it is the pin of the day
-    randomProduct.productDiscountPercentage+=5;
+    const result = await api.get(`/products/${randomProduct.productId}`);
+    const pinOfTheDay = result.data;
 
-    setPinOfTheDay(randomProduct);
+    setPinOfTheDay(pinOfTheDay);
+  }
+
+  useEffect(() => {
+    loadPinOfTheDay();
   }, [wishlistItems]);
 
   // what will be shown on screen if number of items on wishlist < 5
@@ -58,28 +64,11 @@ const PinOfTheDay = () => {
     );
   }
 
-  const totalDiscountPercentage =
-    specialDiscountPercentage + pinOfTheDay.productDiscountPercentage;
-  const totalDiscountPrice = calculateDiscountedPrice(
-      pinOfTheDay.productPrice,
-      totalDiscountPercentage,
-  );
+  const totalDiscountPercentage = specialDiscountPercentage + pinOfTheDay.discountPercentage;
+  const totalDiscountPrice = calculateDiscountedPrice(pinOfTheDay.price, totalDiscountPercentage);
 
   const handleAddToCart = () => {
-    const isProductInCart = cartItems.some((item) => item.productId === pinOfTheDay.productId);
-
-    const product = {
-      productId: pinOfTheDay.productId,
-      productPrice: pinOfTheDay.productPrice,
-      productTitle: pinOfTheDay.productTitle,
-      productDescription: pinOfTheDay.productDescription,
-      productDiscountPercentage: pinOfTheDay.productDiscountPercentage,
-      productImage: pinOfTheDay.productImage,
-      productCategory: pinOfTheDay.productCategory,
-      quantity: 1,
-      productStock: pinOfTheDay.productStock,
-    };
-
+    const isProductInCart = cartItems.some((item) => item.id === pinOfTheDay.id);
 
     if (isProductInCart) {
       Swal.fire({
@@ -89,7 +78,14 @@ const PinOfTheDay = () => {
         confirmButtonText: 'OK',
       });
     } else {
-      addToCart(product);
+      const product = {
+        ...pinOfTheDay,
+        discountPercentage: totalDiscountPercentage,
+      };
+
+      console.log(product);
+
+      addToCart(product, 1);
       showAddToCartConfirmation();
     }
   };
@@ -125,24 +121,24 @@ const PinOfTheDay = () => {
           <h3>An additional 5% discount to a pin on your wishlist</h3>
           <div className='pinoftheday-details'>
             <div className='pinoftheday-image'>
-              <img src={pinOfTheDay.productImage} alt='Pin of The Day' />
+              <img src={pinOfTheDay.image} alt='Pin of The Day' />
             </div>
             <div className='pinoftheday-info'>
               <h3 className='pinoftheday-product-title'>
-                {pinOfTheDay.productTitle}
+                {pinOfTheDay.title}
               </h3>
               <div className='pinoftheday-rating'>
-                <StarRating rating={pinOfTheDay.productRating} />
+                <StarRating rating={pinOfTheDay.rating} />
               </div>
               <div className='pinoftheday-description'>
-                {pinOfTheDay.productDescription}
+                {pinOfTheDay.description}
               </div>
               <div className='pinoftheday-price'>
                 <span className='pinoftheday-discount'>
                   Special Discount of {totalDiscountPercentage}% !
                 </span>
                 <span className='pinoftheday-original-price'>
-                  ${pinOfTheDay.productPrice.toFixed(2)}
+                  ${pinOfTheDay.price.toFixed(2)}
                 </span>
                 <span className='pinoftheday-sale-price'>
                   ${totalDiscountPrice}

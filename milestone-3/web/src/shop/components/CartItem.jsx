@@ -73,7 +73,7 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
           </div>
           <div className='cart-remove'>
             <div className='cart-price'>
-              <h3>${(item.price * curQuantity)}</h3>
+              <h3>${((item.price - (item.price * item.discountPercentage / 100)) * curQuantity).toFixed(2)}</h3>
             </div>
             <button type='button' onClick={confirmRemoveItem}>
               <FontAwesomeIcon icon={faTrashAlt} />
