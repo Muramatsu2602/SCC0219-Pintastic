@@ -152,7 +152,7 @@ Para o correto funcionamento da aplicação é necessária que o FrontEnd (prese
     - **shop/components**: componentes relacionados a loja.
     - **shop/pages**: contém as páginas de Cart, Catalogue, Checkout, Landing Page, Pin Of the Day, Product Details e Wishlist.
     - **shop/pages/mock**: mock de produtos.
-    - 
+      
 ### Problemas
 O Grupo não relata nenhum problema técnico durante o desenvolvimento do projeto.
 
