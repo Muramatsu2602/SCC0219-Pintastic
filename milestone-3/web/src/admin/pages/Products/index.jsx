@@ -28,7 +28,7 @@ export default function Products() {
   ];
 
   const loadProducts = async () => {
-    const response = await api.get('/products/active');
+    const response = await api.get('/products');
 
     setData(formatProductsIntoDatatable(response.data, setModal));
   };
