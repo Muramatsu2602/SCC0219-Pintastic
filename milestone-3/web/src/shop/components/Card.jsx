@@ -47,16 +47,7 @@ const Card = ({
     if (isOnWishlist) {
       removeFromWishlist(productId);
     } else {
-      addToWishlist({
-        productId,
-        productPrice,
-        productTitle,
-        productDescription,
-        productDiscountPercentage,
-        productImage,
-        productRating,
-        productCategory,
-      });
+      addToWishlist(productId);
     }
     setIsOnWishlist(!isOnWishlist);
   };

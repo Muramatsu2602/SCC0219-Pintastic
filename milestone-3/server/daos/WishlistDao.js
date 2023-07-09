@@ -16,7 +16,7 @@ async function addToWishlist(userId, productId) {
     const wishlistItem = new Wishlist({ userId, productId });
     await wishlistItem.save();
   } catch (error) {
-    throw new Error('Failed to add product to wishlist');
+    throw new Error('Failed to add product to wishlist in WishlistDao: ' + error);
   }
 }
 

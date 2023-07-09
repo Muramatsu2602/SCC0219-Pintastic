@@ -18,6 +18,7 @@ const Wishlist = () => {
   const {wishlistItems, removeFromWishlist} = useContext(WishlistContext);
   const {cartItems, addToCart} = useContext(CartContext);
 
+
   const handleRemoveItem = (itemId) => {
     Swal.fire({
       title: 'Remove Item',
@@ -83,40 +84,40 @@ const Wishlist = () => {
           ) : (
             <ul className='wishlist-items'>
               {wishlistItems.map((item) => (
-                <li key={item.productId} className='wishlist-item'>
+                <li key={item._id} className='wishlist-item'>
                   <div className='wishlist-details'>
                     <div className='wishlist-image-remove'>
                       <img
                         id='wishlist-item-image'
-                        src={item.productImage}
+                        src={item.image}
                         alt='Product'
                       />
                     </div>
                     <div className='wishlist-info'>
                       <h3 className='wishlist-product-title'>
-                        {item.productTitle}
+                        {item.title}
                       </h3>
                       <div className='wishlist-rating'>
-                        <StarRating rating={item.productRating} />
+                        <StarRating rating={item.rating} />
                       </div>
                       <div className='wishlist-prices'>
-                        {item.productDiscountPercentage &&
-                        item.productDiscountPercentage > 0 ? (
+                        {item.discountPercentage &&
+                        item.discountPercentage > 0 ? (
                           <>
                             <span className='wishlist-original-price'>
-                              ${item.productPrice}
+                              ${item.price}
                             </span>
                             <span className='wishlist-discount-price'>
                               $
                               {calculateDiscountedPrice(
-                                  item.productPrice,
-                                  item.productDiscountPercentage,
+                                  item.price,
+                                  item.discountPercentage,
                               )}
                             </span>
                           </>
                         ) : (
                           <span className='wishlist-price'>
-                            ${item.productPrice}
+                            ${item.price}
                           </span>
                         )}
                       </div>
@@ -124,14 +125,14 @@ const Wishlist = () => {
                   </div>
                   <button
                     className='wishlist-remove-button'
-                    onClick={() => handleRemoveItem(item.productId)}
+                    onClick={() => handleRemoveItem(item._id)}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} />
                     <span className='wishlist-remove-text'>Remove</span>
                   </button>
                   <Button
                     className='wishlist-add-to-cart-button'
-                    onClick={() => handleAddToCart(item.productId)}
+                    onClick={() => handleAddToCart(item._id)}
                     buttonText='+ Add to Cart'
                   />
                 </li>

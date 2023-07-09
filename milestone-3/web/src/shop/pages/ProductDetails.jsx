@@ -43,14 +43,11 @@ const ProductDetails = () => {
   }, [wishlistItems, productId]);
 
   const handleWishlistToggle = () => {
-    // !ONLY WORRY ABOUT ADDING THE PRODUCT ID TO WISHLIST NOT THE ENTIRE THING AS WE HAVE AN API NOW
-    const product = productsData.find((product) => product._id === parseInt(productId));
-
     if (isOnWishlist) {
       removeFromWishlist(productId);
       setIsOnWishlist(false);
     } else {
-      addToWishlist(product);
+      addToWishlist(productId);
       setIsOnWishlist(true);
     }
   };

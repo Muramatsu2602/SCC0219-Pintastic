@@ -3,7 +3,7 @@ const router = express.Router()
 const AuthMiddleware = require('../middleware/AuthMiddleware')
 const WishlistController = require('../controllers/WishlistController')
 
-router.get('/:userId', async function (request, response, next) {
+router.get('/:userId',AuthMiddleware.isCustomer, async function (request, response, next) {
 	try {
 		const { userId } = request.params
 
@@ -19,9 +19,9 @@ router.get('/:userId', async function (request, response, next) {
 
 router.post('/', AuthMiddleware.isCustomer, async (request, response, next) => {
 	try {
-		const { userId, productId } = request.body
+		const { curUserId, productId } = request.body
 
-		await WishlistController.addToWishlist(userId, productId)
+		await WishlistController.addToWishlist(curUserId, productId)
 
 		return response.status(200).end()
 	} catch (error) {
