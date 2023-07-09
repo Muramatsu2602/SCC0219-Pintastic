@@ -1,3 +1,4 @@
+const PintasticException = require('../models/exceptions/PintasticException');
 const ProductDao = require("../daos/ProductDao");
 
 class ProductController {
@@ -8,6 +9,11 @@ class ProductController {
 
   static async getProductById(id) {
     const product = await ProductDao.getById(id);
+
+    if(product == null) {
+      throw new PintasticException('Product not found', 400, 'Product not found');
+    }
+
     return this.#removeSensitiveData(product);
   }
 
@@ -19,14 +25,20 @@ class ProductController {
     return await ProductDao.updateById(id, title);
   }
 
+  static async addToStock(id, amount) {
+    return await ProductDao.addToStock(id, amount);
+  }
+
   static async delete(id) {
     return await ProductDao.delete(id);
   }
 
   static #removeSensitiveData(product) {
-    delete product.__v;
+    const updatedProduct = product.toObject();
 
-    return product;
+    delete updatedProduct.__v;
+
+    return updatedProduct;
   }
 }
 
