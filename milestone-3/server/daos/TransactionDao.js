@@ -5,6 +5,10 @@ class TransactionDao {
     return await Transaction.find();
   }
 
+  static async getByCustomerId(customerId) {
+    return await Transaction.find({ customerId });
+  }
+
   static async create(customerId, products, totalPrice, amountOfProducts) {
     const newTransaction = new Transaction({
       customerId,

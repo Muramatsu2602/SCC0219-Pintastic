@@ -2,24 +2,36 @@ const jwt = require('jsonwebtoken');
 
 const PintasticException = require('../models/exceptions/PintasticException');
 const UserDao = require('../daos/UserDao');
+const TransactionController = require('./TransactionController');
 
 class UserController {
   static async getAllUsers() {
     const users = await UserDao.getAll();
+    const adaptedUsers = users.map(this.#removeSensitiveData);
 
-    return users;
+    for(const index in adaptedUsers) {
+      const transactions = await TransactionController.getByCustomerId(adaptedUsers[index]._id);
+      
+      adaptedUsers[index].purchases = transactions.length;
+    }
+
+    return adaptedUsers;
   };
 
   static async getUserById(id) {
     const user = await UserDao.getById(id);
+    const transactions = await TransactionController.getByCustomerId(id);
 
-    return this.#removeSensitiveData(user);
+    return {
+      ...this.#removeSensitiveData(user),
+      'purchases': transactions.length
+    };
   };
 
   static async login(email, password) {
     const user = await UserDao.getByEmail(email);
 
-    if(user == null || user.password != password) {
+    if(user == null || user.password != password || user.active != true) {
       throw new PintasticException('Failed attempt to login as customer', 401, 'Incorrect user or password');
     }
 
@@ -41,6 +53,12 @@ class UserController {
   static async updateById(id, email, name) {
     return await UserDao.updateById(id, email, name);
   };
+
+  static async toggleActive(id) {
+    const updatedUser = await UserDao.toggleActive(id);
+
+    return this.#removeSensitiveData(updatedUser);
+  }
 
   static async delete(id) {
     return await UserDao.delete(id);

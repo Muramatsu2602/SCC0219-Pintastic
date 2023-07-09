@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Swal from 'sweetalert2';
 import {faPencil} from '@fortawesome/free-solid-svg-icons';
 
+import api from '../../../services/api';
 import PintasticException from '../../../models/PintasticException';
 import Datatable from '../../components/Datatable';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';
-import mockClients from './mockClients';
 
 import './styles.css';
 
 export default function Clients() {
-  const [clients] = useState(mockClients);
+  const [data, setData] = useState([]);
   const [modal, setModal] = useState(null);
 
   const columns = [
@@ -21,7 +21,15 @@ export default function Clients() {
     'Status',
   ];
 
-  const data = formatClientsIntoDatatable(clients, setModal);
+  const loadClients = async () => {
+    const response = await api.get('/users');
+
+    setData(formatClientsIntoDatatable(response.data, setModal));
+  };
+
+  useEffect(() => {
+    loadClients();
+  }, [modal]);
 
   return (
     <>
@@ -38,14 +46,21 @@ export default function Clients() {
 }
 
 function ToggleClientStatusModal(props) {
+  async function toggleClientStatus(client) {
+    try {
+      await api.put(`/users/toggleActive/${client._id}`);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function handleToggleClientStatus(e) {
     try {
       e.preventDefault();
 
-      const updatedClient = props.client;
-      updatedClient.status = updatedClient.status == 'active' ? 'inactive' : 'active';
+      const client = props.client;
 
-      console.log(updatedClient);
+      await toggleClientStatus(client);
 
       props.hideModal();
     } catch (error) {
@@ -62,7 +77,7 @@ function ToggleClientStatusModal(props) {
   return (
     <Modal
       { ...props }
-      title={props.client.status == 'active' ? 'Deseja desativar o cliente?' : 'Deseja ativar o cliente?'}
+      title={props.client.active ? 'Deseja desativar o cliente?' : 'Deseja ativar o cliente?'}
       body={(
         <form onSubmit={handleToggleClientStatus}>
 
@@ -89,13 +104,13 @@ function formatClientsIntoDatatable(clients, setModal) {
           },
           {
             'type': 'status',
-            'value': client.status,
+            'value': client.active ? 'active' : 'inactive',
           },
           {
             'type': 'options',
             'value': [
               {
-                'title': client.status == 'active' ? 'Desativar' : 'Ativar',
+                'title': client.active ? 'Desativar' : 'Ativar',
                 'icon': faPencil,
                 'action': () => {
                   const toggleClientStatusModal = (

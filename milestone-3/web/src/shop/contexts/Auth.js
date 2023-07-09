@@ -36,7 +36,7 @@ export function AuthProvider({children}) {
   async function logout() {
     try {
       setUser(null);
-      localStorage.clear();
+      localStorage.removeItem('@PintasticShop:user');
     } catch (e) {
       throw e;
     }
@@ -51,6 +51,10 @@ export function AuthProvider({children}) {
       const storagedUser = localStorage.getItem('@PintasticShop:user');
 
       const parsedUser = JSON.parse(storagedUser);
+
+      api.defaults.headers.Authorization = (
+        `Bearer ${parsedUser.accessToken}`
+      );
 
       setUser(parsedUser);
     } catch (error) {

@@ -3,7 +3,7 @@ const PintasticException = require('../models/exceptions/PintasticException');
 
 class AdminDao {
   static async getAll() {
-    return await Admin.find();
+    return await Admin.find().sort({ updatedAt: -1 });
   }
 
   static async getByEmail(email) {
