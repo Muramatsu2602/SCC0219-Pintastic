@@ -7,6 +7,11 @@ class ProductController {
     return products.map(this.#removeSensitiveData);
   }
 
+  static async getActiveProducts(limit) {
+    const products = await ProductDao.getActive(limit);
+    return products.map(this.#removeSensitiveData);
+  }
+
   static async getProductById(id) {
     const product = await ProductDao.getById(id);
 

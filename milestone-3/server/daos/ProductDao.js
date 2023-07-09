@@ -11,6 +11,16 @@ class ProductDao {
   
     return await query.exec();
   }
+
+  static async getActive(limit = null) {
+    let query = Product.find({ status: true }).sort({ updatedAt: -1 });;
+  
+    if (limit) {
+      query = query.limit(limit);
+    }
+  
+    return await query.exec();
+  }
   
   static async getById(id) {
     return await Product.findById(id);

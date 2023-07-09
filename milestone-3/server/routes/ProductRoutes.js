@@ -15,6 +15,17 @@ router.get('/', async function(request, response, next) {
   }
 });
 
+router.get('/active', async function(request, response, next) {
+  try {
+    const limit = parseInt(request.query.limit); // Parse the limit from the query string
+    const products = await ProductController.getActiveProducts(limit);
+
+    return response.status(200).json(products);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id', async function(request, response, next) {
   try {
     const { id } = request.params;
