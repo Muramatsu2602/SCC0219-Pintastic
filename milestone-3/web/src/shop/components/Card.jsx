@@ -37,9 +37,7 @@ const Card = ({
   const {signed} = useAuth();
 
   useEffect(() => {
-    const isProductWishlisted = wishlistItems.some(
-        (item) => item.productId === productId,
-    );
+    const isProductWishlisted = wishlistItems.some((item) => item.productId === productId);
     setIsOnWishlist(isProductWishlisted);
   }, [wishlistItems, productId]);
 
