@@ -9,6 +9,8 @@ import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {CartContext} from '../contexts/Cart';
 
+import api from '../../services/api';
+
 const Checkout = () => {
   const navigate = useNavigate();
   const {cartItems, clearCart} = useContext(CartContext);
@@ -67,8 +69,19 @@ const Checkout = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'Cancel',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        const products = cartItems.map((item) => {
+          return {
+            'id': item._id,
+            'amount': item.quantity,
+          };
+        });
+
+        await api.post('/checkout', {
+          products,
+        });
+
         Swal.fire(
             'Checkout Confirmed',
             'Your order has been placed successfully!',
