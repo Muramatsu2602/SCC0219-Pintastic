@@ -36,7 +36,7 @@ export function AuthProvider({children}) {
   async function logout() {
     try {
       setUser(null);
-      localStorage.clear();
+      localStorage.removeItem('@PintasticShop:user');
     } catch (e) {
       throw e;
     }

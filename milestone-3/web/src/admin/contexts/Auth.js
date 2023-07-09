@@ -5,6 +5,7 @@ import React, {
   createContext,
 } from 'react';
 
+import api from '../../services/api';
 import PintasticException from '../../models/PintasticException';
 
 const AuthContext = createContext({});
@@ -14,36 +15,26 @@ export function AuthProvider({children}) {
 
   async function login(email, password) {
     try {
-      if (email != 'admin@pintastic.com' || password != '123') {
-        throw new PintasticException('Incorrect email or password', 'Email ou senha incorretos');
-      }
-      // const response = await api.post('/login', {
-      //   email,
-      //   senha: password,
-      // });
+      const response = await api.post('/admins/login', {
+        email,
+        password,
+      });
 
-      const response = {
-        data: {
-          email,
-        },
-      };
+      api.defaults.headers.Authorization = (
+        `Bearer ${response.data.accessToken}`
+      );
 
       setUser(response.data);
-
       localStorage.setItem('@PintasticAdmin:user', JSON.stringify(response.data));
     } catch (error) {
-      // if(error.code == 'incorrectUserOrPassword') {
-      //   throw new PintasticException('Incorrect user or password', 'O usuário ou senha estão incorretos');
-      // }
-
-      throw error;
+      throw new PintasticException('Incorrect user or password', 'O usuário ou senha estão incorretos');
     }
   }
 
   async function logout() {
     try {
       setUser(null);
-      localStorage.clear();
+      localStorage.removeItem('@PintasticAdmin:user');
     } catch (e) {
       throw e;
     }
@@ -58,6 +49,10 @@ export function AuthProvider({children}) {
       const storagedUser = localStorage.getItem('@PintasticAdmin:user');
 
       const parsedUser = JSON.parse(storagedUser);
+
+      api.defaults.headers.Authorization = (
+        `Bearer ${parsedUser.accessToken}`
+      );
 
       setUser(parsedUser);
     } catch (error) {

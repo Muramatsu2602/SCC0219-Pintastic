@@ -1,20 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Swal from 'sweetalert2';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPencil, faPlus} from '@fortawesome/free-solid-svg-icons';
 
+import api from '../../../services/api';
 import PintasticException from '../../../models/PintasticException';
 import Datatable from '../../components/Datatable';
 import Input from '../../components/Input';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';
-import mockAdmins from './mockAdmins';
 
 import './styles.css';
 
 export default function Admins() {
-  const [admins, setAdmins] = useState(mockAdmins);
+  const [admins, setAdmins] = useState([]);
+  const [data, setData] = useState([]);
   const [modal, setModal] = useState(null);
 
   const columns = [
@@ -24,7 +25,15 @@ export default function Admins() {
     'Status',
   ];
 
-  const data = formatAdminsIntoDatatable(admins, setModal);
+  const loadAdmins = async () => {
+    const response = await api.get('/admins');
+
+    setData(formatAdminsIntoDatatable(response.data, setModal));
+  };
+
+  useEffect(() => {
+    loadAdmins();
+  }, [modal]);
 
   return (
     <>
@@ -50,21 +59,28 @@ export default function Admins() {
 }
 
 function CreateAdminModal(props) {
+  async function createAdmin(admin) {
+    try {
+      await api.post('/admins', admin);
+    } catch (error) {
+      if (error.response.status == 409) {
+        throw new PintasticException('Duplicated email', 'Esse email já está sendo utilizado');
+      }
+
+      throw error;
+    }
+  }
+
   async function handleCreateAdmin(e) {
     try {
       e.preventDefault();
 
       const admin = {
-        createdAt: new Date(),
-        updatedAt: new Date(),
         name,
         email,
-        status: 'active',
       };
 
-      props.setAdmins([admin, ...props.admins]);
-
-      console.log(admin);
+      await createAdmin(admin);
 
       props.hideModal();
     } catch (error) {
@@ -113,14 +129,25 @@ function CreateAdminModal(props) {
 }
 
 function ToggleAdminStatusModal(props) {
+  async function toggleAdminStatus(admin) {
+    try {
+      await api.put(`/admins/toggleActive/${admin._id}`);
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw new PintasticException('Permission denied', 'Você não possui permissão para editar esse recurso');
+      }
+
+      throw error;
+    }
+  }
+
   async function handleToggleAdminStatus(e) {
     try {
       e.preventDefault();
 
-      const updatedAdmin = props.admin;
-      updatedAdmin.status = updatedAdmin.status == 'active' ? 'inactive' : 'active';
+      const admin = props.admin;
 
-      console.log(updatedAdmin);
+      await toggleAdminStatus(admin);
 
       props.hideModal();
     } catch (error) {
@@ -130,14 +157,14 @@ function ToggleAdminStatusModal(props) {
       }
 
       console.error(error);
-      Swal.fire('Ocorreu um erro', 'Não foi possível editar o produto, tente novamente mais tarde', 'error');
+      Swal.fire('Ocorreu um erro', 'Não foi possível editar o administrador, tente novamente mais tarde', 'error');
     }
   }
 
   return (
     <Modal
       { ...props }
-      title={props.admin.status == 'active' ? 'Deseja desativar o administrador?' : 'Deseja ativar o administrador?'}
+      title={props.admin.active ? 'Deseja desativar o administrador?' : 'Deseja ativar o administrador?'}
       body={(
         <form onSubmit={handleToggleAdminStatus}>
 
@@ -170,13 +197,13 @@ function formatAdminsIntoDatatable(admins, setModal) {
           },
           {
             'type': 'status',
-            'value': admin.status,
+            'value': admin.active ? 'active' : 'inactive',
           },
           {
             'type': 'options',
             'value': [
               {
-                'title': admin.status == 'active' ? 'Desativar' : 'Ativar',
+                'title': admin.active ? 'Desativar' : 'Ativar',
                 'icon': faPencil,
                 'action': () => {
                   const toggleAdminStatusModal = (
