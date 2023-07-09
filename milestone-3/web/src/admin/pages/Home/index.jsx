@@ -1,11 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+
+import Swal from 'sweetalert2';
+
+import api from '../../../services/api';
 
 import './styles.css';
 
 export default function Products() {
-  const [clients] = useState('108');
-  const [purchases] = useState('556');
-  const [receipt] = useState('R$ 27.8k');
+  const [clients, setClients] = useState('0');
+  const [purchases, setPurchases] = useState('0');
+  const [receipt, setReceipt] = useState('R$ 0.0k');
+
+  const loadData = async () => {
+    try {
+      const customers = (await api.get('/users')).data;
+      const transactions = (await api.get('/transactions')).data;
+
+      setClients(customers.length);
+      setPurchases(transactions.length);
+
+      const receipt = transactions.reduce((total, currentTransaction) => total + currentTransaction.totalPrice, 0);
+
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+
+      setReceipt(formatter.format(receipt));
+    } catch (error) {
+      console.error(error);
+      Swal.fire('Ocorreu um erro', 'Não foi possível carregar os dados, tente novamente mais tarde', 'error');
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>
@@ -25,7 +55,7 @@ export default function Products() {
             <p>Compras realizadas</p>
           </div>
           <div className="card">
-            <h3>{receipt}</h3>
+            <h4>{receipt}</h4>
             <p>Receita</p>
           </div>
         </div>
