@@ -87,7 +87,7 @@ A seguir estão listados os testes que iremos realizar:
 10) Quando logado como um usuário comum, é possível editar as informações de perfil que são salvas conforme esperado.
 11) Após os dados referentes às informações bancárias (dados fictícios) serem preenchidos, a compra é finalizada e o carrinho é esvaziado, conforme o esperado.
 
-## Procedimentos de build
+## Comentários sobre os componentes da Milestone 2
 
 - Para a entrega do Milestone 2, foram desenvolvidos todas as páginas do sistema ([link figma](https://www.figma.com/file/MftvtXlZh9A57ovjIyvspl/Mockup-Pintastic---Template-p%2F-Costumer-Side?type=design&node-id=17189%3A143372&t=uTBwirYr3YysFnDW-1)) utilizando o framework [React](https://react.dev/).
 
@@ -105,6 +105,8 @@ A seguir estão listados os testes que iremos realizar:
     - **shop/pages**: contém as páginas de Cart, Catalogue, Checkout, Landing Page, Pin Of the Day, Product Details e Wishlist.
     - **shop/pages/mock**: mock de produtos.
 
+## Procedimentos de build
+
 ### Tutorial de Build
 
 Abaixo, um pequeno tutorial de como rodar e visualizar as páginas do site:
@@ -119,16 +121,16 @@ Para o correto funcionamento da aplicação é necessária que o FrontEnd (prese
 
     Faça download do projeto por meio do botão [Code] -> [Download ZIP] presente no GitHub e decompacte o arquivo .ZIP, ou clone o projeto em sua pasta de preferência.
 
-    Depois, por meio do terminal, dentro da pasta (milestone-2/frontend) do projeto, executar o comando abaixo:
+    Depois, por meio do terminal, dentro da pasta (milestone-3/web) do projeto, executar o comando abaixo:
     > npm install
 
     Em seguida, para executar o projeto, basta utilizado o comando abaixo:
-    > npm run
+    > npm start
 
     Por fim, em seu navegador, vá para a url abaixo: 
     localhost:3000/
     Para logar como client, utilize:
-      Email: client@pintastic.com
+      Email: user@pintastic.com
       Senha: 123
      
     Lembrando que para acessar a página do administrador, você deve utilizar a URL localhost:3000/admin
@@ -137,3 +139,13 @@ Para o correto funcionamento da aplicação é necessária que o FrontEnd (prese
       Senha: 123
     
     Pronto! Você agora estará na página principal de nosso site!
+
+#### **Backend**
+
+  Após clonar o repositório, abra em outra aba do terminal, dentro da pasta (milestone-3/server) do projeto, executar o comando abaixo:
+    > npm install
+
+    Em seguida, para executar o projeto, basta utilizado o comando abaixo:
+    > npm start
+
+    Pronto! Agora o servidor está rodando e você deve poder realizar requisições HTTP em localhost:8080
