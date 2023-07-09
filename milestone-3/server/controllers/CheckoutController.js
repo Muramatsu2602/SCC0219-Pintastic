@@ -19,7 +19,7 @@ class CheckoutController {
 
       products.push({
         ...checkoutProduct,
-        'price': storedProduct.price,
+        'price': (storedProduct.price - (storedProduct.price * storedProduct.discountPercentage / 100)).toFixed(2),
       });
     }
 

@@ -30,7 +30,12 @@ app.use(routes);
 
 // Error handling middleware
 app.use((error, request, response, next) => {
-  console.error(`[${new Date().toISOString()}] Error: ${error.message}`);
+  if (error instanceof PintasticException) {
+    return response.status(error.getHttpStatusCode()).json({
+      'error': error.getBusinessError(),
+    });
+  }
+  
   console.error(error); // Add this line to print the detailed error stack trace
   return response.status(500).end();
 });
