@@ -8,7 +8,11 @@ const CartSection = () => {
   const {cartItems, updateCartQuantity, removeFromCart} = useContext(CartContext);
 
   const calculateTotalPrice = useCallback(() => {
-    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return cartItems.reduce((acc, item) => {
+      const finalPrice = item.price - (item.price * item.discountPercentage / 100);
+
+      return acc + finalPrice * item.quantity;
+    }, 0);
   }, [cartItems]);
 
   const totalPrice = calculateTotalPrice();
