@@ -4,7 +4,7 @@ const router = express.Router();
 const AuthMiddleware = require('../middleware/AuthMiddleware');
 const ProductController = require('../controllers/ProductController');
 
-router.get('/', async function(request, response, next) {
+router.get('/', AuthMiddleware.isAdmin, async function(request, response, next) {
   try {
     const limit = parseInt(request.query.limit); // Parse the limit from the query string
     const products = await ProductController.getAllProducts(limit);

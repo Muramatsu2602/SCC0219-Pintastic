@@ -108,7 +108,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchRelatedProducts = async () => {
       try {
-        const response = await api.get('/products?limit=10');
+        const response = await api.get('/products/active?limit=10');
         const products = response.data;
         setRelatedProducts(products);
       } catch (error) {

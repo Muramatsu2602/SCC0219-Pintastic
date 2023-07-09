@@ -21,7 +21,7 @@ export default function LandingPage() {
   useEffect(() => {
     const fetchCardData = async () => {
       try {
-        const response = await api.get('/products?limit=10');
+        const response = await api.get('/products/active?limit=10');
         setCardData(response.data);
       } catch (error) {
         console.error('Error fetching card data:', error);
