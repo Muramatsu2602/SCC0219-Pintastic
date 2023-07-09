@@ -50,8 +50,8 @@ class UserController {
     return await UserDao.create(data);
   };
 
-  static async updateById(id, email, name) {
-    return await UserDao.updateById(id, email, name);
+  static async updateById(id, data) {
+    return await UserDao.updateById(id, data);
   };
 
   static async toggleActive(id) {

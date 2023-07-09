@@ -28,13 +28,10 @@ class UserDao {
     }
   }
 
-  static async updateById(id, email, name) {
+  static async updateById(id, data) {
     return await User.findOneAndUpdate(
       { _id: id },
-      {
-        email,
-        name
-      },
+      data,
       { new: true },
     );
   }

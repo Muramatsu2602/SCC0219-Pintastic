@@ -36,7 +36,31 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     default: "123",
-  }
+  },
+
+  cep: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+
+  state: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+
+  address: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+
+  complement: {
+    type: String,
+    required: false,
+    trim: true,
+  },
 });
 
 module.exports = mongoose.model(TABLE_NAME, schema);
