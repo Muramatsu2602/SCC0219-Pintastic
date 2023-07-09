@@ -42,20 +42,45 @@ router.post('/', AuthMiddleware.isAdmin, async function(request, response, next)
 });
 
 
-router.put('/:id', 
-  AuthMiddleware.isAdmin,  
+router.put('/:id',
+  AuthMiddleware.isAdmin,
   async function(request, response, next) {
     try {
       const { id } = request.params;
-      const { title } = request.body;
+      const { title, description, price, discountPercentage, image, category, stock } = request.body;
 
-      const product = await ProductController.updateById(id, title);
+      const data = {
+        title,
+        description,
+        price,
+        discountPercentage,
+        image,
+        category,
+        stock
+      };
+
+      const product = await ProductController.updateById(id, data);
 
       return response.status(200).json(product);
     } catch (error) {
       next(error);
     }
-}
+  }
+);
+
+router.put('/toggleActive/:id', 
+  AuthMiddleware.isAdmin,  
+  async function(request, response, next) {
+    try {
+      const { id } = request.params;
+
+      const product = await ProductController.toggleActive(id);
+
+      return response.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
 );
 
 router.delete('/:id', 

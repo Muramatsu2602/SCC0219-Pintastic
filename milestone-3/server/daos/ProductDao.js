@@ -3,7 +3,7 @@ const Product = require('../models/schemas/Product');
 class ProductDao {
   
   static async getAll(limit = null) {
-    let query = Product.find();
+    let query = Product.find().sort({ updatedAt: -1 });;
   
     if (limit) {
       query = query.limit(limit);
@@ -22,16 +22,26 @@ class ProductDao {
     return product;
   }
 
-  static async updateById(id, title) {
+  static async updateById(id, data) {
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: id },
-      {
-        title
-      },
+      data,
       { new: true },
     );
 
     return updatedProduct.toObject();
+  }
+
+  static async toggleActive(id) {
+    const updatedProduct = await Product.findOneAndUpdate(
+      { _id: id }, 
+      [
+        { $set: { status: { $not: "$status" } } }
+      ],
+      { new: true }
+    );
+
+    return updatedProduct;
   }
 
   static async addToStock(id, amount) {

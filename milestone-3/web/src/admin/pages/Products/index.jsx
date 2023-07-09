@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Swal from 'sweetalert2';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPencil, faTrash, faPlus} from '@fortawesome/free-solid-svg-icons';
 
+import api from '../../../services/api';
 import PintasticException from '../../../models/PintasticException';
 import Datatable from '../../components/Datatable';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 import SubmitButton from '../../components/SubmitButton';
 import Modal from '../../components/Modal';
-import mockProducts from '../../../mock/products.json';
 
 import './styles.css';
 
 export default function Products() {
-  const [products, setProducts] = useState(mockProducts);
+  const [data, setData] = useState([]);
   const [modal, setModal] = useState(null);
 
   const columns = [
@@ -27,7 +27,15 @@ export default function Products() {
     'Status',
   ];
 
-  const data = formatProductsIntoDatatable(products, setModal);
+  const loadProducts = async () => {
+    const response = await api.get('/products');
+
+    setData(formatProductsIntoDatatable(response.data, setModal));
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, [modal]);
 
   return (
     <>
@@ -37,7 +45,7 @@ export default function Products() {
           <h1>Produtos</h1>
           <button onClick={() => {
             const createProductModal = (
-              <CreateProductModal products={products} setProducts={setProducts} hideModal={() => setModal(null)} />
+              <CreateProductModal hideModal={() => setModal(null)} />
             );
 
             setModal(createProductModal);
@@ -53,24 +61,29 @@ export default function Products() {
 }
 
 function CreateProductModal(props) {
+  async function createProduct(product) {
+    try {
+      await api.post('/products', [product]);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function handleCreateProduct(e) {
     try {
       e.preventDefault();
 
       const product = {
-        'productCategory': category,
-        'productTitle': title,
-        'productDescription': description,
-        'productImage': image,
-        'productPrice': price,
-        'productDiscountPercentage': discount,
-        'productStock': stock,
-        'productStatus': 'active',
+        'category': category,
+        'title': title,
+        'description': description,
+        'image': image,
+        'price': price,
+        'discountPercentage': discount,
+        'stock': stock,
       };
 
-      props.setProducts([product, ...props.products]);
-
-      console.log(product);
+      await createProduct(product);
 
       props.hideModal();
     } catch (error) {
@@ -80,7 +93,7 @@ function CreateProductModal(props) {
       }
 
       console.error(error);
-      Swal.fire('Ocorreu um erro', 'Não foi possível realizar o login, tente novamente mais tarde', 'error');
+      Swal.fire('Ocorreu um erro', 'Não foi possível cadastrar o produto, tente novamente mais tarde', 'error');
     }
   }
 
@@ -174,24 +187,29 @@ function CreateProductModal(props) {
 }
 
 function EditProductModal(props) {
+  async function editProduct(productId, data) {
+    try {
+      await api.put(`/products/${productId}`, data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function handleEditProduct(e) {
     try {
       e.preventDefault();
 
-      const updatedProduct = {
-        'productCategory': category,
-        'productTitle': title,
-        'productDescription': description,
-        'productImage': image,
-        'productPrice': price,
-        'productDiscountPercentage': discount,
-        'productStock': stock,
-        'productStatus': 'active',
+      const data = {
+        'category': category,
+        'title': title,
+        'description': description,
+        'image': image,
+        'price': parseFloat(price),
+        'discountPercentage': parseFloat(discount),
+        'stock': parseInt(stock),
       };
 
-      Object.assign(props.product, updatedProduct);
-
-      console.log(updatedProduct);
+      await editProduct(props.product._id, data);
 
       props.hideModal();
     } catch (error) {
@@ -205,13 +223,13 @@ function EditProductModal(props) {
     }
   }
 
-  const [category, setCategory] = useState(props?.product?.productCategory || 'pin');
-  const [title, setTitle] = useState(props?.product?.productTitle || '');
-  const [description, setDescription] = useState(props?.product?.productDescription || '');
-  const [image, setImage] = useState(props?.product?.productImage || '');
-  const [price, setPrice] = useState(props?.product?.productPrice || '');
-  const [discount, setDiscount] = useState(props?.product?.productDiscountPercentage || '');
-  const [stock, setStock] = useState(props?.product?.productStock || '');
+  const [category, setCategory] = useState(props?.product?.category || 'pin');
+  const [title, setTitle] = useState(props?.product?.title || '');
+  const [description, setDescription] = useState(props?.product?.description || '');
+  const [image, setImage] = useState(props?.product?.image || '');
+  const [price, setPrice] = useState(props?.product?.price || '');
+  const [discount, setDiscount] = useState(props?.product?.discountPercentage || '');
+  const [stock, setStock] = useState(props?.product?.stock || '');
 
   return (
     <Modal
@@ -295,14 +313,21 @@ function EditProductModal(props) {
 }
 
 function ToggleProductStatusModal(props) {
+  async function toggleProductStatus(product) {
+    try {
+      await api.put(`/products/toggleActive/${product._id}`);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function handleToggleProductStatus(e) {
     try {
       e.preventDefault();
 
-      const updatedProduct = props.product;
-      updatedProduct.productStatus = updatedProduct.productStatus == 'active' ? 'inactive' : 'active';
+      const product = props.product;
 
-      console.log(updatedProduct);
+      await toggleProductStatus(product);
 
       props.hideModal();
     } catch (error) {
@@ -333,14 +358,21 @@ function ToggleProductStatusModal(props) {
 }
 
 function DeleteProductModal(props) {
+  async function deleteProduct(product) {
+    try {
+      await api.delete(`/products/${product._id}`);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function handleDeleteProduct(e) {
     try {
       e.preventDefault();
 
-      const updatedProduct = props.product;
-      updatedProduct.productDeleted = true;
+      const product = props.product;
 
-      console.log(updatedProduct);
+      await deleteProduct(product);
 
       props.hideModal();
     } catch (error) {
@@ -377,35 +409,34 @@ function formatProductsIntoDatatable(products, setModal) {
   });
 
   return products
-      .filter((product) => !product.productDeleted)
       .map((product) => {
         return [
           {
             'type': 'image',
             'value': {
-              'image': product.productImage,
-              'alt': product.productTitle,
+              'image': product.image,
+              'alt': product.title,
             },
           },
           {
             'type': 'text',
-            'value': product.productTitle,
+            'value': product.title,
           },
           {
             'type': 'text',
-            'value': product.productStock,
+            'value': product.stock,
           },
           {
             'type': 'text',
-            'value': formatter.format(product.productPrice),
+            'value': formatter.format(product.price),
           },
           {
             'type': 'text',
-            'value': product.productDiscountPercentage + '%',
+            'value': product.discountPercentage + '%',
           },
           {
             'type': 'status',
-            'value': product.productStatus,
+            'value': product.status ? 'active' : 'inactive',
           },
           {
             'type': 'options',
@@ -425,7 +456,7 @@ function formatProductsIntoDatatable(products, setModal) {
                 },
               },
               {
-                'title': product.productStatus == 'active' ? 'Desativar' : 'Ativar',
+                'title': product.status ? 'Desativar' : 'Ativar',
                 'icon': faPencil,
                 'action': () => {
                   const toggleProductStatusModal = (
