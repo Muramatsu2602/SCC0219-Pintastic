@@ -73,7 +73,8 @@
 }
 
 /* Styles for the purchase summary section */
-#checkout-purchase-summary {
+  #checkout-purchase-summary {
+	width: 30%;
 	background-color: #f8f9fa;
 	border: 1px solid #e9ecef;
 	border-radius: 4px;
@@ -91,6 +92,29 @@
 	margin-bottom: 10px;
 	color: #495057;
   }
+  
+  .checkout-summary-product {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+  }
+  
+  .checkout-summary-product-image {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+  }
+  
+  .checkout-summary-product-details {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .checkout-summary-product-details span {
+	margin-bottom: 5px;
+  }
+  
+  
   
   .checkout-summary-item div {
 	display: flex;
@@ -125,7 +149,7 @@
 	cursor: pointer;
 	transition: all 0.3s ease;
   }
-  
+
   .checkout-summary-item button:hover {
 	background-color: #0056b3;
   }

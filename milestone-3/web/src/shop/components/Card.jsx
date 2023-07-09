@@ -65,17 +65,16 @@ const Card = ({
 
   const handleAddToCart = () => {
     const product = {
-      productId,
-      productPrice,
-      productTitle,
-      productDescription,
-      productImage,
-      quantity: 1,
-      productStock,
+      _id: productId,
+      price: productPrice,
+      title: productTitle,
+      description: productDescription,
+      image: productImage,
+      stock: productStock,
     };
 
     const isProductInCart = cartItems.some(
-        (item) => item.productId === productId,
+        (item) => item._id === productId,
     );
 
     if (isProductInCart) {
@@ -86,7 +85,7 @@ const Card = ({
         confirmButtonText: 'OK',
       });
     } else {
-      addToCart(product);
+      addToCart(product, 1);
       showAddToCartConfirmation();
     }
   };

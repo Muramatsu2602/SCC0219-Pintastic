@@ -192,8 +192,8 @@ const Checkout = () => {
 
   const cartTotal = cartItems.reduce(
       (total, item) => {
-        console.log(item.productPrice, item.quantity); // Print the values of ProductPrice and quantity for each item
-        return total + item.productPrice * item.quantity;
+        console.log(item.price, item.quantity); // Print the values of ProductPrice and quantity for each item
+        return total + item.price * item.quantity;
       },
       0,
   );
@@ -516,28 +516,35 @@ const Checkout = () => {
           <div className='checkout-summary-item'>
             <h3>Summary</h3>
             {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <div key={item.productId}>
-                <span>{item.productTitle}</span>
-                <span>${item.productPrice}</span>
-                <span>Qty: {item.quantity}</span>
-              </div>
-            ))
-          ) : (
-            <div>No items in the cart</div>
-          )}
+      cartItems.map((item) => (
+        <div key={item._id} className='checkout-summary-product'>
+          <img
+            src={item.image} // Replace 'image' with the correct prop for the product image
+            alt={item.title} // Replace 'title' with the correct prop for the product title
+            className='checkout-summary-product-image'
+          />
+          <div className='checkout-summary-product-details'>
+            <span>{item.title}</span>
+            <span>${item.price}</span>
+            <span>Qty: {item.quantity}</span>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div>No items in the cart</div>
+    )}
           </div>
           <div className='checkout-summary-item'>
             <h2>Total</h2>
           </div>
-          {cartItems.length > 0 && ( // Add conditional check here
+          {cartItems.length > 0 && (
             <div className='checkout-summary-item'>
-              <span>Delivery Tax: $5.00</span> <hr />
-              <span>Final Cost: ${((cartTotal) + 5.0).toFixed(2)}</span>
+              <span>Delivery Tax: $5.00</span>
+              <hr />
+              <span>Final Cost: ${(cartTotal + 5.0).toFixed(2)}</span>
             </div>
           )}
         </aside>
-
       </main>
       <Footer />
     </form>
