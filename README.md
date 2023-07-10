@@ -89,6 +89,54 @@ A seguir estão listados os testes que iremos realizar:
 
 ## Procedimentos de build
 
+### Tutorial de Build
+
+Abaixo, um pequeno tutorial de como rodar e visualizar as páginas do site:
+
+Para executar a aplicação é preciso que o software Node.js esteja instalado em sua máquina através do tutorial abaixo:        
+https://nodejs.org/en/
+
+**IMPORTANTE!**
+
+Para o correto funcionamento da aplicação é necessária que o FrontEnd (presente neste repositório) esteja em execução. Dessa forma, temos o tutorial de build seguinte:
+#### **FrontEnd**
+
+  1. Faça download do projeto por meio do botão [Code] -> [Download ZIP] presente no GitHub e decompacte o arquivo .ZIP, ou clone o projeto em sua pasta de preferência.
+
+  2. Depois, por meio do terminal, dentro da pasta (milestone-3/web) do projeto, executar o comando abaixo:
+  > npm install
+
+  3. Em seguida, para executar o projeto, basta utilizado o comando abaixo:
+  > npm start
+
+  4. Por fim, em seu navegador, vá para a url abaixo: 
+  localhost:3000/
+  
+  5. Para logar como client, utilize:
+    - Email: user@pintastic.com
+    - Senha: 123
+   
+  6. Lembrando que para acessar a página do administrador, você deve utilizar a URL localhost:3000/admin
+  - Para logar utilize:
+    -  Email: admin@pintastic.com
+    -  Senha: 123
+    
+  Pronto! Você agora estará na página principal de nosso site!
+
+#### **Backend**
+
+  Após clonar o repositório, abra em outra aba do terminal, dentro da pasta (milestone-3/server) do projeto, executar o comando abaixo:
+  > npm install
+
+  Em seguida, para executar o projeto, basta utilizado o comando abaixo:
+  > npm start
+
+  Pronto! Agora o servidor está rodando e você deve poder realizar requisições HTTP em localhost:8080
+
+## Comentários sobre o Código, Problemas e Comentários Gerais
+
+### Comentários sobre os componentes da Milestone 2
+
 - Para a entrega do Milestone 2, foram desenvolvidos todas as páginas do sistema ([link figma](https://www.figma.com/file/MftvtXlZh9A57ovjIyvspl/Mockup-Pintastic---Template-p%2F-Costumer-Side?type=design&node-id=17189%3A143372&t=uTBwirYr3YysFnDW-1)) utilizando o framework [React](https://react.dev/).
 
 - Todas as componentes do React (JSX + CSS) desenvolvidas estão presentes na pasta **milestone-2/frontend/src**, sendo que, para o desenvolvimento de uma SPA (Single Page Application) utilizou-se o [React Router](https://reactrouter.com/en/main), fazendo com que os componentes da página sejam dinamicamente carregados durante a nevegação do usuário.
@@ -104,36 +152,9 @@ A seguir estão listados os testes que iremos realizar:
     - **shop/components**: componentes relacionados a loja.
     - **shop/pages**: contém as páginas de Cart, Catalogue, Checkout, Landing Page, Pin Of the Day, Product Details e Wishlist.
     - **shop/pages/mock**: mock de produtos.
+      
+### Problemas
+O Grupo não relata nenhum problema técnico durante o desenvolvimento do projeto.
 
-### Tutorial de Build
-
-Abaixo, um pequeno tutorial de como rodar e visualizar as páginas do site:
-
-Para executar a aplicação é preciso que o software Node.js esteja instalado em sua máquina através do tutorial abaixo:        
-https://nodejs.org/en/
-
-**IMPORTANTE!**
-
-Para o correto funcionamento da aplicação é necessária que o FrontEnd (presente neste repositório) esteja em execução. Dessa forma, temos o tutorial de build seguinte:
-#### **FrontEnd**
-
-    Faça download do projeto por meio do botão [Code] -> [Download ZIP] presente no GitHub e decompacte o arquivo .ZIP, ou clone o projeto em sua pasta de preferência.
-
-    Depois, por meio do terminal, dentro da pasta (milestone-2/frontend) do projeto, executar o comando abaixo:
-    > npm install
-
-    Em seguida, para executar o projeto, basta utilizado o comando abaixo:
-    > npm run
-
-    Por fim, em seu navegador, vá para a url abaixo: 
-    localhost:3000/
-    Para logar como client, utilize:
-      Email: client@pintastic.com
-      Senha: 123
-     
-    Lembrando que para acessar a página do administrador, você deve utilizar a URL localhost:3000/admin
-    Para logar utilize:
-      Email: admin@pintastic.com
-      Senha: 123
-    
-    Pronto! Você agora estará na página principal de nosso site!
+### Comentários gerais
+Ao longo dos três milestones foi possível praticar holisticamente as competências de um projeto web moderno. Gostaríamos de agradecer ao Professor da Disciplina, os Monitores envolvidos e nossos colegas que realizaram feedbacks construtivos nas Reviews.
