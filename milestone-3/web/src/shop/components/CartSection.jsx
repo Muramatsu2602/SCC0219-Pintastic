@@ -9,13 +9,20 @@ const CartSection = () => {
 
   const calculateTotalPrice = useCallback(() => {
     return cartItems.reduce((acc, item) => {
-      const finalPrice = item.price - (item.price * item.discountPercentage / 100);
+      let finalPrice = 0;
+
+      if (item.discountPercentage) {
+        finalPrice = item.price - (item.price * item.discountPercentage / 100);
+      } else {
+        finalPrice = item.price;
+      }
 
       return acc + finalPrice * item.quantity;
     }, 0);
   }, [cartItems]);
 
   const totalPrice = calculateTotalPrice();
+
 
   const handleQuantityChange = (itemId, newQuantity) => {
     updateCartQuantity(itemId, newQuantity);

@@ -12,14 +12,11 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
 
 
   const calculateTotalPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => {
-      const itemPrice =
-        item.discountPercentage > 0 ?
-          (item.price - (item.price * item.discountPercentage / 100)) : // Apply discount if available
-          item.price;
-      const itemTotalPrice = itemPrice * item.quantity;
-      return total + itemTotalPrice;
-    }, 0);
+    const itemPrice =
+      item.discountPercentage > 0 ?
+        item.price - (item.price * item.discountPercentage) / 100 :
+        item.price;
+    const totalPrice = itemPrice * curQuantity;
     return totalPrice.toFixed(2);
   };
 
