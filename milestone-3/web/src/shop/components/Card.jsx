@@ -53,6 +53,8 @@ const Card = ({
   const heartIcon = isOnWishlist ? faHeartSolid : faHeartRegular;
 
   const handleAddToCart = () => {
+    alert('productId', productId);
+
     const product = {
       _id: productId,
       price: productPrice,

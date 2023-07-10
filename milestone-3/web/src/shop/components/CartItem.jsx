@@ -10,6 +10,20 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
   const [curQuantity, setCurQuantity] = useState(item.quantity);
   const {cartItems} = useContext(CartContext);
 
+
+  const calculateTotalPrice = () => {
+    const totalPrice = cartItems.reduce((total, item) => {
+      const itemPrice =
+        item.discountPercentage > 0 ?
+          (item.price - (item.price * item.discountPercentage / 100)) : // Apply discount if available
+          item.price;
+      const itemTotalPrice = itemPrice * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
+    return totalPrice.toFixed(2);
+  };
+
+
   const handleChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     if (isNaN(newQuantity)) {
@@ -73,7 +87,7 @@ const CartItem = ({item, handleQuantityChange, handleRemoveItem}) => {
           </div>
           <div className='cart-remove'>
             <div className='cart-price'>
-              <h3>${((item.price - (item.price * item.discountPercentage / 100)) * curQuantity).toFixed(2)}</h3>
+              <h3>${calculateTotalPrice()}</h3>
             </div>
             <button type='button' onClick={confirmRemoveItem}>
               <FontAwesomeIcon icon={faTrashAlt} />
