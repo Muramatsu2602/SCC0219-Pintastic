@@ -57,6 +57,7 @@ const Card = ({
       _id: productId,
       price: productPrice,
       title: productTitle,
+      discountPercentage: productDiscountPercentage,
       description: productDescription,
       image: productImage,
       stock: productStock,
